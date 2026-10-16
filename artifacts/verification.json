@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-16",
+  "contract_bytes": 8164,
+  "contract_sha256": "2e1a151030430af7f803dbd1071f08315eeea72f6efb04d19594762d75835730",
+  "tests": {
+    "passed": 27,
+    "failed": 0
+  },
+  "production_build": "passed",
+  "legacy_format_check": "passed (offline validator)",
+  "browser_checks": [
+    "normal payment",
+    "split relay attack",
+    "oversized request rejection",
+    "guardian pause",
+    "queue cancellation",
+    "timelocked policy resume",
+    "evidence page",
+    "375px no horizontal overflow"
+  ],
+  "on_chain_deployment": false,
+  "blocker": "No local Linux node; checked community dev endpoints unavailable; official V3 RPC unconfirmed."
+}

@@ -1,0 +1,15 @@
+[package]
+name = "airlock"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = "s"
+panic = "abort"
+lto = true
+codegen-units = 1
+overflow-checks = true

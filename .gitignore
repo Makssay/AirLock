@@ -1,0 +1,8 @@
+node_modules/
+dist/
+contracts/airlock/target/
+research/python-deps/
+research/__pycache__/
+.env
+deployments/*.local.json
+test-results/

@@ -1,0 +1,71 @@
+{
+  "target": "wasm32v1-none",
+  "bytes": 8164,
+  "imports": [
+    {
+      "module": "env",
+      "name": "memory",
+      "kind": "memory"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_get_storage",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_return",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_deposit_event",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_set_storage",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_caller",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_transfer",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_input",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_now",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_hash_blake2_256",
+      "kind": "function"
+    },
+    {
+      "module": "seal0",
+      "name": "seal_balance",
+      "kind": "function"
+    }
+  ],
+  "exports": [
+    {
+      "name": "call",
+      "kind": "function"
+    },
+    {
+      "name": "deploy",
+      "kind": "function"
+    }
+  ]
+}
