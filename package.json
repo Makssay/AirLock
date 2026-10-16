@@ -11,7 +11,11 @@
     "preview": "node server/index.mjs --production",
     "chain:probe": "node scripts/chain.mjs probe",
     "chain:deploy": "node scripts/chain.mjs deploy",
-    "chain:demo": "node scripts/chain.mjs demo"
+    "chain:demo": "node scripts/chain.mjs demo",
+    "build:evm": "node scripts/build-evm.mjs",
+    "test:evm": "node --test tests/evm.test.mjs",
+    "evm:node": "node server/evm-node.mjs",
+    "evm:demo": "node scripts/evm-demo.mjs"
   },
   "dependencies": {
     "@polkadot/api": "^16.4.6",
@@ -24,6 +28,20 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "ethers": "6.17.0",
+    "solc": "0.8.30",
     "vite": "^6.1.0"
+  },
+  "optionalDependencies": {
+    "@foundry-rs/anvil-win32-amd64": "1.7.1",
+    "@foundry-rs/anvil-linux-amd64": "1.7.1",
+    "@foundry-rs/anvil-linux-arm64": "1.7.1",
+    "@foundry-rs/anvil-darwin-amd64": "1.7.1",
+    "@foundry-rs/anvil-darwin-arm64": "1.7.1"
+  },
+  "overrides": {
+    "solc": {
+      "tmp": "0.2.7"
+    }
   }
 }

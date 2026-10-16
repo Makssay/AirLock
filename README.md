@@ -2,7 +2,7 @@
 
 A withdrawal firewall for Portaldot cross-chain integrations. A compromised relay can request a release; it cannot bypass independently controlled limits, timelocks or guardian cancellation.
 
-**Status:** working local WASM lab, compiled Rust contract and deployment adapter. No Portaldot testnet deployment is claimed. Official V3 endpoint, toolchain and local-deployment eligibility still need organizer confirmation.
+**Status:** working WASM lab plus a Solidity implementation deployed and tested on a real local Anvil development chain. No Portaldot testnet deployment or revive compatibility is claimed. Official V3 endpoint, compiler/backend and eligibility still need organizer confirmation. See [V3 status](docs/V3-STATUS.md).
 
 ## Run the prototype
 
@@ -68,6 +68,26 @@ The interface's source-chain lane is a lab message source. No second blockchain 
 
 ## Real development-chain adapter
 
+### Solidity / local EVM
+
+This path runs on Windows without WSL. Native Anvil binaries are installed as optional platform dependencies from the official Foundry npm packages. The node binds only to loopback and uses public development keys.
+
+```powershell
+npm run build:evm
+npm run test:evm
+npm run evm:node
+```
+
+In a second terminal:
+
+```powershell
+npm run evm:demo
+```
+
+The demonstration deploys `contracts/evm/Airlock.sol`, executes normal and compromised-relay requests, mines a rejected drain attempt, pauses, and cancels the queue. It saves 15 actual local transaction receipts in `deployments/evm-demo.local.json` and a snapshot in `artifacts/evm/local-chain-evidence.json`. The Evidence page displays this separately from WASM host receipts. These transactions are on chain ID 31337, **not Portaldot**. The EVM reference uses 18-decimal local native units; the legacy WASM lab uses 14-decimal local POT units. Deployment to a PVM backend may require resolc and a different artifact.
+
+### Legacy Portaldot (pending reachable node)
+
 Run the official local client in Linux/WSL with `--dev --alice` and its WebSocket endpoint. The public materials inspected so far describe the legacy runtime, not a verified V3 environment.
 
 ```powershell
@@ -81,9 +101,10 @@ The adapter refuses Mainnet and non-Development/Local chain types. Dev signing u
 ## Current verification
 
 - 27 tests cover compiled WASM and lab session behavior, including an adversarial 250-step sequence.
+- 10 additional Solidity scenarios execute as transactions on an isolated native Anvil chain, including failed-payout rollback and reentrancy protection. Node's test runner counts the enclosing suite as one additional test.
 - Production frontend builds successfully.
 - Compiled artifact passes the vendored portawasm legacy-format validator (8,164 bytes, memory 2–16 pages). This is an offline compatibility check, not proof of on-chain execution.
-- No local Linux distribution was detected during initial setup; the community dev endpoint inspected returned 404. Actual chain deployment is pending a reachable accepted node.
+- WSL Ubuntu registration failed with missing virtualization support. No reboot was performed. Portaldot deployment remains pending a reachable accepted node; local EVM verification runs independently through native Anvil.
 
 ## Files
 

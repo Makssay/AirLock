@@ -3,8 +3,11 @@
   "contract_bytes": 8164,
   "contract_sha256": "2e1a151030430af7f803dbd1071f08315eeea72f6efb04d19594762d75835730",
   "tests": {
-    "passed": 27,
-    "failed": 0
+    "passed": 38,
+    "failed": 0,
+    "wasm_and_session_checks": 27,
+    "evm_scenarios": 10,
+    "note": "Node test count includes one enclosing EVM suite."
   },
   "production_build": "passed",
   "legacy_format_check": "passed (offline validator)",
@@ -16,8 +19,19 @@
     "queue cancellation",
     "timelocked policy resume",
     "evidence page",
-    "375px no horizontal overflow"
+    "375px no horizontal overflow",
+    "local EVM receipts visible",
+    "EVM evidence 375px no horizontal overflow"
   ],
-  "on_chain_deployment": false,
-  "blocker": "No local Linux node; checked community dev endpoints unavailable; official V3 RPC unconfirmed."
+  "blocker": "Portaldot V3 configuration unconfirmed by support correspondence; WSL Ubuntu registration failed with HCS_E_HYPERV_NOT_INSTALLED.",
+  "local_evm": {
+    "chainId": 31337,
+    "node": "Anvil 1.7.1",
+    "deployment": true,
+    "transaction_receipts": 15,
+    "evidence": "artifacts/evm/local-chain-evidence.json",
+    "receipts_rechecked_via_rpc": 15
+  },
+  "portaldot_deployment": false,
+  "dependency_audit": "0 vulnerabilities reported"
 }

@@ -1,0 +1,175 @@
+{
+  "mode": "local-evm-chain",
+  "portaldotDeployment": false,
+  "reviveCompatibility": "unverified",
+  "endpoint": "http://127.0.0.1:8545",
+  "chainId": "31337",
+  "contract": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+  "genesis": "0xbf48bc3c82308c9f095294b82fb69a9d32425e21de16ef725a531fd6ff2d8c9c",
+  "amountDecimals": 18,
+  "vaultBalanceBaseUnits": "905000000000000000000",
+  "reserved": "0",
+  "receipts": [
+    {
+      "label": "deployment",
+      "transactionHash": "0xd57b3f0caeb549a0c4ff13874c3994b79376f5fd54ae6142d816d6fd8c813ab4",
+      "blockHash": "0x76021d66ebf5944e85d0279291294de6f21ee64297a005b942ba8c0e26770d08",
+      "blockNumber": 30,
+      "status": 1,
+      "gasUsed": "1463051",
+      "events": []
+    },
+    {
+      "label": "normal release",
+      "transactionHash": "0x69c3acdeaf8a8270708632550837eae5d4ab1343d4d5888542fe0427cf3a8faa",
+      "blockHash": "0x80599a72b133d598a136ce47d3ca4f09a653516a8a4f5d6de354ab7574a51087",
+      "blockNumber": 31,
+      "status": 1,
+      "gasUsed": "132208",
+      "events": [
+        "Released"
+      ]
+    },
+    {
+      "label": "compromised relay split request",
+      "transactionHash": "0xfcc224c03b1a55eb08dd8a4c01c3dd6c6a04f1ea7b948d2a594010bdceccfb9e",
+      "blockHash": "0x8cd8ef0a367e64a4489ff7f7bb27acbe3f1575ec50447b1c0c3216713daedb28",
+      "blockNumber": 32,
+      "status": 1,
+      "gasUsed": "95299",
+      "events": [
+        "Released"
+      ]
+    },
+    {
+      "label": "compromised relay split request",
+      "transactionHash": "0x538baaf33e037f168ab96dc171014d1a96bb77655576c7d071d7a52cdbc1f29a",
+      "blockHash": "0xb2ecece351c6c95bc20fbcce1414fc7e306688f8e5064d183b400072b9273649",
+      "blockNumber": 33,
+      "status": 1,
+      "gasUsed": "95299",
+      "events": [
+        "Released"
+      ]
+    },
+    {
+      "label": "compromised relay split request",
+      "transactionHash": "0x09202739589727c52b9adc7ac86a239086b0e43ef672992b3ffb3c360bd40d7f",
+      "blockHash": "0xf5ceba0bc1cb92a01982522cec69eff0d55d4bbb6a6275da6490756d9095f7d0",
+      "blockNumber": 34,
+      "status": 1,
+      "gasUsed": "95299",
+      "events": [
+        "Released"
+      ]
+    },
+    {
+      "label": "compromised relay split request",
+      "transactionHash": "0x56cee4e817895706fedae1aa96253fac67441b6c7a906e257f470b0f5af80d13",
+      "blockHash": "0xb2a14556e3739a1422872c0d54279378f279e94989b2e75d72cfc32c7f623501",
+      "blockNumber": 35,
+      "status": 1,
+      "gasUsed": "105315",
+      "events": [
+        "Queued"
+      ]
+    },
+    {
+      "label": "compromised relay split request",
+      "transactionHash": "0x8f42a63388ceb45910319e4f0eb7ccea60bc1c63d5d3430f3059c39cf1549e4d",
+      "blockHash": "0x7ed560b2a033fefae90afbaeaf4901d860f8460f9a9ae2713efc4f0049f09e98",
+      "blockNumber": 36,
+      "status": 1,
+      "gasUsed": "88215",
+      "events": [
+        "Queued"
+      ]
+    },
+    {
+      "label": "compromised relay split request",
+      "transactionHash": "0xce2299b88de214914f556a1aeffc0bee307f77854f2ef96344925489ff2a04e6",
+      "blockHash": "0xe4d3c00455a4134a488fd55396388f28cb2cad9d8795748f44f88f2b005fab62",
+      "blockNumber": 37,
+      "status": 1,
+      "gasUsed": "88215",
+      "events": [
+        "Queued"
+      ]
+    },
+    {
+      "label": "large request quarantined",
+      "transactionHash": "0x7f1c05a5c0cf5816520435981e8cd6115bb8bc04ff90f454ee3b4f18637c3785",
+      "blockHash": "0x208e53d4e5dbf9dc1a85d03b12a5be1abae00eeee97d2077d62beefaf4ad1934",
+      "blockNumber": 38,
+      "status": 1,
+      "gasUsed": "83647",
+      "events": [
+        "Queued"
+      ]
+    },
+    {
+      "label": "oversized drain rejected",
+      "transactionHash": "0x4c067e453e1b2c8fcd224e71adc7b925c560725c4b018fd589b7ba4c2be86578",
+      "blockHash": "0x2cba7a9dd76c7fde48c9e157d5bd27b3c267cd345abd66fa6ae7f740eb5704f2",
+      "blockNumber": 39,
+      "status": 0,
+      "gasUsed": "47549",
+      "events": []
+    },
+    {
+      "label": "guardian pause",
+      "transactionHash": "0xa6f495219a3199fd089529ffb1e1aeb15d02697ae127a0ea6a7f2e1cc58bf267",
+      "blockHash": "0xa55ab97ab4364f5dbd536b8e91a066a3804f9b0cccacf74d86f1cab38354f431",
+      "blockNumber": 40,
+      "status": 1,
+      "gasUsed": "44540",
+      "events": [
+        "ReleasesPaused"
+      ]
+    },
+    {
+      "label": "guardian cancellation",
+      "transactionHash": "0x013c6eea7d41ad3d84e0b6e854a80222f017d4906120ec0d40ba19b08ff7a821",
+      "blockHash": "0x402319ce6dd8c4492d419f7b0dbd37840960056d35d1d0061ec777f060d6c36c",
+      "blockNumber": 41,
+      "status": 1,
+      "gasUsed": "38501",
+      "events": [
+        "Cancelled"
+      ]
+    },
+    {
+      "label": "guardian cancellation",
+      "transactionHash": "0xb94d3436aedfb460fe8ef2755a36d79d927d7a483082d322d4d58a569aec3248",
+      "blockHash": "0x6d270a846e370806a574f64503c97a2859f44924a79ec3513d606b177c32f6a7",
+      "blockNumber": 42,
+      "status": 1,
+      "gasUsed": "38513",
+      "events": [
+        "Cancelled"
+      ]
+    },
+    {
+      "label": "guardian cancellation",
+      "transactionHash": "0x5bbf8ddd88618571a1b013a0d632e5f893bad9c55c5bdb0436c554a0470dfdef",
+      "blockHash": "0x1e90ddb4f0f941f456db8b30b689105f8800a9158c3b226abcc9d80d6fb5cb13",
+      "blockNumber": 43,
+      "status": 1,
+      "gasUsed": "38513",
+      "events": [
+        "Cancelled"
+      ]
+    },
+    {
+      "label": "guardian cancellation",
+      "transactionHash": "0xc67d85b6eeb4d9a798b8c6a56c42746d35a626e2457044daa85398fc7ad68250",
+      "blockHash": "0xd982c6c7d3275e9a1b32e1e805e614e5896d41a497ed71b8e196478d3f6a8732",
+      "blockNumber": 44,
+      "status": 1,
+      "gasUsed": "33713",
+      "events": [
+        "Cancelled"
+      ]
+    }
+  ]
+}

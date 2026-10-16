@@ -21,7 +21,7 @@ Airlock is an independently administered withdrawal firewall around a native POT
 - Relay and guardian cannot rotate in this version. Recovery requires a new deployment and an explicit migration design.
 - Records grow with unique accepted messages. Tests bound value exposure, not indefinite storage growth, spam fees or legacy contract rent.
 - The legacy pallet may charge storage rent or evict underfunded contracts. The reserve floor is a configured amount, not an automatically calculated rent guarantee. Host tests do not emulate fees, rent, consensus, block limits, reorgs or validator behavior.
-- A transfer must not reenter the contract. The inspected legacy seal_transfer transfers currency without invoking recipient contract code; adaptation to an EVM implementation would require reentrancy analysis.
+- The inspected legacy seal_transfer transfers currency without invoking recipient contract code. The Solidity reference uses native calls that can invoke code, so every mutating entry point has a reentrancy guard; EVM tests cover a recipient attempting a nested queued release and a recipient rejecting payment.
 - Fixed source domain labels and nonces do not prove source finality. A production adapter needs a specified verification mechanism.
 
 ## Test evidence
