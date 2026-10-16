@@ -1,0 +1,17 @@
+{
+  "name": "Portaldot V3 testnet",
+  "substrateRpc": "wss://testnetv3-node.feso-apps.xyz",
+  "evmRpc": "https://testnetv3-eth-rpc.feso-apps.xyz",
+  "chainId": 420420777,
+  "nativeCurrency": { "name": "Test POT V3", "symbol": "tPOTv3", "decimals": 14 },
+  "nodeExplorer": "https://node-console.feso-apps.xyz/",
+  "provenance": "Network details supplied by the user from Discord on 2026-10-16",
+  "verification": {
+    "runtime": "not yet verified",
+    "chainId": "declared; not yet confirmed by RPC",
+    "genesisHash": null,
+    "compilerBackend": "not yet verified",
+    "dnsAtCheck": "NXDOMAIN for all three hostnames from both Google and Cloudflare DNS",
+    "checkedDate": "2026-10-16"
+  }
+}

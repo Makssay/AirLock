@@ -1,5 +1,13 @@
 # V3 integration status
 
+## Newly supplied network configuration
+
+The user subsequently provided Discord network details: Substrate `wss://testnetv3-node.feso-apps.xyz`, EVM `https://testnetv3-eth-rpc.feso-apps.xyz`, chain ID 420420777, tPOTv3 with 14 decimals and explorer `https://node-console.feso-apps.xyz/`. These declared settings are saved in `config/portaldot-v3.json`.
+
+Direct connection attempts on 16 October 2026 failed at name resolution. Independent Google and Cloudflare DNS queries returned status 3 (NXDOMAIN) for all three exact hostnames. The parent domain's SOA was returned, but no endpoint address. This is a snapshot of DNS availability, not a conclusion that the configuration never worked. RPC identity, genesis, runtime and compiler backend therefore remain unverified. Raw observations are in `research/v3-network-probe.json` and `research/v3-dns-check.json`.
+
+## Earlier support correspondence
+
 The user supplied support correspondence on 16 October 2026. It says V3 endpoint, chain ID, supported namespaces, CORS, transports and local source/binary compatibility are unverified. This is correspondence supplied by the user, not independently authenticated documentation. No transcript is published here.
 
 Therefore a legacy spec1002 deployment is not evidence of V3 compatibility. The current Rust seal0 artifact remains an explicitly labelled legacy reference and WASM lab. The new Solidity implementation preserves the security mechanisms with standard native-currency calls and a reentrancy guard, but does not claim successful Portaldot V3 execution.
