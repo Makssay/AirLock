@@ -2,7 +2,7 @@
 
 A withdrawal firewall for Portaldot cross-chain integrations. A compromised relay can request a release; it cannot bypass independently controlled limits, timelocks or guardian cancellation.
 
-**Status:** working WASM lab plus a Solidity implementation deployed and tested on a real local Anvil development chain. No Portaldot testnet deployment or revive compatibility is claimed. Official V3 endpoint, compiler/backend and eligibility still need organizer confirmation. See [V3 status](docs/V3-STATUS.md).
+**Status:** working WASM lab plus a Solidity implementation deployed and tested on a real local Anvil development chain. No Portaldot testnet deployment or revive compatibility is claimed. V3 network identity, EVM bytecode support, and constructor simulation are now verified. Live deployment awaits the guardian wallet signature; relay eligibility still needs organizer confirmation. See [V3 status](docs/V3-STATUS.md).
 
 ## Run the prototype
 
@@ -14,7 +14,7 @@ npm test
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. The service binds only to loopback. Lab state is in memory and resets on restart. There is no wallet connection and no real currency is transferred by the interface.
+Open http://127.0.0.1:5173. The service binds only to loopback. Lab state is in memory and resets on restart. The lab controls use simulated funds. The separate Deploy to V3 page connects a Substrate wallet and sends a real testnet deployment only after the user requests and signs it.
 
 To rebuild the contract, install Rust and the official target:
 
@@ -30,6 +30,24 @@ Production frontend:
 npm run build
 npm run preview
 ```
+
+## Portaldot V3 deployment
+
+```powershell
+npm run build:evm
+npm run v3:prepare
+npm run dev
+```
+
+Open http://127.0.0.1:5173/#deploy in the browser containing your Substrate wallet extension. Refresh the simulation, connect the guardian account, review the amounts, and sign. The in-app browser may not have access to your wallet extension.
+
+Preparation creates a separate random TESTNET relay in ignored `deployments/relay-wallet.local.json`. This local file contains its private key; keep it private and never use this disposable wallet on mainnet. No guardian secrets are stored or requested. Public deployment preparation is in `deployments/v3-preparation.local.json`.
+
+The guardian signs one `utility.batchAll`: fund the relay with 10 tPOT and instantiate Airlock with 50 tPOT. The current optimized artifact requires a storage deposit of about 400.263 tPOT, separately from the reserve, with a 409 tPOT cap. The estimated batch network fee was 0.6214 tPOT on 21 October. Preparation re-estimates weight, deposit, fees and available balance. The UI rejects stale preparation, another network, another guardian or changed deployment call. An unsuccessful batch rolls back both calls, although network fees still apply.
+
+Native Substrate amounts use 14 decimals; EVM contract amounts use 18 decimals (verified native-to-Ethereum ratio 10000). EVM initcode must include constructor arguments, with the native instantiate call's `data` empty. Build uses solc 0.8.30, viaIR, optimizer runs 1, Paris. Runtime bytecode is 4865 bytes; the previous 6262-byte build exceeded this account's storage budget.
+
+After finalization the local server independently verifies the canonical block, guardian signer, exact call, success event, instantiation and code presence before saving `deployments/airlock-v3.local.json`. Wallet-observed receipts can also be downloaded. A simulation address is never presented as an already deployed contract. If finalization times out, check the transaction before attempting another deployment.
 
 ## Three-minute demo
 

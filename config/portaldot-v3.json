@@ -1,17 +1,34 @@
 {
   "name": "Portaldot V3 testnet",
-  "substrateRpc": "wss://testnetv3-node.feso-apps.xyz",
-  "evmRpc": "https://testnetv3-eth-rpc.feso-apps.xyz",
+  "substrateRpc": "wss://test-node-v3.portaldot.dev",
+  "evmRpc": "https://test-evm-rpc-v3.portaldot.dev",
   "chainId": 420420777,
-  "nativeCurrency": { "name": "Test POT V3", "symbol": "tPOTv3", "decimals": 14 },
-  "nodeExplorer": "https://node-console.feso-apps.xyz/",
-  "provenance": "Network details supplied by the user from Discord on 2026-10-16",
+  "nativeCurrency": {
+    "name": "Test POT V3",
+    "symbol": "tPOT",
+    "decimals": 14
+  },
+  "nodeExplorer": "https://node-console.portaldot.dev/",
+  "provenance": "Endpoints discovered via user-supplied Pindex on 2026-10-21; Substrate identity and EVM chain ID independently checked by read-only RPC. Explorer link not verified.",
   "verification": {
-    "runtime": "not yet verified",
-    "chainId": "declared; not yet confirmed by RPC",
-    "genesisHash": null,
-    "compilerBackend": "not yet verified",
-    "dnsAtCheck": "NXDOMAIN for all three hostnames from both Google and Cloudflare DNS",
-    "checkedDate": "2026-10-16"
+    "runtime": "portaldot-v3 specVersion 3002",
+    "chainId": "420420777 confirmed by eth_chainId",
+    "genesisHash": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "compilerBackend": "allowEVMBytecode=true; solc 0.8.30 viaIR Paris Airlock constructor dry-run passed via ReviveApi_instantiate",
+    "checkedDate": "2026-10-21",
+    "evidence": [
+      "artifacts/v3-preflight.json"
+    ]
+  },
+  "previousEndpoints": {
+    "substrateRpc": "wss://testnetv3-node.feso-apps.xyz",
+    "evmRpc": "https://testnetv3-eth-rpc.feso-apps.xyz",
+    "nodeExplorer": "https://node-console.feso-apps.xyz/",
+    "dnsObservation": "NXDOMAIN on 2026-10-16"
+  },
+  "ethereumNativeCurrency": {
+    "name": "Test POT V3",
+    "symbol": "tPOT",
+    "decimals": 18
   }
 }

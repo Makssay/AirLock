@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-10-21T11:56:28.392Z",
+  "network": {
+    "substrateRpc": "wss://test-node-v3.portaldot.dev",
+    "evmRpc": "https://test-evm-rpc-v3.portaldot.dev",
+    "chainId": 420420777,
+    "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "runtime": "portaldot-v3 spec 3002",
+    "nativeDecimals": 14,
+    "evmDecimals": 18,
+    "nativeToEthRatio": 10000,
+    "allowEVMBytecode": true
+  },
+  "artifact": {
+    "file": "artifacts/evm/Airlock.json",
+    "sha256": "d437ba7e73e3a0338c58b9066d1cc7437ade4cb882a7d4455a7fdc3dfb6736c7",
+    "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+    "settings": {
+      "viaIR": true,
+      "optimizer": {
+        "enabled": true,
+        "runs": 1
+      },
+      "evmVersion": "paris",
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode.object",
+            "evm.deployedBytecode.object"
+          ]
+        }
+      }
+    },
+    "creationBytes": 5711,
+    "runtimeBytes": 4865
+  },
+  "dryRun": {
+    "success": true,
+    "method": "ReviveApi_instantiate",
+    "weightRequired": {
+      "refTime": 343240236,
+      "proofSize": 20930
+    },
+    "storageDepositNativeBaseUnits": "40026300000000000",
+    "estimatedBatchFeeNativeBaseUnits": "62141689222249"
+  },
+  "broadcast": false,
+  "portaldotDeployment": false,
+  "limitations": "Constructor simulation only. Local EVM behavior tests do not replace V3 transaction receipts."
+}

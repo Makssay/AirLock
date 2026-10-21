@@ -15,7 +15,8 @@
     "build:evm": "node scripts/build-evm.mjs",
     "test:evm": "node --test tests/evm.test.mjs",
     "evm:node": "node server/evm-node.mjs",
-    "evm:demo": "node scripts/evm-demo.mjs"
+    "evm:demo": "node scripts/evm-demo.mjs",
+    "v3:prepare": "node scripts/v3-prepare.mjs"
   },
   "dependencies": {
     "@polkadot/api": "^16.4.6",

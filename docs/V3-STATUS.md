@@ -1,8 +1,22 @@
 # V3 integration status
 
-## Newly supplied network configuration
+## Live V3 verification — 21 October 2026
 
-The user subsequently provided Discord network details: Substrate `wss://testnetv3-node.feso-apps.xyz`, EVM `https://testnetv3-eth-rpc.feso-apps.xyz`, chain ID 420420777, tPOTv3 with 14 decimals and explorer `https://node-console.feso-apps.xyz/`. These declared settings are saved in `config/portaldot-v3.json`.
+The user supplied https://pindex.onrender.com/. Its explorer footer and linked repository https://github.com/youthisguy/portalIndex expose replacement endpoints:
+
+- Substrate: `wss://test-node-v3.portaldot.dev`
+- EVM: `https://test-evm-rpc-v3.portaldot.dev`
+- Console link: `https://node-console.portaldot.dev/` (not independently checked)
+
+Read-only RPC confirmed chain `PortaldotV3 Test`, runtime `portaldot-v3` spec 3002, genesis `0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd`, SS58 42 and native symbol `tPOT` with 14 decimals. The Ethereum gateway returned chain ID 420420777 and a live block number. It answered requests with an explicit application User-Agent; the default Python User-Agent received HTTP 403.
+
+At finalized block 131195 the user-supplied SS58 account had 500 tPOT free, no reserved or frozen balance, and nonce 0. `reviveApi.address` returned its H160 address and `reviveApi.accountId` mapped it back to the original account. No transaction was submitted. The account-specific observation is in local research evidence, not in the reusable network config.
+
+Both Contracts and Revive calls are present. This confirms network access, not compatibility of the current Airlock artifacts or a successful deployment. Subsequent verification confirmed `allowEVMBytecode=true`, `nativeToEthRatio=10000`, and a successful native Revive constructor dry-run for the optimized Airlock artifact. The deployment page prepares an atomic relay-funding and deployment transaction for the guardian to sign. No V3 transaction has been sent yet. See `artifacts/v3-preflight.json` and the README deployment section.
+
+## Previously supplied network configuration
+
+The user subsequently provided Discord network details: Substrate `wss://testnetv3-node.feso-apps.xyz`, EVM `https://testnetv3-eth-rpc.feso-apps.xyz`, chain ID 420420777, tPOTv3 with 14 decimals and explorer `https://node-console.feso-apps.xyz/`. These settings are retained as previous endpoints in `config/portaldot-v3.json`; the active entries now use the verified replacement endpoints.
 
 Direct connection attempts on 16 October 2026 failed at name resolution. Independent Google and Cloudflare DNS queries returned status 3 (NXDOMAIN) for all three exact hostnames. The parent domain's SOA was returned, but no endpoint address. This is a snapshot of DNS availability, not a conclusion that the configuration never worked. RPC identity, genesis, runtime and compiler backend therefore remain unverified. Raw observations are in `research/v3-network-probe.json` and `research/v3-dns-check.json`.
 
@@ -35,4 +49,4 @@ Attempting Ubuntu installation through WSL failed with HCS_E_HYPERV_NOT_INSTALLE
 
 ## Next Portaldot gate
 
-Obtain official V3 RPC, chain ID/genesis, faucet, contract compiler/backend, reproducible deploy example, and a decision on whether the custom trusted relay is eligible. Then deploy a probe before adapting Airlock. Do not use mainnet funds or substitute another network's receipts for Portaldot evidence.
+Network identity is now verified and the supplied account is funded. The compiler path and constructor dry-run are verified. Obtain the guardian wallet signature and verify a finalized deployment before claiming live execution. Eligibility of the custom trusted relay still requires organizer confirmation. Signing requires the wallet owner; a public address alone cannot authorize transactions. Do not use mainnet funds or substitute another network's receipts for Portaldot evidence.
