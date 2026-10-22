@@ -83,5 +83,14 @@
     "reserved": "0.0",
     "evidence": "artifacts/v3-attack-demo.json",
     "recovery": "Initial pause preflight rejected before signing: insufficient guardian storage funds. Returned 3 tPOT relay surplus to guardian, then finalized pause and cancel. Preflight now reserves the peak pause deposit."
+  },
+  "checkin_presentation": {
+    "walkthrough": "four recorded stages, live console separate",
+    "desktop": "verified",
+    "mobile_375px": "verified; no horizontal overflow",
+    "publications": "none",
+    "video": "docs/check-in/airlock-week2.mp4",
+    "narration": "English synthetic narration; Microsoft Zira Desktop",
+    "limitations": "Recorded guardian response was after quarantine expiry; no timely response claim. Trusted RPC relay; no consensus proof."
   }
 }

@@ -1,8 +1,26 @@
 # Airlock
 
-A release firewall on Portaldot V3. A trusted relay may submit messages, but an independent guardian, fixed-window payout limits, reserve floor, quarantine and replay protection bound what those messages can release.
+**What if your relay starts sending bad payout instructions?**
 
-**Live testnets:** Ethereum Sepolia outbox -> trusted RPC relay -> Portaldot V3 contract. A verified request paid 0.25 tPOT to the guardian. Recorded reserve: **48.75 tPOT**, zero queued reservations, releases active. This is a testnet prototype, not an audited bridge.
+Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. Relay authorization is only the first check: the contract also enforces a spending cap, quarantine, reserve floor, replay protection and independent guardian controls.
+
+**Verified prototype:** Ethereum Sepolia request -> trusted RPC relay -> Portaldot V3. An earlier request paid **0.25 tPOT**. A later controlled **4 tPOT** request entered quarantine, then the guardian paused and cancelled it. During that scenario **0 tPOT was paid**, and the vault remained at **48.75 tPOT**. Releases were left paused; this is a recorded result, not a current-balance promise.
+
+## See the product
+
+Run the console and open **Watch verified walkthrough** on the Control room, or visit `http://127.0.0.1:5173/#demo`. The four-step viewer reads recorded receipts and never signs a transaction. The Control room continues to read live finalized V3 state.
+
+- [Week 2 progress and evidence](docs/check-in/WEEK-2.md)
+- [Submission checklist](docs/check-in/SUBMISSION-CHECKLIST.md)
+- [Architecture diagram](docs/check-in/architecture.svg)
+- [Controlled scenario JSON](artifacts/v3-attack-demo.json)
+- Local video: `docs/check-in/airlock-week2.mp4`; a public viewing link is still needed before submission.
+
+![Airlock architecture](docs/check-in/architecture.svg)
+
+A treasury that executes every authorized relay instruction delegates its payout authority to that relay. Airlock constrains that authority on V3. This is an architectural comparison, not a measured claim about losses prevented. Small malicious payouts inside the cap remain possible.
+
+**Trust limits:** the outbox does not escrow ETH, and V3 does not verify Ethereum consensus. The relay trusts configured RPC data. The recorded guardian response occurred after the quarantine delay due to funding recovery; this run proves pause/cancel mechanics, not response within the delay. This is an unaudited testnet prototype.
 
 ## Run
 
