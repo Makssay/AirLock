@@ -18,3 +18,5 @@ npx remotion render src/index.ts AirlockWeek2 ../docs/check-in/airlock-week2.mp4
 Narration text, screenshot references, scene start frames and durations are in `public/scenes.json`. Each scene includes 0.8 seconds of padding after its recorded narration. The OpenRouter narration script computes durations from the generated PCM audio before rendering.
 
 Output MP4 and generated WAV narration are local artifacts excluded from Git. The screenshot assets and SVG are included. There is no public URL or submission created by these commands.
+
+The current presentation omits the event header, outer scene counter, repeated footer captions, technical file paths and contract-address overlays. Verifiable addresses and receipts remain available in the application and check-in documentation. Narration and scene timing are unchanged.

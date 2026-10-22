@@ -1,12 +1,14 @@
 {
   "durationSeconds": 142.741,
-  "sizeBytes": 9165485,
-  "sha256": "8864a30ffc607d826e5068f4e35e21532a23134e530c7fe7ca09b1bdb3189b0c",
+  "sizeBytes": 8372941,
+  "sha256": "1005525ac134393db0bef9584a788006d422441678e185c9fc5f270a2aa6e0e2",
   "video": "1920x1080 H.264, 15 fps",
   "audio": "AAC; Gemini Flash TTS / Fenrir, English",
   "scenesReviewed": 8,
   "script": "approved presentation revision",
   "recording": "saved finalized public-testnet evidence",
   "publicUrl": null,
-  "published": false
+  "published": false,
+  "presentation": "clean: no event header, outer scene counter, repeated footers or technical overlays",
+  "audioUnchanged": true
 }
