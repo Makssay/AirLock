@@ -1,5 +1,6 @@
 import {ApiPromise,WsProvider} from '@polkadot/api';
 import {readFileSync,writeFileSync} from 'node:fs';
+import {matchesV3Code} from '../lib/v3-code.mjs';
 
 // Verify the wallet-submitted result independently before labelling it a deployment.
 export async function verifyV3Receipt({transactionHash,blockHash}){
@@ -13,18 +14,22 @@ export async function verifyV3Receipt({transactionHash,blockHash}){
   const block=await api.rpc.chain.getBlock(blockHash);
   const height=block.block.header.number;
   const finalized=await api.rpc.chain.getHeader(await api.rpc.chain.getFinalizedHead());
-  if(height.gt(finalized.number)||(await api.rpc.chain.getBlockHash(height)).toHex()!==blockHash)throw Error('Block is not canonical and finalized');
+  if(BigInt(height.toString())>BigInt(finalized.number.toString())||(await api.rpc.chain.getBlockHash(height.toString())).toHex()!==blockHash)throw Error('Block is not canonical and finalized');
   const index=block.block.extrinsics.findIndex(tx=>tx.hash.toHex()===transactionHash);
   if(index<0)throw Error('Transaction not found in supplied block');
   const tx=block.block.extrinsics[index];
-  if(!tx.isSigned||!api.createType('AccountId',tx.signer).eq(api.createType('AccountId',plan.guardian))||tx.method.toHex()!==plan.callData)throw Error('Transaction does not match the prepared guardian deployment');
+  const signer=tx.signer.isId?tx.signer.asId.toString():tx.signer.toString();
+  if(!tx.isSigned||!api.createType('AccountId',signer).eq(api.createType('AccountId',plan.guardian))||tx.method.toHex()!==plan.callData)throw Error('Transaction does not match the prepared guardian deployment');
   const at=await api.at(blockHash);const events=(await at.query.system.events()).filter(e=>e.phase.isApplyExtrinsic&&e.phase.asApplyExtrinsic.toNumber()===index).map(e=>e.event);
   if(!events.some(e=>e.section==='system'&&e.method==='ExtrinsicSuccess')||events.some(e=>e.section==='system'&&e.method==='ExtrinsicFailed'))throw Error('Deployment extrinsic failed');
   const instance=events.find(e=>e.section==='revive'&&e.method==='Instantiated');
   if(!instance)throw Error('No Revive instantiation event');
   const contract=instance.data[1].toString();
   const code=await at.call.reviveApi.code(contract);
-  if(code.toHex()!==plan.dryRun.result.ok.result.data)throw Error('Deployed bytecode differs from the reviewed constructor result');
+  const expectedCode=plan.dryRun.result.ok.result.data;
+  // This V3 runtime API returns a SCALE-encoded Vec<u8> inside its Bytes result.
+  // Accept the wrapper only when the declared length exactly matches the payload.
+  if(!matchesV3Code(code.toU8a(true),expectedCode))throw Error('Deployed bytecode differs from the reviewed constructor result');
   const evidence={mode:'portaldot-v3-finalized',portaldotDeployment:true,verifiedAt:new Date().toISOString(),genesis:api.genesisHash.toHex(),transactionHash,blockHash,blockNumber:height.toString(),contract,relay:plan.relay,guardian:plan.guardianEvm,events:events.map(e=>({section:e.section,method:e.method,data:e.data.toJSON()}))};
   writeFileSync('deployments/airlock-v3.local.json',JSON.stringify(evidence,null,2));return evidence;
  }finally{if(api)await api.disconnect();else await provider.disconnect();}

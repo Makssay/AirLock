@@ -1,3 +1,15 @@
+# V3 live deployment — 22 October 2026
+
+Airlock is deployed at `0x3bbb62bf86d40f26a87e70fe56ee073e69198713` on verified chain 420420777, genesis `0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd`. Deployment transaction `0x23d1230a3897b65591474b2dadadf7fecc12e6ec34f373474f9c26535bb06e54`, finalized block 146537. The canonical block, exact guardian-signed batch, successful instantiation and complete runtime bytecode were independently checked. V3's code API wraps runtime code in an additional SCALE Vec length; verification accepts it only with an exact length and byte match.
+
+Four live contract-operation transactions and eight checks are recorded in `artifacts/v3-live-evidence.json`. The normal payout returned 1 tPOT to the guardian; a 4 tPOT request was quarantined, then cancelled after the guardian paused releases. Final recorded reserve 49 tPOT, reserved 0, paused true. Replay, oversized drain, early execution and paused release checks are read-only reverts, not mined failed transactions. Split attack, reentrancy, policy changes and resume remain local test coverage.
+
+The user authorized signing from a locally supplied test seed. It was matched to the expected guardian and never printed or committed. Scripts require an explicit testnet flag and reject another genesis/chain/address. Initial storage deposit about 400.263 tPOT is separate from the 50 tPOT contract funding. The local relay received 10 tPOT in the deployment batch and a further 25 tPOT for the reduced live smoke run. Constructor simulation alone had not exposed the high fee estimate for subsequent writes; a 2 tPOT guard prevented the initial smoke attempt from sending any transaction.
+
+The implementation still trusts relay attestations. External source-chain verification and organizer eligibility of this design remain unresolved. This is testnet evidence, not a production security audit.
+
+## Earlier investigation (historical)
+
 # V3 integration status
 
 ## Live V3 verification — 21 October 2026

@@ -2,7 +2,7 @@
 
 A withdrawal firewall for Portaldot cross-chain integrations. A compromised relay can request a release; it cannot bypass independently controlled limits, timelocks or guardian cancellation.
 
-**Status:** working WASM lab plus a Solidity implementation deployed and tested on a real local Anvil development chain. No Portaldot testnet deployment or revive compatibility is claimed. V3 network identity, EVM bytecode support, and constructor simulation are now verified. Live deployment awaits the guardian wallet signature; relay eligibility still needs organizer confirmation. See [V3 status](docs/V3-STATUS.md).
+**Status:** deployed and verified on Portaldot V3 testnet at `0x3bbb62bf86d40f26a87e70fe56ee073e69198713`, deployment block 146537. A live smoke run finalized normal release, quarantine, guardian pause and cancellation; replay, oversized drain, early execution and paused release were rejected by read-only calls. The recorded end state is 49 tPOT, zero reservations and paused releases. Full split-attack, policy and adversarial-recipient scenarios remain local tests. No external-chain proof or production-readiness claim is made. See [live evidence](artifacts/v3-live-evidence.json).
 
 ## Run the prototype
 
@@ -48,6 +48,19 @@ The guardian signs one `utility.batchAll`: fund the relay with 10 tPOT and insta
 Native Substrate amounts use 14 decimals; EVM contract amounts use 18 decimals (verified native-to-Ethereum ratio 10000). EVM initcode must include constructor arguments, with the native instantiate call's `data` empty. Build uses solc 0.8.30, viaIR, optimizer runs 1, Paris. Runtime bytecode is 4865 bytes; the previous 6262-byte build exceeded this account's storage budget.
 
 After finalization the local server independently verifies the canonical block, guardian signer, exact call, success event, instantiation and code presence before saving `deployments/airlock-v3.local.json`. Wallet-observed receipts can also be downloaded. A simulation address is never presented as an already deployed contract. If finalization times out, check the transaction before attempting another deployment.
+
+### Optional local testnet signing
+
+The user may supply the disposable test guardian's mnemonic as `SEED` in local `.env` (ignored by Git). Never paste it into a chat or commit it. Only CLI scripts read it; Express and the frontend do not. The script verifies the exact guardian address, hardcoded testnet genesis and chain ID, and deployment budget before signing. It writes a transaction journal before broadcasting and blocks blind redeployment after an uncertain result.
+
+```powershell
+npm run v3:deploy:local -- --send-testnet
+npm run v3:smoke -- --send-testnet
+```
+
+Do not rerun these commands on an already used deployment. Smoke tests refuse an existing journal by default. The recorded run used an additional 25 tPOT transfer from guardian to the local relay (35 tPOT funded in total). The Ethereum RPC fee estimate for a first contract write was about 19.5 tPOT, so the live scenario was deliberately reduced instead of sending many split requests. The initial 2 tPOT relay transaction guard stopped the first attempt before signing; no duplicate payment occurred. Live evidence contains four contract-operation receipts, plus a separate deployment and relay-top-up receipt in local journals. Static rejection checks do not incur transaction fees and have no transaction hashes.
+
+The signing keypair is locked after use. `.env` remains local for the user's own management. The currently deployed contract is paused. Refreshing the lab only resets the WASM sandbox; it cannot reset or unpause V3.
 
 ## Three-minute demo
 

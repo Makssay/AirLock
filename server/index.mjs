@@ -19,7 +19,8 @@ app.post('/api/v3/prepare',async(_req,res)=>{
  preparingV3=true;
  try{res.json(await prepareV3());}catch(e){res.status(400).json({error:e.message});}finally{preparingV3=false;}
 });
-app.get('/api/v3/receipt',(_req,res)=>{try{res.json(JSON.parse(readFileSync('deployments/airlock-v3.local.json','utf8')));}catch{res.status(404).json({error:'No verified V3 deployment yet.'});}});
+app.get('/api/v3/receipt',(_req,res)=>{try{res.json(JSON.parse(readFileSync('deployments/airlock-v3.local.json','utf8')));}catch{try{res.json(JSON.parse(readFileSync('artifacts/v3-live-evidence.json','utf8')).deployment);}catch{res.status(404).json({error:'No verified V3 deployment yet.'});}}});
+app.get('/api/v3/evidence',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/v3-live-evidence.json','utf8')));}catch{res.status(404).json({error:'V3 smoke test has not completed yet.'});}});
 app.post('/api/v3/receipt',async(req,res)=>{try{res.json(await verifyV3Receipt(req.body));}catch(e){res.status(400).json({error:e.message});}});
 app.get('/api/evm-evidence',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/evm/local-chain-evidence.json','utf8')));}catch{res.status(404).json({error:'No local EVM deployment recorded. Run npm run evm:node and npm run evm:demo.'});}});
 app.post('/api/action',(req,res)=>{try{const result=session.action(req.body);res.json({result,snapshot:session.snapshot()});}catch(e){res.status(400).json({error:e.message});}});
