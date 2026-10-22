@@ -1,12 +1,12 @@
 # Airlock
 
-A withdrawal firewall for Portaldot cross-chain integrations. A compromised relay can request a release; it cannot bypass independently controlled limits, timelocks or guardian cancellation.
+A release firewall on Portaldot V3. A trusted relay may submit messages, but an independent guardian, fixed-window payout limits, reserve floor, quarantine and replay protection bound what those messages can release.
 
-**Status:** deployed and verified on Portaldot V3 testnet at `0x3bbb62bf86d40f26a87e70fe56ee073e69198713`, deployment block 146537. A live smoke run finalized normal release, quarantine, guardian pause and cancellation; replay, oversized drain, early execution and paused release were rejected by read-only calls. The recorded end state is 49 tPOT, zero reservations and paused releases. Full split-attack, policy and adversarial-recipient scenarios remain local tests. No external-chain proof or production-readiness claim is made. See [live evidence](artifacts/v3-live-evidence.json).
+**Live testnets:** Ethereum Sepolia outbox -> trusted RPC relay -> Portaldot V3 contract. A verified request paid 0.25 tPOT to the guardian. Recorded reserve: **48.75 tPOT**, zero queued reservations, releases active. This is a testnet prototype, not an audited bridge.
 
-## Run the prototype
+## Run
 
-Requirements: Node.js 22+, npm. The compiled WASM artifact is included.
+Node.js 22+ and npm are required. On Windows the optional native Anvil package runs local regression tests without WSL.
 
 ```powershell
 npm ci
@@ -14,147 +14,69 @@ npm test
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. The service binds only to loopback. Lab state is in memory and resets on restart. The lab controls use simulated funds. The separate Deploy to V3 page connects a Substrate wallet and sends a real testnet deployment only after the user requests and signs it.
+Open http://127.0.0.1:5173/#overview. The server binds only to loopback. The main interface reads live V3 state; it has no simulated clock, reset or mock balance. The legacy WASM and local EVM modules remain for regression tests, not the main product flow.
 
-To rebuild the contract, install Rust and the official target:
-
-```powershell
-rustup target add wasm32v1-none
-npm run build:contract
-npm test
-```
-
-Production frontend:
+For signing, create local `.env` from [.env.example](.env.example): `SEED` must match the pinned sr25519 guardian, and `PRIVATE` must match the configured Ethereum Sepolia outbox owner. The separate V3 EVM relay key is in ignored `deployments/relay-wallet.local.json`. Use disposable test wallets. The server reads keys only for signing and never sends them to the browser, logs or JSON exports. A fresh checkout can inspect the deployment without keys; create a relay setup only for a new deployment, not to replace this contract's immutable relay.
 
 ```powershell
 npm run build
 npm run preview
 ```
 
-## Portaldot V3 deployment
+## Deployed addresses and evidence
+
+| Item | Value |
+| --- | --- |
+| Portaldot V3 chain ID | 420420777 |
+| Portaldot V3 contract | `0x3bbb62bf86d40f26a87e70fe56ee073e69198713` |
+| Deployment block | 146537 |
+| Ethereum Sepolia chain ID | 11155111 |
+| Sepolia outbox | `0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE` |
+| Source request | `0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5` |
+| V3 payout | `0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605` |
+
+- [Latest end-to-end run](artifacts/v3-console-e2e.json): source receipt, destination receipt, live state and eight integration checks.
+- [Initial V3 smoke run](artifacts/v3-live-evidence.json): deployment, payout, quarantine, pause and cancellation. Historical end state was paused with 49 tPOT; the later run resumed and paid another 0.25.
+- [Constructor and runtime verification](artifacts/v3-preflight.json), [deployed runtime code](artifacts/v3-deployed-runtime.hex), [verification summary](artifacts/verification.json).
+- Network settings: [V3](config/portaldot-v3.json), [Sepolia](config/source-sepolia.json).
+
+Live snapshots and the local operation journal are available in the UI's Evidence page and `/api/live/evidence`. Read-only attack checks have no transaction hash or gas cost. Failed preflight checks are labelled as not broadcast. Pending and uncertain operations are not described as finalized.
+
+## Interface
+
+- **Control room:** finalized reserve, cumulative window budget, queue and bounded payout requests.
+- **Quarantine:** on-chain messages, earliest execution time, cap/pause checks and guardian cancellation.
+- **Release policy:** guardian schedules limits or resume; anyone may activate after the immutable 300-second delay. The UI signs activation with the local guardian.
+- **Evidence:** submission stages, source and destination hashes, current wallet balances and exportable records. Operator funding transfers 1-5 tPOT to the pinned relay; the UI button uses 5.
+
+The emergency pause remains available while a source/relay request is waiting, provided no other guardian transaction is in flight. Source confirmation does not override a later guardian pause. After a timeout or restart an uncertain journal blocks blind retries; reconcile its hashes before attempting a new operation.
+
+## Source and trust model
+
+[AirlockOutbox.sol](contracts/evm/AirlockOutbox.sol) is an owner-controlled Sepolia request emitter. **It does not escrow or bridge ETH.** The local relay checks chain ID, source owner, pinned bytecode hash, receipt target, exactly one matching event, amount, recipient, destination and canonical block after **six confirmations**. Six confirmations are not an Ethereum finalized checkpoint or consensus proof.
+
+Destination nonce is `(11155111 << 32) | sourceNonce`, with sourceNonce limited to 32 bits. The existing V3 source domain remains generic: the immutable V3 contract does not verify or bind the Sepolia source. The configured relay supplies that binding. A compromised relay may fabricate requests and can consume the available allowed budget. Airlock bounds exposure; it cannot eliminate it. Read the [threat model](docs/THREAT-MODEL.md).
+
+The contract caps total releases in fixed windows, including releases executed from quarantine. Queued funds remain reserved. Cancellation consumes the nonce. Guardian pause blocks releases; changing policy or resuming requires the separate delay. Fixed-window boundary bursts and delayed guardian response remain risks.
+
+## Signing and budgets
+
+Native Substrate balances use 14 decimals; Ethereum-compatible V3 calls use 18, with a runtime ratio of 10000. Solidity amounts use EVM units. Constructor initcode includes arguments, while native Revive `data` is empty. V3 supports the solc EVM bytecode; build uses solc 0.8.30, viaIR, optimizer runs 1, Paris. Runtime size is 4865 bytes. The initial storage deposit was about 400.263 tPOT, separately from the 50 tPOT reserve.
+
+V3's Ethereum gas estimates include storage and may require a large upfront balance. Each relay request is limited to 5 tPOT, always paid to the pinned guardian. The relay fee ceiling is 25 tPOT with a 5% gas margin above the gateway estimate. Guardian network fees are capped at 1 tPOT and storage charge at 12 tPOT. Source requests are capped at 0.001 test ETH; source deployment at 0.01 test ETH. Funds and fees are checked before creating the source event, then checked again before relaying it.
+
+Signing requires the exact pinned genesis, chain ID, deployed bytecode and role addresses. The server requires exact loopback Host and Origin, JSON requests and a per-process control token. Request IDs deduplicate double clicks. A write journal is saved before broadcast. Guardian and source seeds stay outside frontend bundles. `/api/action` is retired; `/api/state` and `/api/evidence` return V3 data.
+
+## Development commands
 
 ```powershell
 npm run build:evm
 npm run v3:prepare
-npm run dev
-```
-
-Open http://127.0.0.1:5173/#deploy in the browser containing your Substrate wallet extension. Refresh the simulation, connect the guardian account, review the amounts, and sign. The in-app browser may not have access to your wallet extension.
-
-Preparation creates a separate random TESTNET relay in ignored `deployments/relay-wallet.local.json`. This local file contains its private key; keep it private and never use this disposable wallet on mainnet. No guardian secrets are stored or requested. Public deployment preparation is in `deployments/v3-preparation.local.json`.
-
-The guardian signs one `utility.batchAll`: fund the relay with 10 tPOT and instantiate Airlock with 50 tPOT. The current optimized artifact requires a storage deposit of about 400.263 tPOT, separately from the reserve, with a 409 tPOT cap. The estimated batch network fee was 0.6214 tPOT on 21 October. Preparation re-estimates weight, deposit, fees and available balance. The UI rejects stale preparation, another network, another guardian or changed deployment call. An unsuccessful batch rolls back both calls, although network fees still apply.
-
-Native Substrate amounts use 14 decimals; EVM contract amounts use 18 decimals (verified native-to-Ethereum ratio 10000). EVM initcode must include constructor arguments, with the native instantiate call's `data` empty. Build uses solc 0.8.30, viaIR, optimizer runs 1, Paris. Runtime bytecode is 4865 bytes; the previous 6262-byte build exceeded this account's storage budget.
-
-After finalization the local server independently verifies the canonical block, guardian signer, exact call, success event, instantiation and code presence before saving `deployments/airlock-v3.local.json`. Wallet-observed receipts can also be downloaded. A simulation address is never presented as an already deployed contract. If finalization times out, check the transaction before attempting another deployment.
-
-### Optional local testnet signing
-
-The user may supply the disposable test guardian's mnemonic as `SEED` in local `.env` (ignored by Git). Never paste it into a chat or commit it. Only CLI scripts read it; Express and the frontend do not. The script verifies the exact guardian address, hardcoded testnet genesis and chain ID, and deployment budget before signing. It writes a transaction journal before broadcasting and blocks blind redeployment after an uncertain result.
-
-```powershell
 npm run v3:deploy:local -- --send-testnet
-npm run v3:smoke -- --send-testnet
+npm run source:deploy -- --send-testnet
+npm run test:live:e2e -- --send-testnet
 ```
 
-Do not rerun these commands on an already used deployment. Smoke tests refuse an existing journal by default. The recorded run used an additional 25 tPOT transfer from guardian to the local relay (35 tPOT funded in total). The Ethereum RPC fee estimate for a first contract write was about 19.5 tPOT, so the live scenario was deliberately reduced instead of sending many split requests. The initial 2 tPOT relay transaction guard stopped the first attempt before signing; no duplicate payment occurred. Live evidence contains four contract-operation receipts, plus a separate deployment and relay-top-up receipt in local journals. Static rejection checks do not incur transaction fees and have no transaction hashes.
+Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-The signing keypair is locked after use. `.env` remains local for the user's own management. The currently deployed contract is paused. Refreshing the lab only resets the WASM sandbox; it cannot reset or unpause V3.
-
-## Three-minute demo
-
-1. Send the normal 20 POT lab payment. Show release, vault balance and receipt.
-2. Run the relay attack. Small withdrawals consume the remaining fixed-window budget; excess small and large admissible messages are quarantined. The 900 POT drain is rejected.
-3. Inspect a queued request. Advancing the clock does not bypass the cumulative cap.
-4. Pause as guardian, then cancel the queue. The pending reservation becomes available while the vault funds remain.
-5. Test replay; the contract rejects reuse of an accepted source nonce.
-6. Open Release policy. Schedule resume and show that it cannot activate before the separate policy delay.
-7. Download evidence. Its receipts identify the local WASM host and compiled contract SHA-256, not blockchain transaction hashes.
-
-The attacker can steal the configured available instant budget. Airlock limits loss under its stated assumptions; it does not magically prevent all theft. See [threat model](docs/THREAT-MODEL.md).
-
-## Architecture
-
-```text
-Lab message composer / relay attack
-              |
-       fixed-width ABI
-              |
-    compiled Rust airlock.wasm
-              |
-     isolated seal0 host
-     storage / POT / clock
-              |
-    receipts + operator interface
-
-Separate deployment adapter
-              |
-     @polkadot/api + node metadata
-              |
-    actual legacy Portaldot dev node
-```
-
-The interface's source-chain lane is a lab message source. No second blockchain or external-chain proof is implemented yet. The protection logic is in the Rust contract, not a frontend simulation of its decisions.
-
-## Real development-chain adapter
-
-### Solidity / local EVM
-
-This path runs on Windows without WSL. Native Anvil binaries are installed as optional platform dependencies from the official Foundry npm packages. The node binds only to loopback and uses public development keys.
-
-```powershell
-npm run build:evm
-npm run test:evm
-npm run evm:node
-```
-
-In a second terminal:
-
-```powershell
-npm run evm:demo
-```
-
-The demonstration deploys `contracts/evm/Airlock.sol`, executes normal and compromised-relay requests, mines a rejected drain attempt, pauses, and cancels the queue. It saves 15 actual local transaction receipts in `deployments/evm-demo.local.json` and a snapshot in `artifacts/evm/local-chain-evidence.json`. The Evidence page displays this separately from WASM host receipts. These transactions are on chain ID 31337, **not Portaldot**. The EVM reference uses 18-decimal local native units; the legacy WASM lab uses 14-decimal local POT units. Deployment to a PVM backend may require resolc and a different artifact.
-
-### Legacy Portaldot (pending reachable node)
-
-Run the official local client in Linux/WSL with `--dev --alice` and its WebSocket endpoint. The public materials inspected so far describe the legacy runtime, not a verified V3 environment.
-
-```powershell
-npm run chain:probe -- --endpoint ws://127.0.0.1:9944
-npm run chain:deploy -- --endpoint ws://127.0.0.1:9944
-npm run chain:demo -- --endpoint ws://127.0.0.1:9944
-```
-
-The adapter refuses Mainnet and non-Development/Local chain types. Dev signing uses public Alice/Bob keys only on these development chains. Deployment endows the contract with 1,000 local POT. Remote development chains additionally require `--allow-remote-dev --expected-genesis <verified hash>`. Probe does not sign or send transactions. Deploy/demo are explicit writes and save finalized receipts under deployments. A new chain/runtime requires compatibility review, not blind retries.
-
-## Current verification
-
-- 27 tests cover compiled WASM and lab session behavior, including an adversarial 250-step sequence.
-- 10 additional Solidity scenarios execute as transactions on an isolated native Anvil chain, including failed-payout rollback and reentrancy protection. Node's test runner counts the enclosing suite as one additional test.
-- Production frontend builds successfully.
-- Compiled artifact passes the vendored portawasm legacy-format validator (8,164 bytes, memory 2–16 pages). This is an offline compatibility check, not proof of on-chain execution.
-- WSL Ubuntu registration failed with missing virtualization support. No reboot was performed. Portaldot deployment remains pending a reachable accepted node; local EVM verification runs independently through native Anvil.
-
-## Files
-
-- `contracts/airlock/src/lib.rs`: contract and authorization/state transitions.
-- `lib/wasm-lab.mjs`: isolated execution host.
-- `lib/abi.mjs`: encoders, decoders and stable error codes.
-- `server/session.mjs`: lab scenarios and receipts.
-- `scripts/chain.mjs`: probe/deploy/demo adapter.
-- `docs/ABI.md`: custom seal0 wire format.
-- `research/`: earlier documentation/runtime audit; not competition code evidence.
-
-## Attribution
-
-Original Airlock contract and interface built for this project. Runtime integration researched from the public [Portaldot source](https://github.com/portaldotVolunteer/Portaldot), [developer documentation](https://portaldot-dev.readthedocs.io/en/latest/) and [portaldot-contract-zero](https://github.com/jonathan-moore58/portaldot-contract-zero) (MIT). The latter's `tools/portawasm.py` is vendored unmodified for offline validation; its license is in `tools/PORTAWASM-LICENSE`. No translator or complete pre-existing competition project is submitted as Airlock. Third-party dependencies and versions are recorded in package-lock.json. The custom contract has no Rust dependencies.
-
-## Next acceptance milestones
-
-1. Confirm contest deployment environment and relay model with organizers.
-2. Deploy the compiled contract and reproduce normal/quarantine/cancel against that node.
-3. Add one real external testnet source and a specified relay verification model.
-4. Replace lab-only role switching with wallet authorization in a separate chain mode.
-5. Record a reproducible on-chain demo, public repository and pitch deck.
+`npm test` runs 44 regression checks, including native local EVM transactions, reentrancy and transfer rollback, compiled WASM invariants, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.

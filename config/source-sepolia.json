@@ -1,0 +1,15 @@
+{
+  "name": "Ethereum Sepolia",
+  "chainId": 11155111,
+  "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+  "explorer": "https://sepolia.etherscan.io",
+  "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+  "owner": "0xf337687dD73c1A13EFE39393a000f55a95B1ac54",
+  "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+  "destination": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+  "confirmations": 6,
+  "finality": "Six canonical confirmations; not Ethereum finalized checkpoint proof",
+  "deploymentHash": "0x3c6306d690b08dee2ac23b1e787b485f26b1cd51dac7e4dee94dfc4b2502c5a8",
+  "deploymentBlock": 11970436,
+  "runtimeCodeHash": "0xc560bf4795c877637bedd1d92cb004676d73aac58cecc945cdd002611af555da"
+}

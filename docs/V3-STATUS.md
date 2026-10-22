@@ -1,3 +1,13 @@
+# Two-public-testnet integration — 22 October 2026
+
+The main interface now uses live V3 state, with real guardian and relay transactions. Ethereum Sepolia outbox `0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE` emits release requests. The verified end-to-end run observed source transaction `0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5` after six canonical confirmations and finalized V3 payout `0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605`. The reserve moved from 49 to 48.75 tPOT. Releases are active, after a guardian-scheduled resume and the actual 300-second delay. No time acceleration or balance reset exists in the primary UI.
+
+The user authorized a locally supplied Sepolia key. No keys were printed, exported to the browser or committed. Three additional guardian operations funded the relay in amounts 5, 5 and 3 tPOT after the policy activation (the original run had also supplied 35 tPOT). Public journals provide exact amounts and transaction hashes. The first attempted payout was stopped before a source transaction because the relay lacked upfront gas funds. The successful request used a fresh ID only after verifying that no source/destination transaction had been signed for that failed attempt.
+
+This is a trusted-relay request pipeline, not an escrow bridge. The source contract emits requests without transferring ETH into a bridge. Six Sepolia confirmations are not Ethereum finalized-checkpoint verification. All contract and UI limits remain part of the documented trust model. See `artifacts/v3-console-e2e.json` and README.
+
+## Earlier deployment and smoke run (historical)
+
 # V3 live deployment — 22 October 2026
 
 Airlock is deployed at `0x3bbb62bf86d40f26a87e70fe56ee073e69198713` on verified chain 420420777, genesis `0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd`. Deployment transaction `0x23d1230a3897b65591474b2dadadf7fecc12e6ec34f373474f9c26535bb06e54`, finalized block 146537. The canonical block, exact guardian-signed batch, successful instantiation and complete runtime bytecode were independently checked. V3's code API wraps runtime code in an additional SCALE Vec length; verification accepts it only with an exact length and byte match.

@@ -3,12 +3,13 @@
   "contract_bytes": 8164,
   "contract_sha256": "2e1a151030430af7f803dbd1071f08315eeea72f6efb04d19594762d75835730",
   "tests": {
-    "passed": 39,
+    "passed": 44,
     "failed": 0,
     "wasm_and_session_checks": 27,
     "evm_scenarios": 10,
     "note": "Node test count includes one enclosing EVM suite.",
-    "v3_code_wrapper_regression": 1
+    "v3_code_wrapper_regression": 1,
+    "live_console_guards": 5
   },
   "production_build": "passed",
   "legacy_format_check": "passed (offline validator)",
@@ -28,7 +29,7 @@
     "V3 page at 375px without horizontal overflow",
     "wallet extension absence handled with browser instructions"
   ],
-  "blocker": "No external-chain attestation or bridge proof has been implemented; full split-attack scenario is verified locally, not in this V3 smoke run.",
+  "blocker": "Relay trusts configured Sepolia RPC; six canonical confirmations are not an Ethereum consensus proof. The outbox is not an ETH escrow.",
   "local_evm": {
     "chainId": 31337,
     "node": "Anvil 1.7.1",
@@ -48,5 +49,22 @@
     "vaultTokensAfterTest": 49,
     "pausedAfterTest": true,
     "evidence": "artifacts/v3-live-evidence.json"
+  },
+  "live_console": {
+    "network": "Portaldot V3 testnet",
+    "source": "Ethereum Sepolia",
+    "e2e": "passed",
+    "checks": 8,
+    "evidence": "artifacts/v3-console-e2e.json",
+    "vaultTokens": 48.75,
+    "paused": false,
+    "signing": "local server only; strict origins and per-session control token",
+    "export_secret_scan": "passed: no seed, private key or control token in the export",
+    "browser_checks": [
+      "live V3 balance and source route",
+      "source and destination hashes in Evidence",
+      "375px overview and Evidence without horizontal overflow",
+      "status labels remain visible on mobile"
+    ]
   }
 }

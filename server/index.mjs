@@ -2,16 +2,27 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
-import { Session } from './session.mjs';
 import { prepareV3 } from '../scripts/v3-prepare.mjs';
 import { verifyV3Receipt } from './v3-receipt.mjs';
-const app=express();const session=new Session();const port=Number(process.env.PORT||5173);
+import { LiveV3 } from './live-v3.mjs';
+import {randomBytes} from 'node:crypto';
+const app=express();const port=Number(process.env.PORT||5173);
+const live=new LiveV3(),controlToken=randomBytes(32).toString('hex');
 app.use(express.json({limit:'8kb'}));
 app.use('/api',(req,res,next)=>{
  if(req.method!=='GET' && req.headers.origin && req.headers.origin!==`http://127.0.0.1:${port}` && req.headers.origin!==`http://localhost:${port}`)return res.status(403).json({error:'Only the local Airlock interface may change lab state'});
  res.set('Cache-Control','no-store');next();
 });
-app.get('/api/state',(_req,res)=>res.json(session.snapshot()));
+app.get('/api/state',async(_req,res)=>{try{res.json(await live.snapshot());}catch(e){res.status(503).json({error:e.message});}});
+app.use('/api/live',(req,res,next)=>{
+ if(![`127.0.0.1:${port}`,`localhost:${port}`].includes(req.headers.host))return res.status(403).json({error:'Use the local Airlock address'});
+ if(req.method!=='GET'&&(![`http://127.0.0.1:${port}`,`http://localhost:${port}`].includes(req.headers.origin)||req.headers['x-airlock-control']!==controlToken))return res.status(403).json({error:'Use the local Airlock controls to request a testnet transaction'});
+ next();
+});
+app.get('/api/live/state',async(req,res)=>{try{res.json({...await live.snapshot(req.query.refresh==='1'),controlToken});}catch(e){res.status(503).json({error:e.message});}});
+app.get('/api/live/jobs',(_req,res)=>res.json({jobs:live.store.jobs.toReversed(),busy:live.busy}));
+app.get('/api/live/evidence',async(_req,res)=>{try{res.attachment('airlock-v3-live-state.json').json({disclaimer:'Finalized Portaldot V3 state and local submission journal. No external-chain proof.',...await live.snapshot(true)});}catch(e){res.status(503).json({error:e.message});}});
+app.post('/api/live/action',(req,res)=>{try{res.status(202).json(live.start(req.body,req.headers['x-request-id']));}catch(e){res.status(400).json({error:e.message});}});
 let preparingV3=false;
 app.get('/api/v3/preparation',(_req,res)=>{try{res.json(JSON.parse(readFileSync('deployments/v3-preparation.local.json','utf8')));}catch{res.status(404).json({error:'Prepare the V3 deployment first.'});}});
 app.post('/api/v3/prepare',async(_req,res)=>{
@@ -23,8 +34,8 @@ app.get('/api/v3/receipt',(_req,res)=>{try{res.json(JSON.parse(readFileSync('dep
 app.get('/api/v3/evidence',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/v3-live-evidence.json','utf8')));}catch{res.status(404).json({error:'V3 smoke test has not completed yet.'});}});
 app.post('/api/v3/receipt',async(req,res)=>{try{res.json(await verifyV3Receipt(req.body));}catch(e){res.status(400).json({error:e.message});}});
 app.get('/api/evm-evidence',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/evm/local-chain-evidence.json','utf8')));}catch{res.status(404).json({error:'No local EVM deployment recorded. Run npm run evm:node and npm run evm:demo.'});}});
-app.post('/api/action',(req,res)=>{try{const result=session.action(req.body);res.json({result,snapshot:session.snapshot()});}catch(e){res.status(400).json({error:e.message});}});
-app.get('/api/evidence',(_req,res)=>res.attachment('airlock-wasm-lab-evidence.json').json({disclaimer:'Isolated WASM host execution. These receipts are not blockchain transactions or bridge proofs.',...session.snapshot()}));
+app.post('/api/action',(_req,res)=>res.status(410).json({error:'Sandbox actions are retired. Use the V3 testnet controls.'}));
+app.get('/api/evidence',async(_req,res)=>{try{res.attachment('airlock-v3-state.json').json(await live.snapshot(true));}catch(e){res.status(503).json({error:e.message});}});
 if(process.argv.includes('--production')){app.use(express.static(resolve('dist')));app.get('/{*path}',(_req,res)=>res.sendFile(resolve('dist/index.html')));}
 else{const vite=await createViteServer({server:{middlewareMode:true},appType:'spa'});app.use(vite.middlewares);}
-app.listen(port,'127.0.0.1',()=>console.log(`Airlock WASM lab: http://127.0.0.1:${port}`));
+app.listen(port,'127.0.0.1',()=>console.log(`Airlock V3 testnet console: http://127.0.0.1:${port}`));
