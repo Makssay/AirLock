@@ -1,11 +1,12 @@
 {
-  "durationSeconds": 144.875,
-  "sizeBytes": 9682158,
-  "sha256": "f2ce280f03ae5d1f9a9f317b069ca53473817305400e3ee45f5f43a0b57be8dc",
-  "video": "1920x1080 H.264",
-  "audio": "AAC, English synthetic narration",
+  "durationSeconds": 142.741,
+  "sizeBytes": 9165485,
+  "sha256": "8864a30ffc607d826e5068f4e35e21532a23134e530c7fe7ca09b1bdb3189b0c",
+  "video": "1920x1080 H.264, 15 fps",
+  "audio": "AAC; Gemini Flash TTS / Fenrir, English",
   "scenesReviewed": 8,
-  "architectureOverlapFixed": true,
+  "script": "approved presentation revision",
+  "recording": "saved finalized public-testnet evidence",
   "publicUrl": null,
   "published": false
 }

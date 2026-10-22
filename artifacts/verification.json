@@ -89,8 +89,10 @@
     "desktop": "verified",
     "mobile_375px": "verified; no horizontal overflow",
     "publications": "none",
-    "video": "docs/check-in/airlock-week2.mp4",
-    "narration": "English synthetic narration; Microsoft Zira Desktop",
-    "limitations": "Recorded guardian response was after quarantine expiry; no timely response claim. Trusted RPC relay; no consensus proof."
+    "video": "docs/check-in/airlock-week2-fenrir.mp4",
+    "narration": "English Gemini Flash TTS / Fenrir via OpenRouter",
+    "limitations": "Recorded guardian response was after quarantine expiry; no timely response claim. Trusted RPC relay; no consensus proof.",
+    "durationSeconds": 142.741,
+    "script": "user-approved presentation revision"
   }
 }

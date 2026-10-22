@@ -6,7 +6,7 @@ Deadline supplied by the organizers: 24 October 2026, 12:00 UTC / 15:00 Moscow.
 - [x] Local code history and complete README.
 - [x] Architecture diagram.
 - [x] Progress, remaining tasks, addresses and hashes in WEEK-2.md.
-- [x] Video rendered and reviewed: airlock-week2.mp4, 2:25, English narration, 1920x1080.
+- [x] Video rendered and reviewed: airlock-week2.mp4, 2:23, English narration, 1920x1080.
 - [ ] Publish repository yourself, preserving commit history and excluding .env and local wallet files.
 - [ ] Upload the MP4 somewhere publicly accessible and test the viewing link while signed out.
 - [ ] Add real GitHub and video URLs to DoraHacks; use WEEK-2.md for the progress fields.

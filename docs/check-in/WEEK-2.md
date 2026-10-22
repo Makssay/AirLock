@@ -50,7 +50,7 @@ The initial guardian pause preflight was rejected before signing due to insuffic
 - Final documentation, pitch deck and final video.
 
 ## Video
-Local file: `airlock-week2.mp4` (2:25, English synthetic narration). It uses actual application screens backed by recorded finalized evidence. Upload it to obtain a public viewing link before submitting.
+Local file: `airlock-week2.mp4` (2:23, English Fenrir narration). It uses actual application screens backed by recorded finalized evidence. Upload it to obtain a public viewing link before submitting.
 
 ## Submission readiness
 Prepared locally. Nothing in this folder has been uploaded or submitted.

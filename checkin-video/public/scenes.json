@@ -1,74 +1,90 @@
 [
   {
-    "chapter": "Why Airlock?",
-    "title": "What if your relay starts sending bad instructions?",
-    "narration": "Teams hold a treasury on Portaldot, but accept payout instructions from another chain. If the trusted relay is compromised, a valid relay signature can still authorize a bad request.",
+    "chapter": "The problem",
+    "title": "What if your relay sends a bad instruction?",
+    "narration": "What if your relay starts sending the wrong payout instructions? To a treasury, those requests can still look legitimate. They come from a trusted intermediary. But being allowed to submit a request shouldn't mean unlimited access to the funds.",
     "image": "",
-    "duration": 12.566984126984128,
-    "frames": 206,
-    "start": 0
+    "caption": "Relay authorization is only the first check.",
+    "duration": 15.36,
+    "frames": 243,
+    "start": 0,
+    "audio": "fenrir-0.wav"
   },
   {
-    "chapter": "The boundary",
-    "title": "Give relay authority a budget.",
-    "narration": "Airlock puts payout rules on Portaldot V3. Small requests can pass within a budget. Larger requests wait in quarantine. A separate guardian can pause and cancel. The diagram explains the architecture, not a measured loss comparison.",
-    "image": "architecture.svg",
-    "duration": 17.831156462585035,
-    "frames": 284,
-    "start": 206
+    "chapter": "The solution",
+    "title": "Payout authority, with boundaries.",
+    "narration": "Airlock is a payout firewall on Portaldot V3. It sets clear boundaries: how much can be paid immediately, how much can leave within a fixed window, and which requests have to wait. A separate guardian can pause payouts and cancel a request.",
+    "image": "architecture-presentation.svg",
+    "caption": "Limits. Quarantine. Independent guardian.",
+    "duration": 16.8,
+    "frames": 264,
+    "start": 243,
+    "audio": "fenrir-1.wav"
   },
   {
     "chapter": "Normal payout",
     "title": "0.25 tPOT released.",
-    "narration": "First, an earlier real request from Ethereum Sepolia. The relay checks the event after six canonical confirmations. On Portaldot V3, the quarter-token payout is released. This is a recorded walkthrough, not a new transaction.",
+    "narration": "Let's follow a real flow between Ethereum Sepolia and Portaldot V3. A request is created on Sepolia. The relay waits for six confirmations, then submits it to Airlock. A small payout of zero point two five test tokens goes through. The result is confirmed by a transaction on Portaldot V3.",
     "image": "step-0.png",
-    "duration": 17.38639455782313,
-    "frames": 278,
-    "start": 490
+    "caption": "Sepolia request. Six confirmations. V3 payout.",
+    "duration": 20.08,
+    "frames": 314,
+    "start": 507,
+    "audio": "fenrir-2.wav"
   },
   {
     "chapter": "Quarantine",
-    "title": "4 tPOT requested. Zero paid.",
-    "narration": "Next, a controlled four-token request to the guardian wallet models an untrusted relay instruction. It exceeds the one-token instant threshold. The contract queues it and reserves four tokens. The treasury balance stays at forty-eight point seven five.",
+    "title": "4 tPOT requested. Funds stay put.",
+    "narration": "Now a request comes in for four tokens. That's above the instant payout threshold, so it enters quarantine. Airlock reserves the amount, while the funds stay in the treasury. Other payouts can't spend that reserved balance.",
     "image": "step-1.png",
-    "duration": 17.051519274376417,
-    "frames": 273,
-    "start": 768
+    "caption": "Queued on V3. Reserved without a payout.",
+    "duration": 13.2,
+    "frames": 210,
+    "start": 821,
+    "audio": "fenrir-3.wav"
   },
   {
     "chapter": "Guardian response",
-    "title": "Pause without trusting the relay.",
-    "narration": "The independent guardian pauses releases. Our first pause preflight rejected before signing because the guardian needed a storage deposit. Funding recovery delayed this pause beyond the quarantine window. We record that limitation instead of claiming a timely response.",
+    "title": "A separate authority can step in.",
+    "narration": "The guardian reviews the request and pauses payouts. This doesn't require the relay's permission. The guardian has separate authority to protect the treasury. While payouts are paused, the queued request cannot be executed.",
     "image": "step-2.png",
-    "duration": 17.655827664399094,
-    "frames": 282,
-    "start": 1041
+    "caption": "Guardian pause confirmed on Portaldot V3.",
+    "duration": 15.16,
+    "frames": 240,
+    "start": 1031,
+    "audio": "fenrir-4.wav"
   },
   {
     "chapter": "Cancellation",
-    "title": "The request cannot be replayed.",
-    "narration": "The guardian then cancels the request. Its nonce stays consumed. Zero tokens were paid during this scenario, and the vault remained at forty-eight point seven five. The interface exposes the actual transaction hashes and finalized blocks.",
+    "title": "Cancelled. No payout.",
+    "narration": "The guardian then cancels the four-token request. The reservation is released, and that same request can never be executed again. The result: four tokens cancelled, zero paid during this scenario, and forty-eight point seven five tokens still in the treasury. Each stage is backed by contract addresses, transaction hashes, and finalized blocks in the interface.",
     "image": "step-3.png",
-    "duration": 16.65156462585034,
-    "frames": 267,
-    "start": 1323
+    "caption": "4 tPOT cancelled. 0 paid. 48.75 in the vault.",
+    "duration": 22.76,
+    "frames": 354,
+    "start": 1271,
+    "audio": "fenrir-5.wav"
   },
   {
-    "chapter": "What this proves",
-    "title": "Payout controls on Portaldot V3.",
-    "narration": "This prototype demonstrates a real cross-testnet request, quarantine, independent pause and cancellation. It does not verify Ethereum consensus. The relay still trusts RPC data. Small malicious payouts inside the cap remain possible. This is not an audited bridge.",
+    "chapter": "Why Portaldot",
+    "title": "The rules execute on Portaldot V3.",
+    "narration": "Airlock's rules execute in a contract on Portaldot V3. This is where the treasury lives, payout limits are checked, and pause and cancellation take effect. Sepolia is the source of requests, and the relay carries them between networks. These are results from a real run across two public testnets.",
     "image": "",
-    "duration": 20.075873015873015,
-    "frames": 318,
-    "start": 1590
+    "caption": "Native treasury. On-chain rules. Verifiable receipts.",
+    "duration": 17.48,
+    "frames": 275,
+    "start": 1625,
+    "audio": "fenrir-6.wav"
   },
   {
     "chapter": "Next milestone",
-    "title": "Make the response dependable.",
-    "narration": "Before the final submission, we will focus on guardian alerts, response inside the quarantine window, stronger adversarial integration tests and clearer operator recovery. Airlock makes the limits of relay authority visible and enforceable on Portaldot.",
+    "title": "Cross-chain requests. Treasury control.",
+    "narration": "Next, we're adding guardian notifications, continuous queue monitoring, and easier policy configuration for each team's workflow. Airlock lets a treasury accept requests from another chain while keeping control of payouts on Portaldot.",
     "image": "",
-    "duration": 16.535963718820863,
-    "frames": 265,
-    "start": 1908
+    "caption": "Guardian alerts. Queue monitoring. Team-specific policies.",
+    "duration": 15.24,
+    "frames": 241,
+    "start": 1900,
+    "audio": "fenrir-7.wav"
   }
 ]
