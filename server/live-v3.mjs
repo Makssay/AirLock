@@ -105,6 +105,24 @@ export class LiveV3 {
   return job;
  }
  errorName(error){try{return error.revert?.name||this.iface.parseError(error.data)?.name||'RPC error';}catch{return 'RPC error';}}
+ async demoQuote(){
+  const api=await this.connect();await this.assertIdentity(api);
+  const s=await this.snapshot(true);
+  if(s.paused||s.busy||s.pendingPolicy)throw Error('Demo requires active releases, no pending policy and no pending transaction');
+  if(parseEther(s.policy.instant)>=4n*U||parseEther(s.policy.cap)<4n*U||parseEther(s.policy.maxPending)-parseEther(s.reserved)<4n*U)throw Error('Current policy cannot quarantine the fixed 4 tPOT demo request');
+  const data=this.iface.encodeFunctionData('submit',[await this.contract.sourceDomain(),BigInt(Date.now()),this.plan.guardianEvm,4n*U]);
+  const gas=await this.rpc.estimateGas({from:this.plan.relay,to:V3_CONTRACT,data});
+  const upper=gas*105n/100n*BigInt(await this.rpc.send('eth_gasPrice',[]));
+  const deficit=upper+U/10n-parseEther(s.relayBalance);
+  const topup=deficit>0n?(deficit+U-1n)/U:0n;
+  // A false→true storage write can need a transient deposit even when net charge is zero.
+  const pause=await api.call.reviveApi.call(GUARDIAN,V3_CONTRACT,0,null,null,this.iface.encodeFunctionData('pause',[]));
+  if(pause.result.isErr)throw Error('Guardian cannot currently dry-run pause; fund it before starting a demo');
+  const peak=pause.maxStorageDeposit.isCharge?BigInt(pause.maxStorageDeposit.asCharge.toString()):0n;
+  const guardianReserve=peak*10000n+U;
+  const ready=upper<=25n*U&&topup<=5n&&parseEther(s.guardianBalance)>=topup*U+guardianReserve;
+  return {checkedAt:new Date().toISOString(),amount:'4',relayUpperFee:formatEther(upper),relayBalance:s.relayBalance,guardianBalance:s.guardianBalance,topup:topup.toString(),guardianReserve:formatEther(guardianReserve),ready,reason:ready?'Budget available; each transaction is estimated again before signing':'Insufficient operator funds within the demo budget',note:'Includes peak guardian pause storage deposit plus 1 tPOT margin. Sepolia gas is checked separately. Estimates can change; vault funds are never used for fees.'};
+ }
  async checks(job){
   const nonce=BigInt(Date.now());const domain=await this.contract.sourceDomain();const recipient=this.plan.guardianEvm;
   const results=[];
@@ -177,7 +195,9 @@ export class LiveV3 {
    const weight={refTime:(BigInt(dry.weightRequired.refTime.toString())*125n/100n).toString(),proofSize:(BigInt(dry.weightRequired.proofSize.toString())*125n/100n).toString()};
    const charge=dry.storageDeposit.isCharge?BigInt(dry.storageDeposit.asCharge.toString()):0n;
    if(charge>12n*N)throw Error('Limit: storage deposit exceeds 12 tPOT');
-   const tx=api.tx.revive.call(V3_CONTRACT,0,weight,(charge+N).toString(),data);await this.broadcastNative(job,api,pair,tx,charge);
+   const peak=dry.maxStorageDeposit.isCharge?BigInt(dry.maxStorageDeposit.asCharge.toString()):0n;
+   if(peak>12n*N)throw Error('Limit: peak storage deposit exceeds 12 tPOT');
+   const tx=api.tx.revive.call(V3_CONTRACT,0,weight,((peak>charge?peak:charge)+N).toString(),data);await this.broadcastNative(job,api,pair,tx,charge);
   }finally{pair?.lock();}
  }
  async broadcastNative(job,api,pair,tx,charge=0n){

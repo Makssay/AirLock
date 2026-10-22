@@ -21,6 +21,8 @@ app.use('/api/live',(req,res,next)=>{
 });
 app.get('/api/live/state',async(req,res)=>{try{res.json({...await live.snapshot(req.query.refresh==='1'),controlToken});}catch(e){res.status(503).json({error:e.message});}});
 app.get('/api/live/jobs',(_req,res)=>res.json({jobs:live.store.jobs.toReversed(),busy:live.busy}));
+app.get('/api/live/demo-quote',async(_req,res)=>{try{res.json(await live.demoQuote());}catch(e){res.status(400).json({error:e.message});}});
+app.get('/api/live/demo',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/v3-attack-demo.json','utf8')));}catch{res.json(null);}});
 app.get('/api/live/evidence',async(_req,res)=>{try{res.attachment('airlock-v3-live-state.json').json({disclaimer:'Finalized Portaldot V3 state and local submission journal. No external-chain proof.',...await live.snapshot(true)});}catch(e){res.status(503).json({error:e.message});}});
 app.post('/api/live/action',(req,res)=>{try{res.status(202).json(live.start(req.body,req.headers['x-request-id']));}catch(e){res.status(400).json({error:e.message});}});
 let preparingV3=false;

@@ -20,7 +20,8 @@
     "v3:deploy:local": "node scripts/v3-deploy-local.mjs",
     "v3:smoke": "node scripts/v3-smoke.mjs",
     "source:deploy": "node scripts/deploy-source.mjs",
-    "test:live:e2e": "node scripts/live-e2e.mjs"
+    "test:live:e2e": "node scripts/live-e2e.mjs",
+    "demo:testnet": "node scripts/attack-demo.mjs"
   },
   "dependencies": {
     "@polkadot/api": "^16.4.6",

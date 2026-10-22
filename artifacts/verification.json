@@ -3,13 +3,13 @@
   "contract_bytes": 8164,
   "contract_sha256": "2e1a151030430af7f803dbd1071f08315eeea72f6efb04d19594762d75835730",
   "tests": {
-    "passed": 44,
+    "passed": 46,
     "failed": 0,
     "wasm_and_session_checks": 27,
     "evm_scenarios": 10,
     "note": "Node test count includes one enclosing EVM suite.",
     "v3_code_wrapper_regression": 1,
-    "live_console_guards": 5
+    "live_console_guards": 7
   },
   "production_build": "passed",
   "legacy_format_check": "passed (offline validator)",
@@ -66,5 +66,22 @@
       "375px overview and Evidence without horizontal overflow",
       "status labels remain visible on mobile"
     ]
+  },
+  "controlled_public_demo": {
+    "status": "completed",
+    "chainId": 420420777,
+    "sourceChainId": 11155111,
+    "metrics": {
+      "earlierNormalPayout": "0.25",
+      "requested": "4",
+      "paidDuringDemo": "0",
+      "cancelled": "4",
+      "vaultBefore": "48.75",
+      "vaultAfter": "48.75"
+    },
+    "paused": true,
+    "reserved": "0.0",
+    "evidence": "artifacts/v3-attack-demo.json",
+    "recovery": "Initial pause preflight rejected before signing: insufficient guardian storage funds. Returned 3 tPOT relay surplus to guardian, then finalized pause and cancel. Preflight now reserves the peak pause deposit."
   }
 }

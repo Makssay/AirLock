@@ -1,6 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateLiveAction,LiveV3} from '../server/live-v3.mjs';
+import {parseEther} from 'ethers';
+
+function quoteFixture(change={}){
+ const live=Object.create(LiveV3.prototype);
+ live.connect=async()=>({call:{reviveApi:{call:async()=>({result:{isErr:false},maxStorageDeposit:{isCharge:true,asCharge:384150000000000n}})}}});live.assertIdentity=async()=>{};
+ live.snapshot=async()=>({paused:false,busy:false,policy:{instant:'1',cap:'5',maxPending:'20'},reserved:'0',relayBalance:'13.25',guardianBalance:'9.96',...change});
+ live.plan={relay:'relay',guardianEvm:'guardian'};live.contract={sourceDomain:async()=>'domain'};live.iface={encodeFunctionData:()=> 'data'};
+ live.rpc={estimateGas:async()=>100n,send:async()=>parseEther('0.16')};return live;
+}
+test('demo preflight reserves guardian funds and refuses an unaffordable relay top-up',async()=>{
+ const quote=await quoteFixture().demoQuote();assert.equal(quote.topup,'4');assert.equal(quote.ready,true);assert.equal(quote.amount,'4');assert.equal(quote.guardianReserve,'4.8415');
+ assert.equal((await quoteFixture({guardianBalance:'5.96'}).demoQuote()).ready,false);
+ assert.equal((await quoteFixture({guardianBalance:'4.99'}).demoQuote()).ready,false);
+ assert.equal((await quoteFixture({relayBalance:'0'}).demoQuote()).ready,false);
+});
+test('demo preflight refuses paused, pending or incompatible policy state',async()=>{
+ for(const change of [{paused:true},{busy:true},{pendingPolicy:{}},{policy:{instant:'4',cap:'5',maxPending:'20'}},{reserved:'18'}])await assert.rejects(()=>quoteFixture(change).demoQuote());
+});
 
 test('live console rejects sandbox clock/reset and arbitrary transaction methods',()=>{
  for(const action of ['advance','reset','transfer','deploy','eth_sendTransaction','constructor'])assert.throws(()=>validateLiveAction({action}));

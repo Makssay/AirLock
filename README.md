@@ -79,4 +79,13 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 44 regression checks, including native local EVM transactions, reentrancy and transfer rollback, compiled WASM invariants, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 46 regression checks, including native local EVM transactions, reentrancy and transfer rollback, compiled WASM invariants, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+
+
+## Controlled public attack demo
+
+With the local console running, `node scripts/attack-demo.mjs --send-testnet` performs a budget preflight, tops up the relay by at most 5 tPOT while retaining the peak pause storage deposit plus a 1 tPOT margin for the guardian, creates a fixed 4 tPOT Sepolia request, verifies the V3 quarantine, pauses and cancels as guardian. Every signing operation repeats its own fee and identity checks. Source gas is checked separately. The script refuses a second run when its journal exists; inspect saved transactions after interruption rather than replaying them.
+
+The Control room displays the saved evidence from `artifacts/v3-attack-demo.json`. The normal 0.25 tPOT payout is explicitly taken from the earlier cross-testnet run. New-demo metrics distinguish the cancelled 4 tPOT request, actual payout during the scenario, and the vault balance. They do not claim that the entire vault was demonstrably saved. The scenario leaves releases paused. Resume uses the existing 300-second policy delay.
+
+The first run exposed a V3 peak-storage funding requirement: pause preflight rejected before signing with only 1.95 tPOT in the guardian. `scripts/recover-demo.mjs` is a bounded recovery for that existing message: it returns exactly 3 tPOT of relay surplus to the pinned guardian and continues pause/cancel, without creating another source request. It refuses an existing recovery journal. The original failed preflight remains visible in the evidence.

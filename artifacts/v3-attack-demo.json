@@ -1,0 +1,3225 @@
+{
+  "startedAt": "2026-10-22T16:26:17.619Z",
+  "status": "completed",
+  "operations": [
+    {
+      "label": "Budgeted relay top-up",
+      "requestId": "7552fdc8-9fc4-4d26-be34-3df70177974b",
+      "input": {
+        "action": "fundRelay",
+        "amount": "4"
+      },
+      "status": "finalized",
+      "id": "e1f8c4a2-6d73-4328-ac60-a5fb201de27d",
+      "createdAt": "2026-10-22T16:26:32.217Z",
+      "estimatedFeeNative": "401500561213530",
+      "transactionHash": "0x538352d160d19cb7d25446b990a776b65bd4882ebc3112dcdec6666b88179ece",
+      "kind": "substrate",
+      "blockHash": "0xd348385bbe7ecfe7c60502dc6dc739421ed72f10214dfb852d09bba440ef1114",
+      "events": [
+        {
+          "section": "balances",
+          "method": "Withdraw",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            1500561213530
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "Transfer",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+            400000000000000
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "Deposit",
+          "data": [
+            "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+            1500561213530
+          ]
+        },
+        {
+          "section": "transactionPayment",
+          "method": "TransactionFeePaid",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            1500561213530,
+            0
+          ]
+        },
+        {
+          "section": "system",
+          "method": "ExtrinsicSuccess",
+          "data": [
+            {
+              "weight": {
+                "refTime": 764602000,
+                "proofSize": 15777
+              },
+              "class": "Normal",
+              "paysFee": "Yes"
+            }
+          ]
+        }
+      ],
+      "completedAt": "2026-10-22T16:26:49.743Z"
+    },
+    {
+      "label": "Controlled oversized-for-instant request",
+      "requestId": "a236434f-00a8-453c-a357-dcfc00e764f1",
+      "input": {
+        "action": "submit",
+        "amount": "4"
+      },
+      "status": "finalized",
+      "id": "abaff90d-e16f-480c-a792-e13897556414",
+      "createdAt": "2026-10-22T16:26:59.967Z",
+      "source": {
+        "chainId": 11155111,
+        "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+        "transactionHash": "0xff5a87b865aba5ad632e7e4b02a87de864b0f0bbf37c34536729b6935259f327",
+        "status": "six confirmations verified",
+        "requiredConfirmations": 6,
+        "blockNumber": 11970724,
+        "blockHash": "0x7dc0136a2381185df035bb85387ce1dc73b41edec7d4ee33127994b109e2d6ec",
+        "eventNonce": "2",
+        "destinationNonce": "47910836928249858",
+        "amount": "4",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+      },
+      "kind": "ethereum",
+      "nonce": "47910836928249858",
+      "amount": "4",
+      "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+      "estimatedMaxFee": "16.41371670006688299",
+      "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+      "blockNumber": 148350,
+      "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+      "completedAt": "2026-10-22T16:28:33.239Z"
+    },
+    {
+      "label": "Guardian emergency pause",
+      "requestId": "7c7f4d36-69e4-439f-9cbc-2f27cca50a48",
+      "input": {
+        "action": "pause"
+      },
+      "status": "failed",
+      "id": "e2969985-f838-41c9-820f-72ba8908ac60",
+      "createdAt": "2026-10-22T16:28:42.105Z",
+      "error": "Contract: revive.StorageDepositNotEnoughFunds"
+    },
+    {
+      "label": "Return relay surplus to guardian for pause storage",
+      "input": {
+        "action": "returnRelaySurplus"
+      },
+      "amount": "3",
+      "transactionHash": "0x9493613c9c1f5d7181444b87520c4341b3511930e5abe189863b5f11e9a99625",
+      "status": "finalized",
+      "blockNumber": 148383
+    },
+    {
+      "label": "Guardian pause after storage budget recovery",
+      "requestId": "f91ac3ff-c30f-4abe-971c-6f389deccc9f",
+      "input": {
+        "action": "pause"
+      },
+      "id": "4e21bca2-7290-45d6-ab53-de209f22388a",
+      "createdAt": "2026-10-22T16:31:55.436Z",
+      "status": "finalized",
+      "estimatedFeeNative": "385660945896679",
+      "transactionHash": "0x2f3a2db1706bc553449e6730e6667ba103c00f9fb53430f5d5057e59a5a25ffb",
+      "kind": "substrate",
+      "blockHash": "0x85b3e7684e2cdf33ae2b9de70f24a393c4b60275f4fbc8c3cb6673bdf644d39f",
+      "events": [
+        {
+          "section": "balances",
+          "method": "Withdraw",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            1510945896679
+          ]
+        },
+        {
+          "section": "revive",
+          "method": "ContractEmitted",
+          "data": [
+            "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+            "0x",
+            [
+              "0xad44957ca348b803a4c11def014497d8cb816b2f32528e3930142f71771406d7"
+            ]
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "TransferAndHold",
+          "data": [
+            {
+              "revive": "StorageDepositReserve"
+            },
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+            384150000000000
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "Deposit",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            29690122
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "Deposit",
+          "data": [
+            "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+            1510916206557
+          ]
+        },
+        {
+          "section": "transactionPayment",
+          "method": "TransactionFeePaid",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            1510916206557,
+            0
+          ]
+        },
+        {
+          "section": "system",
+          "method": "ExtrinsicSuccess",
+          "data": [
+            {
+              "weight": {
+                "refTime": 1279118365,
+                "proofSize": 35031
+              },
+              "class": "Normal",
+              "paysFee": "Yes"
+            }
+          ]
+        }
+      ],
+      "completedAt": "2026-10-22T16:32:12.853Z"
+    },
+    {
+      "label": "Guardian cancels the quarantined request",
+      "requestId": "345fece6-8d6d-4ae8-a874-672feaa954e8",
+      "input": {
+        "action": "cancel",
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+      },
+      "id": "fcbdb33d-e505-44c4-9420-a86eeaae18ad",
+      "createdAt": "2026-10-22T16:32:21.683Z",
+      "status": "finalized",
+      "estimatedFeeNative": "1821323211491",
+      "transactionHash": "0xdb15343549fbecc50cb6a06c2f9e63733e7cc21054a3d8c2774cb99b98142821",
+      "kind": "substrate",
+      "blockHash": "0x119841fcf145a5715f36638d7f94fd619655f8c6fe185f6659ec188698a04af2",
+      "events": [
+        {
+          "section": "balances",
+          "method": "Withdraw",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            1821323208454
+          ]
+        },
+        {
+          "section": "revive",
+          "method": "ContractEmitted",
+          "data": [
+            "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+            "0x0000000000000000000000000000000000000000000000003782dace9d900000",
+            [
+              "0x9a07783c26ba1161617a3713cf36578795b21ea2c22643a1e3875722f3f0413b",
+              "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+            ]
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "TransferOnHold",
+          "data": [
+            {
+              "revive": "StorageDepositReserve"
+            },
+            "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            384150000000000
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "Deposit",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            105152565
+          ]
+        },
+        {
+          "section": "balances",
+          "method": "Deposit",
+          "data": [
+            "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+            1821218055889
+          ]
+        },
+        {
+          "section": "transactionPayment",
+          "method": "TransactionFeePaid",
+          "data": [
+            "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+            1821218055889,
+            0
+          ]
+        },
+        {
+          "section": "system",
+          "method": "ExtrinsicSuccess",
+          "data": [
+            {
+              "weight": {
+                "refTime": 1716554583,
+                "proofSize": 65930
+              },
+              "class": "Normal",
+              "paysFee": "Yes"
+            }
+          ]
+        }
+      ],
+      "completedAt": "2026-10-22T16:32:43.560Z"
+    }
+  ],
+  "limitations": "Controlled 4 tPOT request to the guardian, modelling an untrusted relay instruction. Trusted RPC relay, six source confirmations; no Ethereum consensus proof. The normal payout is a separately recorded earlier run. Cancelled amount is not a measurement of total loss avoided.",
+  "quote": {
+    "checkedAt": "2026-10-22T16:26:24.386Z",
+    "amount": "4",
+    "relayUpperFee": "16.41371670087954475",
+    "relayBalance": "13.252040383335723515",
+    "guardianBalance": "5.96741269548132",
+    "topup": "4",
+    "guardianReserve": "1",
+    "ready": true,
+    "reason": "Budget available; each transaction is estimated again before signing",
+    "note": "V3 estimate only; Sepolia gas is checked separately before signing. Estimate can change. Vault funds are never used for fees."
+  },
+  "before": {
+    "mode": "portaldot-v3-testnet",
+    "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+    "chainId": 420420777,
+    "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "finalizedBlock": 148329,
+    "finalizedHash": "0x55f59078b9828cbe52039f9c07ac7f9d2a5858a13def497bd2ad40f092d62bf8",
+    "checkedAt": "2026-10-22T16:26:28.788Z",
+    "now": 1792686372000,
+    "balance": "48.75",
+    "reserved": "0.0",
+    "spent": "0.0",
+    "reserveFloor": "5.0",
+    "windowSeconds": 600,
+    "policyDelaySeconds": 300,
+    "paused": false,
+    "policy": {
+      "instant": "1.0",
+      "cap": "5.0",
+      "delaySeconds": 120,
+      "maxPending": "20.0"
+    },
+    "pendingPolicy": null,
+    "guardian": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+    "relay": "0x74b438f9dDd5E9A35bd6eFD3D032F9411094dD0A",
+    "guardianBalance": "5.96741269548132",
+    "relayBalance": "13.252040383335723515",
+    "messages": [
+      {
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57",
+        "nonce": "47910836928249857",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "0.25",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 147915,
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605"
+      },
+      {
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d",
+        "nonce": "1792675957828",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "cancelled",
+        "eligibleAt": 1792676106000,
+        "firstSeenBlock": 146608,
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b"
+      },
+      {
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491",
+        "nonce": "1792675957821",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "1.0",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 146604,
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d"
+      }
+    ],
+    "logs": [
+      {
+        "event": "Released",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "blockNumber": 147915,
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57"
+      },
+      {
+        "event": "Queued",
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b",
+        "blockHash": "0x13ffed40cfc17c1965bd4d44916a312080d78c814aeab641c08c5befa500ffec",
+        "blockNumber": 146608,
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d",
+        "blockHash": "0x3e59b74afb61cb772d8191f2da69a2aa92a900aca23f82722a1b47e567753056",
+        "blockNumber": 146604,
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491"
+      }
+    ],
+    "jobs": [
+      {
+        "id": "a3b002a9-212e-47f9-ae19-9f1b02c913eb",
+        "requestId": "cba21e23-4198-44e0-ac70-37999f1434be",
+        "input": {
+          "action": "checkAttack"
+        },
+        "createdAt": "2026-10-22T15:44:53.151Z",
+        "status": "checked",
+        "checks": [
+          {
+            "name": "oversized request",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "wrong source domain",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "nonce replay",
+            "result": "rejected",
+            "reason": "Replay"
+          }
+        ],
+        "completedAt": "2026-10-22T15:44:55.317Z"
+      },
+      {
+        "id": "21df7c4d-353c-456a-b15a-84731ecff91d",
+        "requestId": "1e9de845-3a5b-4190-9e51-03e0ecc5065a",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:43:12.165Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970508,
+          "blockHash": "0x6df7251b90d3ecee28616738c25685da60eedf4d2a747f77048faa76d891f09b",
+          "eventNonce": "1",
+          "destinationNonce": "47910836928249857",
+          "amount": "0.25",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249857",
+        "amount": "0.25",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "12.31712144819941752",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockNumber": 147915,
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "completedAt": "2026-10-22T15:44:45.710Z"
+      },
+      {
+        "id": "d18e3dc0-0f83-4090-baab-39aba1ff14c9",
+        "requestId": "f4e6337a-b888-4b7d-b87f-751496e1a3b1",
+        "input": {
+          "action": "fundRelay",
+          "amount": "3"
+        },
+        "createdAt": "2026-10-22T15:42:28.825Z",
+        "status": "finalized",
+        "estimatedFeeNative": "301500561708722",
+        "transactionHash": "0x74117f5f79440a6746ba59200b9517ccff3544e5446e8adecd8fc5a21883e0f5",
+        "kind": "substrate",
+        "blockHash": "0xa1a7945b8a05390a80abd20d4d3b24039b884fb58b33d30724ab78c14e85d71a",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              300000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561708722
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:48.844Z"
+      },
+      {
+        "id": "18d3df0c-adc3-4a45-b6a8-6b647e613bd2",
+        "requestId": "9ddcdcfc-daff-4610-8198-cab54e7bcf26",
+        "input": {
+          "action": "fundRelay",
+          "amount": "5"
+        },
+        "createdAt": "2026-10-22T15:42:04.753Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561713256",
+        "transactionHash": "0x4f936c9af577e317921131bf58890c8c2069310630d01ebdef000a49fa882fb4",
+        "kind": "substrate",
+        "blockHash": "0xb0e207c6b3ee8cd95b976f0e0e29d4c79171bfabf391c4656af30e8ae1b8c020",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561713256
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:24.818Z"
+      },
+      {
+        "id": "e45ee37a-eb0b-4362-8df9-23c38af19fc2",
+        "requestId": "fff51ca4-be01-469c-aad5-65f2e0d03f14",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:39:56.969Z",
+        "status": "failed",
+        "error": "Limit: relay balance is too low for the estimated fee; top it up separately"
+      },
+      {
+        "id": "e7f773a0-0264-4425-a346-1b3e4f45cef2",
+        "requestId": "7031aafb-f6b4-4dab-824b-eea94c8164c1",
+        "input": {
+          "action": "fundRelay"
+        },
+        "createdAt": "2026-10-22T15:39:32.298Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561742736",
+        "transactionHash": "0x8bc69bbf18b937c047ff4931a8e89c02cf26d2e18f2865ac83cec11f53ce3418",
+        "kind": "substrate",
+        "blockHash": "0xd923ce460cc155387f23ce98c530476834900527d85cef624e4cc36a2b2ebb14",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561742736
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:49.942Z"
+      },
+      {
+        "id": "5c9ddf48-fb82-4b55-95f8-6f0a5c36ed33",
+        "requestId": "536953c6-898c-42e7-95d4-a09801a25c8b",
+        "input": {
+          "action": "activatePolicy"
+        },
+        "createdAt": "2026-10-22T15:39:07.826Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1511660712995",
+        "transactionHash": "0x18cf81d55f2a2579dc07a27e8c5dd8ee339d44e8fd51c33af18cf73a1d42b3b7",
+        "kind": "substrate",
+        "blockHash": "0x23d5a0e44534ec687a5e10cbcf94e6ce8937f2c8404d0f554f1ce30d6ffe3cbe",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511660712995
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x",
+              [
+                "0x49679ec1f602dd318b48972e2398e185f4969bf89f4c32138a03ee806b3d7842"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferOnHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1536599999999998
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              172476990
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1511488236005
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511488236005,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 2105435221,
+                  "proofSize": 86508
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:25.899Z"
+      },
+      {
+        "id": "02485994-e8e8-4a5a-aae9-467500bb77f9",
+        "requestId": "f654abba-bb77-45c4-ad36-50170b13dde8",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:32:39.651Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1155571400914526",
+        "transactionHash": "0x646b19f34626bcb5223e4e663c65ad017e1ff49039c941968a7692c72c3c9841",
+        "kind": "substrate",
+        "blockHash": "0xc85e969630febc31aac7e6968d24225e04e706f6913d537e7e897b54256c07cc",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121400914526
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x000000000000000000000000000000000000000000000000000000006ada2dcc0000000000000000000000000000000000000000000000000000000000000001",
+              [
+                "0x860172149efef7d87a8f66c13d540ce611271bcab012bdbcaefde93d773f5a3c"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferAndHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              1152450000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              120489287
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              3121280425239
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121280425239,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1804420267,
+                  "proofSize": 65834
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:33:01.377Z"
+      },
+      {
+        "id": "641d402b-09f9-4aec-abc1-96445a613f1d",
+        "requestId": "3e94387f-7b22-40dc-9bf7-d33f52780169",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:29:31.629Z",
+        "status": "failed",
+        "error": "Limit: storage deposit exceeds 10 tPOT"
+      }
+    ],
+    "busy": false,
+    "canSign": true,
+    "signingAvailable": true,
+    "historyError": null,
+    "sourceConfig": {
+      "name": "Ethereum Sepolia",
+      "chainId": 11155111,
+      "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+      "explorer": "https://sepolia.etherscan.io",
+      "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+      "owner": "0xf337687dD73c1A13EFE39393a000f55a95B1ac54",
+      "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+      "destination": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+      "confirmations": 6,
+      "finality": "Six canonical confirmations; not Ethereum finalized checkpoint proof",
+      "deploymentHash": "0x3c6306d690b08dee2ac23b1e787b485f26b1cd51dac7e4dee94dfc4b2502c5a8",
+      "deploymentBlock": 11970436,
+      "runtimeCodeHash": "0xc560bf4795c877637bedd1d92cb004676d73aac58cecc945cdd002611af555da"
+    },
+    "source": "Sepolia event → trusted RPC relay → V3; six confirmations, not a consensus proof"
+  },
+  "baseline": {
+    "id": "21df7c4d-353c-456a-b15a-84731ecff91d",
+    "requestId": "1e9de845-3a5b-4190-9e51-03e0ecc5065a",
+    "input": {
+      "action": "submit",
+      "amount": "0.25"
+    },
+    "createdAt": "2026-10-22T15:43:12.165Z",
+    "status": "finalized",
+    "source": {
+      "chainId": 11155111,
+      "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+      "transactionHash": "0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5",
+      "status": "six confirmations verified",
+      "requiredConfirmations": 6,
+      "blockNumber": 11970508,
+      "blockHash": "0x6df7251b90d3ecee28616738c25685da60eedf4d2a747f77048faa76d891f09b",
+      "eventNonce": "1",
+      "destinationNonce": "47910836928249857",
+      "amount": "0.25",
+      "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+    },
+    "kind": "ethereum",
+    "nonce": "47910836928249857",
+    "amount": "0.25",
+    "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+    "estimatedMaxFee": "12.31712144819941752",
+    "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+    "blockNumber": 147915,
+    "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+    "completedAt": "2026-10-22T15:44:45.710Z"
+  },
+  "messageKey": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe",
+  "quarantined": {
+    "mode": "portaldot-v3-testnet",
+    "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+    "chainId": 420420777,
+    "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "finalizedBlock": 148350,
+    "finalizedHash": "0xd6204ad131c5f984e99a1ac1ff9a1d8e2776b2ad61b09802b79837dd5fbfe9ed",
+    "checkedAt": "2026-10-22T16:28:37.405Z",
+    "now": 1792686498000,
+    "balance": "48.75",
+    "reserved": "4.0",
+    "spent": "0.0",
+    "reserveFloor": "5.0",
+    "windowSeconds": 600,
+    "policyDelaySeconds": 300,
+    "paused": false,
+    "policy": {
+      "instant": "1.0",
+      "cap": "5.0",
+      "delaySeconds": 120,
+      "maxPending": "20.0"
+    },
+    "pendingPolicy": null,
+    "guardian": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+    "relay": "0x74b438f9dDd5E9A35bd6eFD3D032F9411094dD0A",
+    "guardianBalance": "1.95240708334602",
+    "relayBalance": "5.7027232803137863",
+    "messages": [
+      {
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe",
+        "nonce": "47910836928249858",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "queued",
+        "eligibleAt": 1792686618000,
+        "firstSeenBlock": 148350,
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb"
+      },
+      {
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57",
+        "nonce": "47910836928249857",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "0.25",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 147915,
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605"
+      },
+      {
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d",
+        "nonce": "1792675957828",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "cancelled",
+        "eligibleAt": 1792676106000,
+        "firstSeenBlock": 146608,
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b"
+      },
+      {
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491",
+        "nonce": "1792675957821",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "1.0",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 146604,
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d"
+      }
+    ],
+    "logs": [
+      {
+        "event": "Queued",
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+        "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+        "blockNumber": 148350,
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "blockNumber": 147915,
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57"
+      },
+      {
+        "event": "Queued",
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b",
+        "blockHash": "0x13ffed40cfc17c1965bd4d44916a312080d78c814aeab641c08c5befa500ffec",
+        "blockNumber": 146608,
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d",
+        "blockHash": "0x3e59b74afb61cb772d8191f2da69a2aa92a900aca23f82722a1b47e567753056",
+        "blockNumber": 146604,
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491"
+      }
+    ],
+    "jobs": [
+      {
+        "id": "abaff90d-e16f-480c-a792-e13897556414",
+        "requestId": "a236434f-00a8-453c-a357-dcfc00e764f1",
+        "input": {
+          "action": "submit",
+          "amount": "4"
+        },
+        "createdAt": "2026-10-22T16:26:59.967Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0xff5a87b865aba5ad632e7e4b02a87de864b0f0bbf37c34536729b6935259f327",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970724,
+          "blockHash": "0x7dc0136a2381185df035bb85387ce1dc73b41edec7d4ee33127994b109e2d6ec",
+          "eventNonce": "2",
+          "destinationNonce": "47910836928249858",
+          "amount": "4",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249858",
+        "amount": "4",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "16.41371670006688299",
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+        "blockNumber": 148350,
+        "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+        "completedAt": "2026-10-22T16:28:33.239Z"
+      },
+      {
+        "id": "e1f8c4a2-6d73-4328-ac60-a5fb201de27d",
+        "requestId": "7552fdc8-9fc4-4d26-be34-3df70177974b",
+        "input": {
+          "action": "fundRelay",
+          "amount": "4"
+        },
+        "createdAt": "2026-10-22T16:26:32.217Z",
+        "status": "finalized",
+        "estimatedFeeNative": "401500561213530",
+        "transactionHash": "0x538352d160d19cb7d25446b990a776b65bd4882ebc3112dcdec6666b88179ece",
+        "kind": "substrate",
+        "blockHash": "0xd348385bbe7ecfe7c60502dc6dc739421ed72f10214dfb852d09bba440ef1114",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561213530
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              400000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561213530
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561213530,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T16:26:49.743Z"
+      },
+      {
+        "id": "a3b002a9-212e-47f9-ae19-9f1b02c913eb",
+        "requestId": "cba21e23-4198-44e0-ac70-37999f1434be",
+        "input": {
+          "action": "checkAttack"
+        },
+        "createdAt": "2026-10-22T15:44:53.151Z",
+        "status": "checked",
+        "checks": [
+          {
+            "name": "oversized request",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "wrong source domain",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "nonce replay",
+            "result": "rejected",
+            "reason": "Replay"
+          }
+        ],
+        "completedAt": "2026-10-22T15:44:55.317Z"
+      },
+      {
+        "id": "21df7c4d-353c-456a-b15a-84731ecff91d",
+        "requestId": "1e9de845-3a5b-4190-9e51-03e0ecc5065a",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:43:12.165Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970508,
+          "blockHash": "0x6df7251b90d3ecee28616738c25685da60eedf4d2a747f77048faa76d891f09b",
+          "eventNonce": "1",
+          "destinationNonce": "47910836928249857",
+          "amount": "0.25",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249857",
+        "amount": "0.25",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "12.31712144819941752",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockNumber": 147915,
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "completedAt": "2026-10-22T15:44:45.710Z"
+      },
+      {
+        "id": "d18e3dc0-0f83-4090-baab-39aba1ff14c9",
+        "requestId": "f4e6337a-b888-4b7d-b87f-751496e1a3b1",
+        "input": {
+          "action": "fundRelay",
+          "amount": "3"
+        },
+        "createdAt": "2026-10-22T15:42:28.825Z",
+        "status": "finalized",
+        "estimatedFeeNative": "301500561708722",
+        "transactionHash": "0x74117f5f79440a6746ba59200b9517ccff3544e5446e8adecd8fc5a21883e0f5",
+        "kind": "substrate",
+        "blockHash": "0xa1a7945b8a05390a80abd20d4d3b24039b884fb58b33d30724ab78c14e85d71a",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              300000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561708722
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:48.844Z"
+      },
+      {
+        "id": "18d3df0c-adc3-4a45-b6a8-6b647e613bd2",
+        "requestId": "9ddcdcfc-daff-4610-8198-cab54e7bcf26",
+        "input": {
+          "action": "fundRelay",
+          "amount": "5"
+        },
+        "createdAt": "2026-10-22T15:42:04.753Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561713256",
+        "transactionHash": "0x4f936c9af577e317921131bf58890c8c2069310630d01ebdef000a49fa882fb4",
+        "kind": "substrate",
+        "blockHash": "0xb0e207c6b3ee8cd95b976f0e0e29d4c79171bfabf391c4656af30e8ae1b8c020",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561713256
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:24.818Z"
+      },
+      {
+        "id": "e45ee37a-eb0b-4362-8df9-23c38af19fc2",
+        "requestId": "fff51ca4-be01-469c-aad5-65f2e0d03f14",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:39:56.969Z",
+        "status": "failed",
+        "error": "Limit: relay balance is too low for the estimated fee; top it up separately"
+      },
+      {
+        "id": "e7f773a0-0264-4425-a346-1b3e4f45cef2",
+        "requestId": "7031aafb-f6b4-4dab-824b-eea94c8164c1",
+        "input": {
+          "action": "fundRelay"
+        },
+        "createdAt": "2026-10-22T15:39:32.298Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561742736",
+        "transactionHash": "0x8bc69bbf18b937c047ff4931a8e89c02cf26d2e18f2865ac83cec11f53ce3418",
+        "kind": "substrate",
+        "blockHash": "0xd923ce460cc155387f23ce98c530476834900527d85cef624e4cc36a2b2ebb14",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561742736
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:49.942Z"
+      },
+      {
+        "id": "5c9ddf48-fb82-4b55-95f8-6f0a5c36ed33",
+        "requestId": "536953c6-898c-42e7-95d4-a09801a25c8b",
+        "input": {
+          "action": "activatePolicy"
+        },
+        "createdAt": "2026-10-22T15:39:07.826Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1511660712995",
+        "transactionHash": "0x18cf81d55f2a2579dc07a27e8c5dd8ee339d44e8fd51c33af18cf73a1d42b3b7",
+        "kind": "substrate",
+        "blockHash": "0x23d5a0e44534ec687a5e10cbcf94e6ce8937f2c8404d0f554f1ce30d6ffe3cbe",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511660712995
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x",
+              [
+                "0x49679ec1f602dd318b48972e2398e185f4969bf89f4c32138a03ee806b3d7842"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferOnHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1536599999999998
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              172476990
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1511488236005
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511488236005,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 2105435221,
+                  "proofSize": 86508
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:25.899Z"
+      },
+      {
+        "id": "02485994-e8e8-4a5a-aae9-467500bb77f9",
+        "requestId": "f654abba-bb77-45c4-ad36-50170b13dde8",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:32:39.651Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1155571400914526",
+        "transactionHash": "0x646b19f34626bcb5223e4e663c65ad017e1ff49039c941968a7692c72c3c9841",
+        "kind": "substrate",
+        "blockHash": "0xc85e969630febc31aac7e6968d24225e04e706f6913d537e7e897b54256c07cc",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121400914526
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x000000000000000000000000000000000000000000000000000000006ada2dcc0000000000000000000000000000000000000000000000000000000000000001",
+              [
+                "0x860172149efef7d87a8f66c13d540ce611271bcab012bdbcaefde93d773f5a3c"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferAndHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              1152450000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              120489287
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              3121280425239
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121280425239,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1804420267,
+                  "proofSize": 65834
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:33:01.377Z"
+      },
+      {
+        "id": "641d402b-09f9-4aec-abc1-96445a613f1d",
+        "requestId": "3e94387f-7b22-40dc-9bf7-d33f52780169",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:29:31.629Z",
+        "status": "failed",
+        "error": "Limit: storage deposit exceeds 10 tPOT"
+      }
+    ],
+    "busy": false,
+    "canSign": true,
+    "signingAvailable": true,
+    "historyError": null,
+    "sourceConfig": {
+      "name": "Ethereum Sepolia",
+      "chainId": 11155111,
+      "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+      "explorer": "https://sepolia.etherscan.io",
+      "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+      "owner": "0xf337687dD73c1A13EFE39393a000f55a95B1ac54",
+      "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+      "destination": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+      "confirmations": 6,
+      "finality": "Six canonical confirmations; not Ethereum finalized checkpoint proof",
+      "deploymentHash": "0x3c6306d690b08dee2ac23b1e787b485f26b1cd51dac7e4dee94dfc4b2502c5a8",
+      "deploymentBlock": 11970436,
+      "runtimeCodeHash": "0xc560bf4795c877637bedd1d92cb004676d73aac58cecc945cdd002611af555da"
+    },
+    "source": "Sepolia event → trusted RPC relay → V3; six confirmations, not a consensus proof"
+  },
+  "initialError": "Contract: revive.StorageDepositNotEnoughFunds",
+  "paused": {
+    "mode": "portaldot-v3-testnet",
+    "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+    "chainId": 420420777,
+    "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "finalizedBlock": 148387,
+    "finalizedHash": "0x85b3e7684e2cdf33ae2b9de70f24a393c4b60275f4fbc8c3cb6673bdf644d39f",
+    "checkedAt": "2026-10-22T16:32:17.794Z",
+    "now": 1792686720000,
+    "balance": "48.75",
+    "reserved": "4.0",
+    "spent": "0.0",
+    "reserveFloor": "5.0",
+    "windowSeconds": 600,
+    "policyDelaySeconds": 300,
+    "paused": true,
+    "policy": {
+      "instant": "1.0",
+      "cap": "5.0",
+      "delaySeconds": 120,
+      "maxPending": "20.0"
+    },
+    "pendingPolicy": null,
+    "guardian": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+    "relay": "0x74b438f9dDd5E9A35bd6eFD3D032F9411094dD0A",
+    "guardianBalance": "1.09579792128045",
+    "relayBalance": "2.6906124962319628",
+    "messages": [
+      {
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe",
+        "nonce": "47910836928249858",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "queued",
+        "eligibleAt": 1792686618000,
+        "firstSeenBlock": 148350,
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb"
+      },
+      {
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57",
+        "nonce": "47910836928249857",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "0.25",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 147915,
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605"
+      },
+      {
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d",
+        "nonce": "1792675957828",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "cancelled",
+        "eligibleAt": 1792676106000,
+        "firstSeenBlock": 146608,
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b"
+      },
+      {
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491",
+        "nonce": "1792675957821",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "1.0",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 146604,
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d"
+      }
+    ],
+    "logs": [
+      {
+        "event": "Queued",
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+        "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+        "blockNumber": 148350,
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "blockNumber": 147915,
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57"
+      },
+      {
+        "event": "Queued",
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b",
+        "blockHash": "0x13ffed40cfc17c1965bd4d44916a312080d78c814aeab641c08c5befa500ffec",
+        "blockNumber": 146608,
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d",
+        "blockHash": "0x3e59b74afb61cb772d8191f2da69a2aa92a900aca23f82722a1b47e567753056",
+        "blockNumber": 146604,
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491"
+      }
+    ],
+    "jobs": [
+      {
+        "id": "4e21bca2-7290-45d6-ab53-de209f22388a",
+        "requestId": "f91ac3ff-c30f-4abe-971c-6f389deccc9f",
+        "input": {
+          "action": "pause"
+        },
+        "createdAt": "2026-10-22T16:31:55.436Z",
+        "status": "finalized",
+        "estimatedFeeNative": "385660945896679",
+        "transactionHash": "0x2f3a2db1706bc553449e6730e6667ba103c00f9fb53430f5d5057e59a5a25ffb",
+        "kind": "substrate",
+        "blockHash": "0x85b3e7684e2cdf33ae2b9de70f24a393c4b60275f4fbc8c3cb6673bdf644d39f",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1510945896679
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x",
+              [
+                "0xad44957ca348b803a4c11def014497d8cb816b2f32528e3930142f71771406d7"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferAndHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              384150000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              29690122
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1510916206557
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1510916206557,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1279118365,
+                  "proofSize": 35031
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T16:32:12.853Z"
+      },
+      {
+        "id": "e2969985-f838-41c9-820f-72ba8908ac60",
+        "requestId": "7c7f4d36-69e4-439f-9cbc-2f27cca50a48",
+        "input": {
+          "action": "pause"
+        },
+        "createdAt": "2026-10-22T16:28:42.105Z",
+        "status": "failed",
+        "error": "Contract: revive.StorageDepositNotEnoughFunds"
+      },
+      {
+        "id": "abaff90d-e16f-480c-a792-e13897556414",
+        "requestId": "a236434f-00a8-453c-a357-dcfc00e764f1",
+        "input": {
+          "action": "submit",
+          "amount": "4"
+        },
+        "createdAt": "2026-10-22T16:26:59.967Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0xff5a87b865aba5ad632e7e4b02a87de864b0f0bbf37c34536729b6935259f327",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970724,
+          "blockHash": "0x7dc0136a2381185df035bb85387ce1dc73b41edec7d4ee33127994b109e2d6ec",
+          "eventNonce": "2",
+          "destinationNonce": "47910836928249858",
+          "amount": "4",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249858",
+        "amount": "4",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "16.41371670006688299",
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+        "blockNumber": 148350,
+        "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+        "completedAt": "2026-10-22T16:28:33.239Z"
+      },
+      {
+        "id": "e1f8c4a2-6d73-4328-ac60-a5fb201de27d",
+        "requestId": "7552fdc8-9fc4-4d26-be34-3df70177974b",
+        "input": {
+          "action": "fundRelay",
+          "amount": "4"
+        },
+        "createdAt": "2026-10-22T16:26:32.217Z",
+        "status": "finalized",
+        "estimatedFeeNative": "401500561213530",
+        "transactionHash": "0x538352d160d19cb7d25446b990a776b65bd4882ebc3112dcdec6666b88179ece",
+        "kind": "substrate",
+        "blockHash": "0xd348385bbe7ecfe7c60502dc6dc739421ed72f10214dfb852d09bba440ef1114",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561213530
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              400000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561213530
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561213530,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T16:26:49.743Z"
+      },
+      {
+        "id": "a3b002a9-212e-47f9-ae19-9f1b02c913eb",
+        "requestId": "cba21e23-4198-44e0-ac70-37999f1434be",
+        "input": {
+          "action": "checkAttack"
+        },
+        "createdAt": "2026-10-22T15:44:53.151Z",
+        "status": "checked",
+        "checks": [
+          {
+            "name": "oversized request",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "wrong source domain",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "nonce replay",
+            "result": "rejected",
+            "reason": "Replay"
+          }
+        ],
+        "completedAt": "2026-10-22T15:44:55.317Z"
+      },
+      {
+        "id": "21df7c4d-353c-456a-b15a-84731ecff91d",
+        "requestId": "1e9de845-3a5b-4190-9e51-03e0ecc5065a",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:43:12.165Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970508,
+          "blockHash": "0x6df7251b90d3ecee28616738c25685da60eedf4d2a747f77048faa76d891f09b",
+          "eventNonce": "1",
+          "destinationNonce": "47910836928249857",
+          "amount": "0.25",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249857",
+        "amount": "0.25",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "12.31712144819941752",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockNumber": 147915,
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "completedAt": "2026-10-22T15:44:45.710Z"
+      },
+      {
+        "id": "d18e3dc0-0f83-4090-baab-39aba1ff14c9",
+        "requestId": "f4e6337a-b888-4b7d-b87f-751496e1a3b1",
+        "input": {
+          "action": "fundRelay",
+          "amount": "3"
+        },
+        "createdAt": "2026-10-22T15:42:28.825Z",
+        "status": "finalized",
+        "estimatedFeeNative": "301500561708722",
+        "transactionHash": "0x74117f5f79440a6746ba59200b9517ccff3544e5446e8adecd8fc5a21883e0f5",
+        "kind": "substrate",
+        "blockHash": "0xa1a7945b8a05390a80abd20d4d3b24039b884fb58b33d30724ab78c14e85d71a",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              300000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561708722
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:48.844Z"
+      },
+      {
+        "id": "18d3df0c-adc3-4a45-b6a8-6b647e613bd2",
+        "requestId": "9ddcdcfc-daff-4610-8198-cab54e7bcf26",
+        "input": {
+          "action": "fundRelay",
+          "amount": "5"
+        },
+        "createdAt": "2026-10-22T15:42:04.753Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561713256",
+        "transactionHash": "0x4f936c9af577e317921131bf58890c8c2069310630d01ebdef000a49fa882fb4",
+        "kind": "substrate",
+        "blockHash": "0xb0e207c6b3ee8cd95b976f0e0e29d4c79171bfabf391c4656af30e8ae1b8c020",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561713256
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:24.818Z"
+      },
+      {
+        "id": "e45ee37a-eb0b-4362-8df9-23c38af19fc2",
+        "requestId": "fff51ca4-be01-469c-aad5-65f2e0d03f14",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:39:56.969Z",
+        "status": "failed",
+        "error": "Limit: relay balance is too low for the estimated fee; top it up separately"
+      },
+      {
+        "id": "e7f773a0-0264-4425-a346-1b3e4f45cef2",
+        "requestId": "7031aafb-f6b4-4dab-824b-eea94c8164c1",
+        "input": {
+          "action": "fundRelay"
+        },
+        "createdAt": "2026-10-22T15:39:32.298Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561742736",
+        "transactionHash": "0x8bc69bbf18b937c047ff4931a8e89c02cf26d2e18f2865ac83cec11f53ce3418",
+        "kind": "substrate",
+        "blockHash": "0xd923ce460cc155387f23ce98c530476834900527d85cef624e4cc36a2b2ebb14",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561742736
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:49.942Z"
+      },
+      {
+        "id": "5c9ddf48-fb82-4b55-95f8-6f0a5c36ed33",
+        "requestId": "536953c6-898c-42e7-95d4-a09801a25c8b",
+        "input": {
+          "action": "activatePolicy"
+        },
+        "createdAt": "2026-10-22T15:39:07.826Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1511660712995",
+        "transactionHash": "0x18cf81d55f2a2579dc07a27e8c5dd8ee339d44e8fd51c33af18cf73a1d42b3b7",
+        "kind": "substrate",
+        "blockHash": "0x23d5a0e44534ec687a5e10cbcf94e6ce8937f2c8404d0f554f1ce30d6ffe3cbe",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511660712995
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x",
+              [
+                "0x49679ec1f602dd318b48972e2398e185f4969bf89f4c32138a03ee806b3d7842"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferOnHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1536599999999998
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              172476990
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1511488236005
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511488236005,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 2105435221,
+                  "proofSize": 86508
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:25.899Z"
+      },
+      {
+        "id": "02485994-e8e8-4a5a-aae9-467500bb77f9",
+        "requestId": "f654abba-bb77-45c4-ad36-50170b13dde8",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:32:39.651Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1155571400914526",
+        "transactionHash": "0x646b19f34626bcb5223e4e663c65ad017e1ff49039c941968a7692c72c3c9841",
+        "kind": "substrate",
+        "blockHash": "0xc85e969630febc31aac7e6968d24225e04e706f6913d537e7e897b54256c07cc",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121400914526
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x000000000000000000000000000000000000000000000000000000006ada2dcc0000000000000000000000000000000000000000000000000000000000000001",
+              [
+                "0x860172149efef7d87a8f66c13d540ce611271bcab012bdbcaefde93d773f5a3c"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferAndHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              1152450000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              120489287
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              3121280425239
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121280425239,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1804420267,
+                  "proofSize": 65834
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:33:01.377Z"
+      },
+      {
+        "id": "641d402b-09f9-4aec-abc1-96445a613f1d",
+        "requestId": "3e94387f-7b22-40dc-9bf7-d33f52780169",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:29:31.629Z",
+        "status": "failed",
+        "error": "Limit: storage deposit exceeds 10 tPOT"
+      }
+    ],
+    "busy": false,
+    "canSign": true,
+    "signingAvailable": true,
+    "historyError": null,
+    "sourceConfig": {
+      "name": "Ethereum Sepolia",
+      "chainId": 11155111,
+      "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+      "explorer": "https://sepolia.etherscan.io",
+      "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+      "owner": "0xf337687dD73c1A13EFE39393a000f55a95B1ac54",
+      "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+      "destination": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+      "confirmations": 6,
+      "finality": "Six canonical confirmations; not Ethereum finalized checkpoint proof",
+      "deploymentHash": "0x3c6306d690b08dee2ac23b1e787b485f26b1cd51dac7e4dee94dfc4b2502c5a8",
+      "deploymentBlock": 11970436,
+      "runtimeCodeHash": "0xc560bf4795c877637bedd1d92cb004676d73aac58cecc945cdd002611af555da"
+    },
+    "source": "Sepolia event → trusted RPC relay → V3; six confirmations, not a consensus proof"
+  },
+  "after": {
+    "mode": "portaldot-v3-testnet",
+    "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+    "chainId": 420420777,
+    "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "finalizedBlock": 148392,
+    "finalizedHash": "0x119841fcf145a5715f36638d7f94fd619655f8c6fe185f6659ec188698a04af2",
+    "checkedAt": "2026-10-22T16:32:47.972Z",
+    "now": 1792686750000,
+    "balance": "48.75",
+    "reserved": "0.0",
+    "spent": "0.0",
+    "reserveFloor": "5.0",
+    "windowSeconds": 600,
+    "policyDelaySeconds": 300,
+    "paused": true,
+    "policy": {
+      "instant": "1.0",
+      "cap": "5.0",
+      "delaySeconds": 120,
+      "maxPending": "20.0"
+    },
+    "pendingPolicy": null,
+    "guardian": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+    "relay": "0x74b438f9dDd5E9A35bd6eFD3D032F9411094dD0A",
+    "guardianBalance": "4.91908574072156",
+    "relayBalance": "2.6906124962319628",
+    "messages": [
+      {
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe",
+        "nonce": "47910836928249858",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "cancelled",
+        "eligibleAt": 1792686618000,
+        "firstSeenBlock": 148350,
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb"
+      },
+      {
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57",
+        "nonce": "47910836928249857",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "0.25",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 147915,
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605"
+      },
+      {
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d",
+        "nonce": "1792675957828",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "4.0",
+        "status": "cancelled",
+        "eligibleAt": 1792676106000,
+        "firstSeenBlock": 146608,
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b"
+      },
+      {
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491",
+        "nonce": "1792675957821",
+        "recipient": "0x75C9FBc682eAD1bFC4C33e461c178dEECC1f2C1D",
+        "amount": "1.0",
+        "status": "released",
+        "eligibleAt": 0,
+        "firstSeenBlock": 146604,
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d"
+      }
+    ],
+    "logs": [
+      {
+        "event": "Queued",
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+        "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+        "blockNumber": 148350,
+        "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "blockNumber": 147915,
+        "key": "0xd845b19f9f95db44ff60ba80721302dfe3ff33f555b54c9609c36a40435ebc57"
+      },
+      {
+        "event": "Queued",
+        "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b",
+        "blockHash": "0x13ffed40cfc17c1965bd4d44916a312080d78c814aeab641c08c5befa500ffec",
+        "blockNumber": 146608,
+        "key": "0xff4d1623d77c1310664fe260ecec43fc29692406267870d779218befb926bb5d"
+      },
+      {
+        "event": "Released",
+        "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d",
+        "blockHash": "0x3e59b74afb61cb772d8191f2da69a2aa92a900aca23f82722a1b47e567753056",
+        "blockNumber": 146604,
+        "key": "0x2a6645288c8305bed79ad372c1af991a372d3db9ced10c9f31543c806f1a2491"
+      }
+    ],
+    "jobs": [
+      {
+        "id": "fcbdb33d-e505-44c4-9420-a86eeaae18ad",
+        "requestId": "345fece6-8d6d-4ae8-a874-672feaa954e8",
+        "input": {
+          "action": "cancel",
+          "key": "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+        },
+        "createdAt": "2026-10-22T16:32:21.683Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1821323211491",
+        "transactionHash": "0xdb15343549fbecc50cb6a06c2f9e63733e7cc21054a3d8c2774cb99b98142821",
+        "kind": "substrate",
+        "blockHash": "0x119841fcf145a5715f36638d7f94fd619655f8c6fe185f6659ec188698a04af2",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1821323208454
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x0000000000000000000000000000000000000000000000003782dace9d900000",
+              [
+                "0x9a07783c26ba1161617a3713cf36578795b21ea2c22643a1e3875722f3f0413b",
+                "0xfd951a8d07f43bef09f77848a6f979385037a0ae86fb4373fa77d88c85a2cbbe"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferOnHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              384150000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              105152565
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1821218055889
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1821218055889,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1716554583,
+                  "proofSize": 65930
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T16:32:43.560Z"
+      },
+      {
+        "id": "4e21bca2-7290-45d6-ab53-de209f22388a",
+        "requestId": "f91ac3ff-c30f-4abe-971c-6f389deccc9f",
+        "input": {
+          "action": "pause"
+        },
+        "createdAt": "2026-10-22T16:31:55.436Z",
+        "status": "finalized",
+        "estimatedFeeNative": "385660945896679",
+        "transactionHash": "0x2f3a2db1706bc553449e6730e6667ba103c00f9fb53430f5d5057e59a5a25ffb",
+        "kind": "substrate",
+        "blockHash": "0x85b3e7684e2cdf33ae2b9de70f24a393c4b60275f4fbc8c3cb6673bdf644d39f",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1510945896679
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x",
+              [
+                "0xad44957ca348b803a4c11def014497d8cb816b2f32528e3930142f71771406d7"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferAndHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              384150000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              29690122
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1510916206557
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1510916206557,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1279118365,
+                  "proofSize": 35031
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T16:32:12.853Z"
+      },
+      {
+        "id": "e2969985-f838-41c9-820f-72ba8908ac60",
+        "requestId": "7c7f4d36-69e4-439f-9cbc-2f27cca50a48",
+        "input": {
+          "action": "pause"
+        },
+        "createdAt": "2026-10-22T16:28:42.105Z",
+        "status": "failed",
+        "error": "Contract: revive.StorageDepositNotEnoughFunds"
+      },
+      {
+        "id": "abaff90d-e16f-480c-a792-e13897556414",
+        "requestId": "a236434f-00a8-453c-a357-dcfc00e764f1",
+        "input": {
+          "action": "submit",
+          "amount": "4"
+        },
+        "createdAt": "2026-10-22T16:26:59.967Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0xff5a87b865aba5ad632e7e4b02a87de864b0f0bbf37c34536729b6935259f327",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970724,
+          "blockHash": "0x7dc0136a2381185df035bb85387ce1dc73b41edec7d4ee33127994b109e2d6ec",
+          "eventNonce": "2",
+          "destinationNonce": "47910836928249858",
+          "amount": "4",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249858",
+        "amount": "4",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "16.41371670006688299",
+        "transactionHash": "0x5a750dbc0a56aa20c8a2e1a60c27f5d228cb03ba58c92d080aa27f2a7d4d90cb",
+        "blockNumber": 148350,
+        "blockHash": "0x024dc0ef9164c75dc31675b2982e4cd6304cc0207cda33ca01299189c7ec58a4",
+        "completedAt": "2026-10-22T16:28:33.239Z"
+      },
+      {
+        "id": "e1f8c4a2-6d73-4328-ac60-a5fb201de27d",
+        "requestId": "7552fdc8-9fc4-4d26-be34-3df70177974b",
+        "input": {
+          "action": "fundRelay",
+          "amount": "4"
+        },
+        "createdAt": "2026-10-22T16:26:32.217Z",
+        "status": "finalized",
+        "estimatedFeeNative": "401500561213530",
+        "transactionHash": "0x538352d160d19cb7d25446b990a776b65bd4882ebc3112dcdec6666b88179ece",
+        "kind": "substrate",
+        "blockHash": "0xd348385bbe7ecfe7c60502dc6dc739421ed72f10214dfb852d09bba440ef1114",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561213530
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              400000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561213530
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561213530,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T16:26:49.743Z"
+      },
+      {
+        "id": "a3b002a9-212e-47f9-ae19-9f1b02c913eb",
+        "requestId": "cba21e23-4198-44e0-ac70-37999f1434be",
+        "input": {
+          "action": "checkAttack"
+        },
+        "createdAt": "2026-10-22T15:44:53.151Z",
+        "status": "checked",
+        "checks": [
+          {
+            "name": "oversized request",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "wrong source domain",
+            "result": "rejected",
+            "reason": "InvalidMessage"
+          },
+          {
+            "name": "nonce replay",
+            "result": "rejected",
+            "reason": "Replay"
+          }
+        ],
+        "completedAt": "2026-10-22T15:44:55.317Z"
+      },
+      {
+        "id": "21df7c4d-353c-456a-b15a-84731ecff91d",
+        "requestId": "1e9de845-3a5b-4190-9e51-03e0ecc5065a",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:43:12.165Z",
+        "status": "finalized",
+        "source": {
+          "chainId": 11155111,
+          "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+          "transactionHash": "0x5eb655a20d68fa0674528cc59beb1c125cfac339de45d4c2c483d6bed37f65a5",
+          "status": "six confirmations verified",
+          "requiredConfirmations": 6,
+          "blockNumber": 11970508,
+          "blockHash": "0x6df7251b90d3ecee28616738c25685da60eedf4d2a747f77048faa76d891f09b",
+          "eventNonce": "1",
+          "destinationNonce": "47910836928249857",
+          "amount": "0.25",
+          "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d"
+        },
+        "kind": "ethereum",
+        "nonce": "47910836928249857",
+        "amount": "0.25",
+        "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+        "estimatedMaxFee": "12.31712144819941752",
+        "transactionHash": "0xd0e326007397ba7fd52c474ed0a18a9dc5adba3f4a667f5c425c8e9605c22605",
+        "blockNumber": 147915,
+        "blockHash": "0xa02b0b9f5ac59374423055ad93e95b61e1fcf9d5bd9bb8447d325076b63bf820",
+        "completedAt": "2026-10-22T15:44:45.710Z"
+      },
+      {
+        "id": "d18e3dc0-0f83-4090-baab-39aba1ff14c9",
+        "requestId": "f4e6337a-b888-4b7d-b87f-751496e1a3b1",
+        "input": {
+          "action": "fundRelay",
+          "amount": "3"
+        },
+        "createdAt": "2026-10-22T15:42:28.825Z",
+        "status": "finalized",
+        "estimatedFeeNative": "301500561708722",
+        "transactionHash": "0x74117f5f79440a6746ba59200b9517ccff3544e5446e8adecd8fc5a21883e0f5",
+        "kind": "substrate",
+        "blockHash": "0xa1a7945b8a05390a80abd20d4d3b24039b884fb58b33d30724ab78c14e85d71a",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              300000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561708722
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561708722,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:48.844Z"
+      },
+      {
+        "id": "18d3df0c-adc3-4a45-b6a8-6b647e613bd2",
+        "requestId": "9ddcdcfc-daff-4610-8198-cab54e7bcf26",
+        "input": {
+          "action": "fundRelay",
+          "amount": "5"
+        },
+        "createdAt": "2026-10-22T15:42:04.753Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561713256",
+        "transactionHash": "0x4f936c9af577e317921131bf58890c8c2069310630d01ebdef000a49fa882fb4",
+        "kind": "substrate",
+        "blockHash": "0xb0e207c6b3ee8cd95b976f0e0e29d4c79171bfabf391c4656af30e8ae1b8c020",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561713256
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561713256,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:42:24.818Z"
+      },
+      {
+        "id": "e45ee37a-eb0b-4362-8df9-23c38af19fc2",
+        "requestId": "fff51ca4-be01-469c-aad5-65f2e0d03f14",
+        "input": {
+          "action": "submit",
+          "amount": "0.25"
+        },
+        "createdAt": "2026-10-22T15:39:56.969Z",
+        "status": "failed",
+        "error": "Limit: relay balance is too low for the estimated fee; top it up separately"
+      },
+      {
+        "id": "e7f773a0-0264-4425-a346-1b3e4f45cef2",
+        "requestId": "7031aafb-f6b4-4dab-824b-eea94c8164c1",
+        "input": {
+          "action": "fundRelay"
+        },
+        "createdAt": "2026-10-22T15:39:32.298Z",
+        "status": "finalized",
+        "estimatedFeeNative": "501500561742736",
+        "transactionHash": "0x8bc69bbf18b937c047ff4931a8e89c02cf26d2e18f2865ac83cec11f53ce3418",
+        "kind": "substrate",
+        "blockHash": "0xd923ce460cc155387f23ce98c530476834900527d85cef624e4cc36a2b2ebb14",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Transfer",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+              500000000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1500561742736
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1500561742736,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 764602000,
+                  "proofSize": 15777
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:49.942Z"
+      },
+      {
+        "id": "5c9ddf48-fb82-4b55-95f8-6f0a5c36ed33",
+        "requestId": "536953c6-898c-42e7-95d4-a09801a25c8b",
+        "input": {
+          "action": "activatePolicy"
+        },
+        "createdAt": "2026-10-22T15:39:07.826Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1511660712995",
+        "transactionHash": "0x18cf81d55f2a2579dc07a27e8c5dd8ee339d44e8fd51c33af18cf73a1d42b3b7",
+        "kind": "substrate",
+        "blockHash": "0x23d5a0e44534ec687a5e10cbcf94e6ce8937f2c8404d0f554f1ce30d6ffe3cbe",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511660712995
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x",
+              [
+                "0x49679ec1f602dd318b48972e2398e185f4969bf89f4c32138a03ee806b3d7842"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferOnHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1536599999999998
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              172476990
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              1511488236005
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              1511488236005,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 2105435221,
+                  "proofSize": 86508
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:39:25.899Z"
+      },
+      {
+        "id": "02485994-e8e8-4a5a-aae9-467500bb77f9",
+        "requestId": "f654abba-bb77-45c4-ad36-50170b13dde8",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:32:39.651Z",
+        "status": "finalized",
+        "estimatedFeeNative": "1155571400914526",
+        "transactionHash": "0x646b19f34626bcb5223e4e663c65ad017e1ff49039c941968a7692c72c3c9841",
+        "kind": "substrate",
+        "blockHash": "0xc85e969630febc31aac7e6968d24225e04e706f6913d537e7e897b54256c07cc",
+        "events": [
+          {
+            "section": "balances",
+            "method": "Withdraw",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121400914526
+            ]
+          },
+          {
+            "section": "revive",
+            "method": "ContractEmitted",
+            "data": [
+              "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+              "0x000000000000000000000000000000000000000000000000000000006ada2dcc0000000000000000000000000000000000000000000000000000000000000001",
+              [
+                "0x860172149efef7d87a8f66c13d540ce611271bcab012bdbcaefde93d773f5a3c"
+              ]
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "TransferAndHold",
+            "data": [
+              {
+                "revive": "StorageDepositReserve"
+              },
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+              1152450000000000
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              120489287
+            ]
+          },
+          {
+            "section": "balances",
+            "method": "Deposit",
+            "data": [
+              "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+              3121280425239
+            ]
+          },
+          {
+            "section": "transactionPayment",
+            "method": "TransactionFeePaid",
+            "data": [
+              "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+              3121280425239,
+              0
+            ]
+          },
+          {
+            "section": "system",
+            "method": "ExtrinsicSuccess",
+            "data": [
+              {
+                "weight": {
+                  "refTime": 1804420267,
+                  "proofSize": 65834
+                },
+                "class": "Normal",
+                "paysFee": "Yes"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-10-22T15:33:01.377Z"
+      },
+      {
+        "id": "641d402b-09f9-4aec-abc1-96445a613f1d",
+        "requestId": "3e94387f-7b22-40dc-9bf7-d33f52780169",
+        "input": {
+          "action": "policy",
+          "instant": "1",
+          "cap": "5",
+          "maxPending": "20",
+          "delaySeconds": 120,
+          "resume": true
+        },
+        "createdAt": "2026-10-22T15:29:31.629Z",
+        "status": "failed",
+        "error": "Limit: storage deposit exceeds 10 tPOT"
+      }
+    ],
+    "busy": false,
+    "canSign": true,
+    "signingAvailable": true,
+    "historyError": null,
+    "sourceConfig": {
+      "name": "Ethereum Sepolia",
+      "chainId": 11155111,
+      "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+      "explorer": "https://sepolia.etherscan.io",
+      "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+      "owner": "0xf337687dD73c1A13EFE39393a000f55a95B1ac54",
+      "recipient": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+      "destination": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+      "confirmations": 6,
+      "finality": "Six canonical confirmations; not Ethereum finalized checkpoint proof",
+      "deploymentHash": "0x3c6306d690b08dee2ac23b1e787b485f26b1cd51dac7e4dee94dfc4b2502c5a8",
+      "deploymentBlock": 11970436,
+      "runtimeCodeHash": "0xc560bf4795c877637bedd1d92cb004676d73aac58cecc945cdd002611af555da"
+    },
+    "source": "Sepolia event → trusted RPC relay → V3; six confirmations, not a consensus proof"
+  },
+  "metrics": {
+    "earlierNormalPayout": "0.25",
+    "requested": "4",
+    "paidDuringDemo": "0",
+    "cancelled": "4",
+    "vaultBefore": "48.75",
+    "vaultAfter": "48.75"
+  },
+  "completedAt": "2026-10-22T16:32:47.975Z",
+  "recoveryNote": "Initial pause preflight rejected before signing: insufficient guardian storage funds. Returned 3 tPOT relay surplus to guardian, then finalized pause and cancel. Preflight now reserves the peak pause deposit."
+}
