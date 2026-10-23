@@ -16,7 +16,7 @@ Source: [Makssay/AirLock](https://github.com/Makssay/AirLock).
 
 Run the console and open **Watch verified walkthrough** on the Control room, or visit `http://127.0.0.1:5173/#demo`. The four-step viewer reads recorded receipts and never signs a transaction. The Control room continues to read live finalized V3 state.
 
-- [Pitch deck (PDF)](https://airlock-v3-by-makssay-and-kuznets.vercel.app/airlock-pitch-deck.pdf)
+- [Pitch deck (PDF)](https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf)
 - [Week 2 progress and evidence](docs/check-in/WEEK-2.md)
 - [Submission checklist](docs/check-in/SUBMISSION-CHECKLIST.md)
 - [Architecture diagram](docs/check-in/architecture.svg)
