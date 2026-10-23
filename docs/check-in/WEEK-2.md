@@ -12,7 +12,7 @@ Teams that hold treasury reserves on Portaldot and accept cross-chain payout ins
 - Real 0.25 tPOT payout in an earlier cross-testnet run.
 - Controlled 4 tPOT request quarantined, guardian pause finalized and request cancelled. Payout during this scenario: 0 tPOT. Vault before/after: 48.75 tPOT.
 - Local interface with live finalized state, recorded evidence walkthrough and operation journal.
-- 46 passing regression tests and production frontend build.
+- 19 passing regression checks in the current V3/EVM source package and production frontend build.
 
 ## Why Portaldot
 The treasury and payout rules live on Portaldot V3. The deployed EVM contract enforces limits over native tPOT; the guardian signs native Substrate calls through Revive. Sepolia is the external source of requests. This demonstrates V3 contract execution and a real cross-testnet application flow without claiming native trustless interoperability.
@@ -50,8 +50,8 @@ The initial guardian pause preflight was rejected before signing due to insuffic
 - Final documentation, pitch deck and final video.
 
 ## Video
-Local file: `airlock-week2.mp4` (2:23, English Fenrir narration). It uses actual application screens backed by recorded finalized evidence. Upload it to obtain a public viewing link before submitting.
+[Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ) (2:23, English Fenrir narration). It uses actual application screens backed by recorded finalized evidence.
 
 ## Submission readiness
-Prepared locally. Nothing in this folder has been uploaded or submitted.
-A public GitHub URL and a publicly accessible video URL must be added to the DoraHacks submission by the team. Localhost and local file paths are not public demonstration links.
+Source: [Makssay/AirLock](https://github.com/Makssay/AirLock). The video is available on YouTube. DoraHacks submission remains pending.
+Add the public GitHub URL and the video URL to the DoraHacks submission. Localhost and local file paths are not public demonstration links.

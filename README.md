@@ -8,13 +8,17 @@ Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. R
 
 ## See the product
 
+**[Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ)** — 2:23, English narration.
+
+Source: [Makssay/AirLock](https://github.com/Makssay/AirLock).
+
 Run the console and open **Watch verified walkthrough** on the Control room, or visit `http://127.0.0.1:5173/#demo`. The four-step viewer reads recorded receipts and never signs a transaction. The Control room continues to read live finalized V3 state.
 
 - [Week 2 progress and evidence](docs/check-in/WEEK-2.md)
 - [Submission checklist](docs/check-in/SUBMISSION-CHECKLIST.md)
 - [Architecture diagram](docs/check-in/architecture.svg)
 - [Controlled scenario JSON](artifacts/v3-attack-demo.json)
-- Local video: `docs/check-in/airlock-week2.mp4`; a public viewing link is still needed before submission.
+- [Development record](docs/DEVELOPMENT.md)
 
 ![Airlock architecture](docs/check-in/architecture.svg)
 
@@ -32,7 +36,7 @@ npm test
 npm run dev
 ```
 
-Open http://127.0.0.1:5173/#overview. The server binds only to loopback. The main interface reads live V3 state; it has no simulated clock, reset or mock balance. The legacy WASM and local EVM modules remain for regression tests, not the main product flow.
+Open http://127.0.0.1:5173/#overview. The server binds only to loopback. The main interface reads live V3 state; it has no simulated clock, reset or mock balance. Local EVM regression tests exercise the Solidity contract. The retired WASM laboratory and its tooling are excluded from this source package.
 
 For signing, create local `.env` from [.env.example](.env.example): `SEED` must match the pinned sr25519 guardian, and `PRIVATE` must match the configured Ethereum Sepolia outbox owner. The separate V3 EVM relay key is in ignored `deployments/relay-wallet.local.json`. Use disposable test wallets. The server reads keys only for signing and never sends them to the browser, logs or JSON exports. A fresh checkout can inspect the deployment without keys; create a relay setup only for a new deployment, not to replace this contract's immutable relay.
 
@@ -55,7 +59,7 @@ npm run preview
 
 - [Latest end-to-end run](artifacts/v3-console-e2e.json): source receipt, destination receipt, live state and eight integration checks.
 - [Initial V3 smoke run](artifacts/v3-live-evidence.json): deployment, payout, quarantine, pause and cancellation. Historical end state was paused with 49 tPOT; the later run resumed and paid another 0.25.
-- [Constructor and runtime verification](artifacts/v3-preflight.json), [deployed runtime code](artifacts/v3-deployed-runtime.hex), [verification summary](artifacts/verification.json).
+- [Constructor and runtime verification](artifacts/v3-preflight.json), [deployed runtime code](artifacts/v3-deployed-runtime.hex).
 - Network settings: [V3](config/portaldot-v3.json), [Sepolia](config/source-sepolia.json).
 
 Live snapshots and the local operation journal are available in the UI's Evidence page and `/api/live/evidence`. Read-only attack checks have no transaction hash or gas cost. Failed preflight checks are labelled as not broadcast. Pending and uncertain operations are not described as finalized.
@@ -97,7 +101,7 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 46 regression checks, including native local EVM transactions, reentrancy and transfer rollback, compiled WASM invariants, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 19 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
 
 
 ## Controlled public attack demo
@@ -106,4 +110,4 @@ With the local console running, `node scripts/attack-demo.mjs --send-testnet` pe
 
 The Control room displays the saved evidence from `artifacts/v3-attack-demo.json`. The normal 0.25 tPOT payout is explicitly taken from the earlier cross-testnet run. New-demo metrics distinguish the cancelled 4 tPOT request, actual payout during the scenario, and the vault balance. They do not claim that the entire vault was demonstrably saved. The scenario leaves releases paused. Resume uses the existing 300-second policy delay.
 
-The first run exposed a V3 peak-storage funding requirement: pause preflight rejected before signing with only 1.95 tPOT in the guardian. `scripts/recover-demo.mjs` is a bounded recovery for that existing message: it returns exactly 3 tPOT of relay surplus to the pinned guardian and continues pause/cancel, without creating another source request. It refuses an existing recovery journal. The original failed preflight remains visible in the evidence.
+The first run exposed a V3 peak-storage funding requirement: pause preflight rejected before signing with only 1.95 tPOT in the guardian. A one-time recovery returned 3 tPOT of relay surplus to the pinned guardian and continued pause/cancel without creating another source request. That historical recovery utility is excluded from this package; the original failed preflight and recovery transactions remain visible in the public evidence.

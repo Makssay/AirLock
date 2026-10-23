@@ -1,12 +1,9 @@
 node_modules/
 dist/
-contracts/airlock/target/
-research/python-deps/
-research/__pycache__/
 .env
-deployments/*.local.json
+.env.*
+!.env.example
+deployments/
+*.local.json
 test-results/
-
-checkin-video/out/
-checkin-video/public/*.wav
-docs/check-in/*.mp4
+*.log

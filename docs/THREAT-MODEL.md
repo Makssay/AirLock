@@ -1,4 +1,4 @@
-# Airlock v0.1 threat model
+# Airlock V3 threat model
 
 Airlock is an independently administered withdrawal firewall around a native POT reserve. It bounds releases initiated by a trusted-message relay that may become compromised. It does not authenticate remote-chain facts and is not a bridge, light client, insurance product or guarantee against all loss.
 
@@ -19,11 +19,17 @@ Airlock is an independently administered withdrawal firewall around a native POT
 - A compromised relay can immediately release the available fixed-window budget. It can continue in subsequent windows if the guardian does not respond. At a boundary, two adjacent window budgets can be released close together. This is not a rolling-window bound.
 - A single guardian can censor, pause indefinitely, or eventually weaken the policy. Guardian compromise and relay/guardian collusion are not solved. A multisig guardian is a possible later extension, not implemented here.
 - Relay and guardian cannot rotate in this version. Recovery requires a new deployment and an explicit migration design.
-- Records grow with unique accepted messages. Tests bound value exposure, not indefinite storage growth, spam fees or legacy contract rent.
-- The legacy pallet may charge storage rent or evict underfunded contracts. The reserve floor is a configured amount, not an automatically calculated rent guarantee. Host tests do not emulate fees, rent, consensus, block limits, reorgs or validator behavior.
-- The inspected legacy seal_transfer transfers currency without invoking recipient contract code. The Solidity reference uses native calls that can invoke code, so every mutating entry point has a reentrancy guard; EVM tests cover a recipient attempting a nested queued release and a recipient rejecting payment.
+- Records grow with unique accepted messages. Tests bound value exposure, not indefinite storage growth or spam fees.
+- V3 operations require network fees and storage deposits. The reserve floor does not fund operator wallets automatically. Guardian and relay funding are checked separately before signing; a late or underfunded guardian can miss the quarantine window.
+- Solidity native transfers can invoke recipient code. Every mutating entry point has a reentrancy guard; EVM tests cover a recipient attempting a nested queued release and a recipient rejecting payment.
 - Fixed source domain labels and nonces do not prove source finality. A production adapter needs a specified verification mechanism.
+
+## Source verification
+
+The Sepolia outbox emits requests without escrowing ETH. The relay checks configured source identity, contract bytecode, owner, canonical receipt and event fields after six confirmations. It trusts configured RPC data; V3 does not verify Ethereum consensus or finalized checkpoints. The V3 source domain is generic and the relay supplies the binding to Sepolia.
 
 ## Test evidence
 
-Node's WebAssembly runtime runs the exact compiled Rust artifact against a local host implementing seal0 storage, clock, caller, balance, transfer, events and BLAKE2. Revert snapshots emulate transaction atomicity. The suite includes deterministic mixed adversarial actions and conservation/reservation invariants. This is contract execution evidence, not proof of successful Portaldot deployment. Legacy validation and actual on-chain deployment remain separate checks.
+`npm test` runs 19 checks over actual local EVM transactions, transfer rollback, reentrancy, spending and quarantine rules, V3 bytecode wrapper validation and server input/idempotency guards. Public V3 deployment and transaction evidence is recorded separately in `artifacts/v3-live-evidence.json`, `artifacts/v3-console-e2e.json` and `artifacts/v3-attack-demo.json`.
+
+The controlled 4 tPOT request was quarantined, paused and cancelled with zero payout during the scenario. Guardian pause finalized after the 120-second quarantine because funding recovery was required. This demonstrates the mechanisms, not a response within the delay. The current preflight reserves peak pause storage funds plus a margin. Local adversarial tests do not establish that every adversarial scenario was exercised on public testnet.
