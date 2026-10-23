@@ -8,6 +8,8 @@ Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. R
 
 ## See the product
 
+**[Open the public Airlock demo](https://airlock-portaldot.vercel.app)** — wallet-free walkthrough, video and transaction evidence.
+
 **[Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ)** — 2:23, English narration.
 
 Source: [Makssay/AirLock](https://github.com/Makssay/AirLock).
@@ -88,6 +90,12 @@ Native Substrate balances use 14 decimals; Ethereum-compatible V3 calls use 18, 
 V3's Ethereum gas estimates include storage and may require a large upfront balance. Each relay request is limited to 5 tPOT, always paid to the pinned guardian. The relay fee ceiling is 25 tPOT with a 5% gas margin above the gateway estimate. Guardian network fees are capped at 1 tPOT and storage charge at 12 tPOT. Source requests are capped at 0.001 test ETH; source deployment at 0.01 test ETH. Funds and fees are checked before creating the source event, then checked again before relaying it.
 
 Signing requires the exact pinned genesis, chain ID, deployed bytecode and role addresses. The server requires exact loopback Host and Origin, JSON requests and a per-process control token. Request IDs deduplicate double clicks. A write journal is saved before broadcast. Guardian and source seeds stay outside frontend bundles. `/api/action` is retired; `/api/state` and `/api/evidence` return V3 data.
+
+## Public website on Vercel
+
+`npm run build:public` builds the public viewer into `dist/`, including static recorded evidence. The Vercel configuration uses this command automatically. The public build does not include operator controls or the local signing server. `/api/network` is a fixed read-only observer: it verifies chain ID and contract bytecode, then returns balance and observation time at the latest RPC block. It does not claim that observation is finalized. If RPC is unavailable, the recorded demo still works.
+
+No wallet keys or mnemonic environment variables are required on Vercel. Continue using `npm run dev` for the local operator console. See [deployment details](docs/DEPLOYMENT.md).
 
 ## Development commands
 

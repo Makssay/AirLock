@@ -49,6 +49,9 @@ The initial guardian pause preflight was rejected before signing due to insuffic
 - Obtain organizer confirmation on track fit for a custom trusted relay.
 - Final documentation, pitch deck and final video.
 
+## Public demo
+[Open Airlock](https://airlock-portaldot.vercel.app) — wallet-free recorded walkthrough, video, transaction evidence and a separate read-only testnet observation.
+
 ## Video
 [Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ) (2:23, English Fenrir narration). It uses actual application screens backed by recorded finalized evidence.
 
