@@ -10,7 +10,7 @@ Deadline supplied by the organizers: 24 October 2026, 12:00 UTC / 15:00 Moscow.
 - [x] Source repository with original development history: [Makssay/AirLock](https://github.com/Makssay/AirLock). Local .env and wallet files are excluded.
 - [x] Video uploaded: [YouTube demo](https://youtu.be/LKbyCsM62rQ).
 - [x] YouTube playback verified in the public viewer.
-- [x] Public viewing site: [Airlock](https://airlock-by-makssay.vercel.app).
+- [x] Public viewing site: [Airlock](https://airlock-v3-by-makssay-and-kuznets.vercel.app).
 - [ ] Add real GitHub and video URLs to DoraHacks; use WEEK-2.md for the progress fields.
 - [ ] Submit and check the submission status. Administrator approval/review may follow.
 

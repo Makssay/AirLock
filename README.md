@@ -8,7 +8,7 @@ Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. R
 
 ## See the product
 
-**[Open the public Airlock demo](https://airlock-by-makssay.vercel.app)** — wallet-free walkthrough, video and transaction evidence.
+**[Open the public Airlock demo](https://airlock-v3-by-makssay-and-kuznets.vercel.app)** — wallet-free walkthrough, video and transaction evidence.
 
 **[Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ)** — 2:23, English narration.
 

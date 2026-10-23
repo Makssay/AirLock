@@ -50,7 +50,7 @@ The initial guardian pause preflight was rejected before signing due to insuffic
 - Final documentation, pitch deck and final video.
 
 ## Public demo
-[Open Airlock](https://airlock-by-makssay.vercel.app) — wallet-free recorded walkthrough, video, transaction evidence and a separate read-only testnet observation.
+[Open Airlock](https://airlock-v3-by-makssay-and-kuznets.vercel.app) — wallet-free recorded walkthrough, video, transaction evidence and a separate read-only testnet observation.
 
 ## Video
 [Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ) (2:23, English Fenrir narration). It uses actual application screens backed by recorded finalized evidence.
