@@ -1,6 +1,6 @@
 # Public Airlock viewer
 
-Production: https://airlock-portaldot.vercel.app
+Production: https://airlock-by-makssay.vercel.app
 
 Vercel project: `airlock-portaldot`, scope `makssays-projects`.
 
@@ -20,4 +20,4 @@ Only fixed read methods and a fixed contract/RPC are used. POST returns 405. No 
 
 All 19 regression checks and the public production build passed. Browser checks covered the four demo stages, embedded YouTube playback and a 375-pixel mobile viewport without horizontal overflow. The production root, evidence JSON, architecture and logo returned HTTP 200 without authentication; the live observer returned a bytecode-verified balance. Private-file paths and the local write endpoint returned 404. Network observer POST returned 405.
 
-The local network intermittently times out for the IPs returned by its DNS for the production alias. Production HTTP checks succeeded through an alternative Vercel edge IP with normal TLS certificate verification and no authentication. This is a local access limitation observed during verification; do not change visitor DNS or security settings automatically.
+The original `airlock-portaldot.vercel.app` hostname resolved to Vercel edge IPs that timed out on the local network. The replacement `airlock-by-makssay.vercel.app` is registered as a production project domain and resolves to a reachable Vercel edge. It was verified through ordinary HTTPS requests and in the browser without authentication, IP overrides or changes to visitor settings. Deployment protection remains unchanged. Future production deployments automatically receive this domain.
