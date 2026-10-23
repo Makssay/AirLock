@@ -49,6 +49,9 @@ The initial guardian pause preflight was rejected before signing due to insuffic
 - Obtain organizer confirmation on track fit for a custom trusted relay.
 - Final documentation, pitch deck and final video.
 
+## Pitch deck
+[Open the six-slide pitch deck (PDF)](https://airlock-v3-by-makssay-and-kuznets.vercel.app/airlock-pitch-deck.pdf).
+
 ## Public demo
 [Open Airlock](https://airlock-v3-by-makssay-and-kuznets.vercel.app) — wallet-free recorded walkthrough, video, transaction evidence and a separate read-only testnet observation.
 
