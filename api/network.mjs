@@ -20,4 +20,3 @@ export default async function handler(req,res){
   return res.status(200).json({chainId:network.chainId,contract:network.contract,block:Number(BigInt(block)),balance:`${whole}${fraction?'.'+fraction:''}`,observedAt:new Date().toISOString(),blockTag:'latest',codeVerified:true});
  }catch{return res.status(503).json({error:'Live testnet observation is temporarily unavailable. Recorded demo evidence remains available.'});}
 }
-
