@@ -55,3 +55,9 @@ Proceed with observer/UI, local adversarial and timing tests, integration docs a
 - Confirmed that the EVM gateway can return a different hash for a native block lookup. Final timing evidence therefore uses the native finalized block's timestamp storage, and a job is not reported finalized until that timestamp has been recorded. Dedicated regression covers this sequencing; all three final-demo tests passed after the change.
 
 Every completed item must name its test, receipt or artifact. New code alone does not establish a timely guardian response or mainnet compatibility. Preserve existing receipts; do not overwrite the Week 2 scenario.
+
+## Delivery checkpoint
+
+Source changes published as commit `1cf801d` under Makssay. Staged files were checked against locally configured secret values before commit. GitHub raw local scenario returned HTTP 200 and `status: passed`. Vercel production deployment `airlock-portaldot-31crsxipy-makssays-projects.vercel.app` completed successfully. Ordinary public-domain reachability and browser visual QA must be distinguished from successful deployment.
+
+Public production domain timed out from the local network during the delivery check. GitHub evidence remains accessible; deployment success is not reported as a successful browser visit.
