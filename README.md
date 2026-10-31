@@ -25,6 +25,9 @@ Run the console and open **Watch verified walkthrough** on the Control room, or 
 - [Final delivery plan](docs/FINAL-PLAN.md)
 - [Local guardian observer](docs/GUARDIAN-WATCH.md)
 - [Integration guide](docs/INTEGRATION.md)
+- [Final submission fields](docs/FINAL-SUBMISSION.md)
+- [Final checklist](docs/FINAL-CHECKLIST.md)
+- [Presentation script](docs/PRESENTATION-SCRIPT.md)
 
 ![Airlock architecture](docs/check-in/architecture.svg)
 

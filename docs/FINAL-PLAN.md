@@ -4,7 +4,7 @@ Started 2026-11-01. Source: team plan and the supplied Oct 30 AMA notes.
 
 ## Latest status
 
-Implemented and verified: peak-deposit signing preflight, bounded history catch-up, terminal guardian observer, stale-state write blocking, native finalized timestamps, 25 regression checks, and an isolated 9-assertion Anvil scenario with a 110-second pause margin. Public and operator builds pass. Live observer checked finalized V3 block 269431 with no queued requests.
+Implemented and verified: peak-deposit signing preflight, bounded history catch-up, terminal guardian observer, stale-state write blocking, native finalized timestamps, 27 regression checks, and an isolated 9-assertion Anvil scenario with a 110-second pause margin. Public and operator builds pass. Live observer checked finalized V3 block 269431 with no queued requests.
 
 Implemented pending browser validation: Guardian watch panel and opt-in browser notifications. Automatic Computer Use review could not establish the browser URL, so browser interactions were stopped. Queued and stale panel server-render checks passed; those are not browser visual checks.
 
@@ -69,3 +69,7 @@ Published https://makssay.github.io/AirLock/ from the gh-pages branch. Ordinary 
 The ordinary Actions build was rejected by GitHub because of an account billing lock. Branch-based Pages deployment succeeded. Repeat publication through `npm run publish:pages` was exercised successfully. No billing, local DNS or security settings were changed. The Vercel deployment remains available through reachable edge routes.
 
 Automatic approval review rejected a final command batch including repository Homepage metadata changes, without a detailed reason. The public Pages site was already deployed and verified. Homepage metadata is left unchanged; README provides the working public link.
+
+## Final submission preparation
+
+Prepared complete testnet fields with native/EVM hash labels, attribution clarification, a spoken presentation script and a separate final checklist. Corrected the historical Week 2 checklist to reflect the team-reported submission and supplied PASSED report. A further browser inspection attempt was stopped by automatic URL verification; browser visual, mobile interaction and video playback checks remain open. No organizer message or DoraHacks update was sent.

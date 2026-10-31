@@ -1,4 +1,4 @@
-# Submission checklist
+# Week 2 submission checklist (historical)
 
 Deadline supplied by the organizers: 24 October 2026, 12:00 UTC / 15:00 Moscow.
 
@@ -11,7 +11,7 @@ Deadline supplied by the organizers: 24 October 2026, 12:00 UTC / 15:00 Moscow.
 - [x] Video uploaded: [YouTube demo](https://youtu.be/LKbyCsM62rQ).
 - [x] YouTube playback verified in the public viewer.
 - [x] Public viewing site: [Airlock](https://airlock-v3-by-makssay-and-kuznets.vercel.app).
-- [ ] Add real GitHub and video URLs to DoraHacks; use WEEK-2.md for the progress fields.
-- [ ] Submit and check the submission status. Administrator approval/review may follow.
+- [x] Team reported the build submitted with repository and demo materials.
+- [x] Supplied check-in report lists both Airlock entries as PASSED; attribution and track labels require organizer clarification.
 
-Do not upload the entire workspace as an archive: it includes ignored local wallet files. The source repository and YouTube video are published. DoraHacks submission remains pending.
+Do not upload the entire workspace as an archive: it includes ignored local wallet files. The source repository and YouTube video are published. The Week 2 build was submitted according to the team. Final submission is a separate step; use [the final checklist](../FINAL-CHECKLIST.md).
