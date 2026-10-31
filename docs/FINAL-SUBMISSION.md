@@ -15,7 +15,8 @@ The full regression suite passes 27 checks. A reproducible local Anvil scenario 
 ## Links
 
 - Repository: https://github.com/Makssay/AirLock
-- Product: https://makssay.github.io/AirLock/
+- Product (original submission URL): https://airlock-v3-by-makssay-and-kuznets.vercel.app/
+- Backup mirror: https://makssay.github.io/AirLock/
 - Video: https://youtu.be/LKbyCsM62rQ
 - Pitch deck: https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf
 - Testnet evidence: https://github.com/Makssay/AirLock/blob/main/artifacts/v3-attack-demo.json
