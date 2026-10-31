@@ -132,4 +132,4 @@ The local control room now includes Guardian watch: queued request details, chai
 
 The latest full regression suite passed 25 checks. The local final scenario passed 9 assertions; pause inclusion preceded eligibility by 110 seconds with explicitly advanced local chain time. A new timely-response run on V3 remains pending.
 
-Public mirror: https://makssay.github.io/AirLock/ — built automatically from main. The Vercel deployment remains at https://airlock-v3-by-makssay-and-kuznets.vercel.app/; some Vercel edge addresses are unreachable from the development network.
+Public mirror: https://makssay.github.io/AirLock/ — published from a local production build with `npm run publish:pages`. The Vercel deployment remains at https://airlock-v3-by-makssay-and-kuznets.vercel.app/; some Vercel edge addresses are unreachable from the development network.

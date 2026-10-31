@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "guardian:watch": "node scripts/guardian-watch.mjs",
+    "publish:pages": "node scripts/publish-pages.mjs --publish",
     "demo:local:final": "node scripts/local-final-scenario.mjs",
     "test": "node --test tests/*.test.mjs",
     "dev": "node server/index.mjs",

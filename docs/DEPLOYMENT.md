@@ -24,8 +24,10 @@ The original `airlock-portaldot.vercel.app` hostname resolved to Vercel edge IPs
 
 ## GitHub Pages availability mirror
 
-https://makssay.github.io/AirLock/ is published by `.github/workflows/pages.yml` on pushes to main. It builds only the wallet-free public viewer with `AIRLOCK_BASE=/AirLock/`. Asset and evidence links respect the project base path. Vercel still builds at `/` and retains its read-only API.
+https://makssay.github.io/AirLock/ is published from the `gh-pages` branch. Run `npm run publish:pages` to build the wallet-free public viewer locally with `AIRLOCK_BASE=/AirLock/`, push static files and request a Pages build. Asset and evidence links respect the project base path. Vercel still builds at `/` and retains its read-only API.
 
 On GitHub Pages the network card makes fixed read-only calls directly to the configured V3 RPC, checks chain identity and bytecode SHA-256, and reads balance/code at one explicit block. It needs no backend or secrets. RPC failure leaves the recorded demo and evidence available. The RPC accepted the browser CORS preflight during verification.
 
 The Vercel timeout was isolated to network routing to specific edge addresses: ordinary DNS selected an unreachable address, while the same hostname returned HTTP 200 through a reachable Vercel edge with normal TLS validation. No local DNS, hosts, proxy or security configuration was changed. A hosting mirror avoids relying on that edge route.
+
+The ordinary Actions workflow could not start because GitHub reported an account billing lock. Pages branch deployment was selected instead; `.github/workflows/pages.yml` is available only for manual dispatch if ordinary Actions becomes available. No billing settings were changed. Local publication preserves PDF bytes and contains no operator endpoints or secrets.

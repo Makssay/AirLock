@@ -61,3 +61,11 @@ Every completed item must name its test, receipt or artifact. New code alone doe
 Source changes published as commit `1cf801d` under Makssay. Staged files were checked against locally configured secret values before commit. GitHub raw local scenario returned HTTP 200 and `status: passed`. Vercel production deployment `airlock-portaldot-31crsxipy-makssays-projects.vercel.app` completed successfully. Ordinary public-domain reachability and browser visual QA must be distinguished from successful deployment.
 
 Public production domain timed out from the local network during the delivery check. GitHub evidence remains accessible; deployment success is not reported as a successful browser visit.
+
+## Availability fix
+
+Published https://makssay.github.io/AirLock/ from the gh-pages branch. Ordinary HTTPS checks returned 200 for the root, JS/CSS, logo, receipt JSON, architecture and a byte-identical PDF. The static viewer's fixed read-only RPC observation and browser CORS preflight passed. Full regression suite: 27 passing checks.
+
+The ordinary Actions build was rejected by GitHub because of an account billing lock. Branch-based Pages deployment succeeded. Repeat publication through `npm run publish:pages` was exercised successfully. No billing, local DNS or security settings were changed. The Vercel deployment remains available through reachable edge routes.
+
+Automatic approval review rejected a final command batch including repository Homepage metadata changes, without a detailed reason. The public Pages site was already deployed and verified. Homepage metadata is left unchanged; README provides the working public link.
