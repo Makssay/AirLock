@@ -6,6 +6,7 @@ import {parseEnv} from 'node:util';
 import {randomUUID} from 'node:crypto';
 import {matchesV3Code} from '../lib/v3-code.mjs';
 import {createSourceRequest,sourceConfig} from './source-lane.mjs';
+import {guardianFundingRequired} from '../lib/guardian-watch.mjs';
 
 export const V3_GENESIS='0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd';
 export const V3_CONTRACT='0x3bbb62bf86d40f26a87e70fe56ee073e69198713';
@@ -61,8 +62,10 @@ export class LiveV3 {
   if((await this.contract.guardian()).toLowerCase()!==this.plan.guardianEvm.toLowerCase()||(await this.contract.relay()).toLowerCase()!==this.plan.relay.toLowerCase())throw Error('Contract role mismatch');
  }
  async syncLogs(height){
-  for(let from=this.store.cursor+1;from<=height;from+=500){
-   const end=Math.min(height,from+499);const logs=await this.rpc.getLogs({address:V3_CONTRACT,fromBlock:from,toBlock:end});
+  // Bound historical catch-up per snapshot; never silently skip old events.
+  const target=Math.min(height,this.store.cursor+2000);
+  for(let from=this.store.cursor+1;from<=target;from+=500){
+   const end=Math.min(target,from+499);const logs=await this.rpc.getLogs({address:V3_CONTRACT,fromBlock:from,toBlock:end});
    for(const log of logs){let event;try{event=this.iface.parseLog(log);}catch{continue;}if(!event)continue;
     const key=event.args.id;
     if(key&&['Queued','Released','Cancelled'].includes(event.name)){const old=this.store.messages[key]||{};this.store.messages[key]={...old,key,recipient:event.args.recipient||old.recipient,amount:event.args.amount?.toString()||old.amount,firstSeenBlock:old.firstSeenBlock||log.blockNumber};}
@@ -81,6 +84,7 @@ export class LiveV3 {
   const finalizedHash=await api.rpc.chain.getFinalizedHead();const nativeHeader=await api.rpc.chain.getHeader(finalizedHash);const height=Number(nativeHeader.number.toString());
   const block=await this.rpc.getBlock(height);if(!block)throw Error('Ethereum gateway has not indexed the finalized block yet');const opts={blockTag:height};
   let historyError=null;try{await this.syncLogs(height);}catch{historyError='History sync is incomplete. Displayed messages are verified, but some earlier events may be missing.';}
+  if(this.store.cursor<height)historyError=`History sync in progress: scanned through block ${this.store.cursor} of ${height}. Some requests may not be visible yet.`;
   const [policy,plan,paused,reserved,spent,balance,floor,window,policyDelay,guardianBalance,relayBalance]=await Promise.all([this.contract.policy(opts),this.contract.pendingPolicy(opts),this.contract.paused(opts),this.contract.reserved(opts),this.contract.spentThisWindow(opts),this.rpc.getBalance(V3_CONTRACT,height),this.contract.reserveFloor(opts),this.contract.windowSeconds(opts),this.contract.policyDelaySeconds(opts),this.rpc.getBalance(this.plan.guardianEvm,height),this.rpc.getBalance(this.plan.relay,height)]);
   const messages=[];
   for(const [key,value] of Object.entries(this.store.messages)){
@@ -197,13 +201,14 @@ export class LiveV3 {
    if(charge>12n*N)throw Error('Limit: storage deposit exceeds 12 tPOT');
    const peak=dry.maxStorageDeposit.isCharge?BigInt(dry.maxStorageDeposit.asCharge.toString()):0n;
    if(peak>12n*N)throw Error('Limit: peak storage deposit exceeds 12 tPOT');
-   const tx=api.tx.revive.call(V3_CONTRACT,0,weight,((peak>charge?peak:charge)+N).toString(),data);await this.broadcastNative(job,api,pair,tx,charge);
+   const tx=api.tx.revive.call(V3_CONTRACT,0,weight,((peak>charge?peak:charge)+N).toString(),data);await this.broadcastNative(job,api,pair,tx,charge,peak);
   }finally{pair?.lock();}
  }
- async broadcastNative(job,api,pair,tx,charge=0n){
+ async broadcastNative(job,api,pair,tx,charge=0n,peak=charge){
    const fee=await tx.paymentInfo(pair);
    if(BigInt(fee.partialFee.toString())>N)throw Error('Limit: guardian network fee exceeds 1 tPOT');
-   const account=await api.query.system.account(GUARDIAN);if(BigInt(account.data.free.toString())-BigInt(account.data.frozen.toString())<charge+BigInt(fee.partialFee.toString())*2n+N/10n)throw Error('Limit: guardian has insufficient funds for storage and fee margin');
+   const required=guardianFundingRequired({netDeposit:charge,peakDeposit:peak,fee:BigInt(fee.partialFee.toString()),margin:N/10n});
+   const account=await api.query.system.account(GUARDIAN);if(BigInt(account.data.free.toString())-BigInt(account.data.frozen.toString())<required)throw Error('Limit: guardian has insufficient funds for peak storage and fee margin');
    job.estimatedFeeNative=(BigInt(fee.partialFee.toString())+charge).toString();
    await tx.signAsync(pair,{nonce:-1});job.transactionHash=tx.hash.toHex();job.kind='substrate';job.status='signed';this.save();pair.lock();
    await new Promise((resolve,reject)=>{
@@ -213,9 +218,17 @@ export class LiveV3 {
      if(status.isInBlock){job.status='included';job.blockHash=status.asInBlock.toHex();this.save();}
      if(status.isInvalid||status.isDropped||status.isUsurped)return finish(Error('Contract: submission not finalized; inspect transaction'));
      if(!status.isFinalized)return;job.blockHash=status.asFinalized.toHex();
-     if(dispatchError){job.status='failed';job.error='Runtime rejected transaction';}else job.status='finalized';job.events=events.map(({event})=>({section:event.section,method:event.method,data:event.data.toJSON()}));job.completedAt=new Date().toISOString();this.save();finish();
+     if(dispatchError){job.status='failed';job.error='Runtime rejected transaction';}else job.status='included';job.events=events.map(({event})=>({section:event.section,method:event.method,data:event.data.toJSON()}));this.save();finish();
     }).then(u=>{unsub=u;if(done)u();}).catch(()=>finish(Error('Contract: submission failed; inspect the saved transaction')));
    });
+   // Native and EVM gateway hashes may differ; use native finalized block state.
+   const header=await api.rpc.chain.getHeader(job.blockHash);
+   const at=await api.at(job.blockHash);
+   job.blockNumber=Number(header.number.toString());
+   job.blockTimestamp=Number((await at.query.timestamp.now()).toString());
+   if(job.status!=='failed')job.status='finalized';
+   job.completedAt=new Date().toISOString();
+   this.save();
  }
  async waitFinalized(api,height){const deadline=Date.now()+120000;while(Date.now()<deadline){const header=await api.rpc.chain.getHeader(await api.rpc.chain.getFinalizedHead());if(Number(header.number.toString())>=height)return;await new Promise(resolve=>setTimeout(resolve,1500));}throw Error('Contract: finality timeout; do not resubmit');}
 }

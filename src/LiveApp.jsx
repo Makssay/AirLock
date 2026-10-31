@@ -1,6 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
 import AttackDemo from './AttackDemo.jsx';
 import StoryDemo from './StoryDemo.jsx';
+import GuardianMonitor from './GuardianMonitor.jsx';
 import {Shield,Activity,Layers,SlidersHorizontal,FileCheck2,Radio,ChevronRight,RefreshCw,Check,X,Clock3,Pause,ArrowRight,Download,AlertTriangle,Zap,ExternalLink} from 'lucide-react';
 const names={overview:'Control room',queue:'Quarantine',policy:'Release policy',evidence:'Evidence',demo:'Verified walkthrough'};
 const actions={submit:'Source request and payout',policy:'Schedule policy',activatePolicy:'Activate policy',cancelPolicy:'Cancel policy',pause:'Guardian pause',cancel:'Cancel request',execute:'Execute release',checkAttack:'Read-only attack checks',fundRelay:'Fund V3 relay'};
@@ -13,6 +14,8 @@ export default function LiveApp(){
  const [page,setPage]=useState(names[location.hash.slice(1)]?location.hash.slice(1):'overview'),[data,setData]=useState(null),[error,setError]=useState(''),[notice,setNotice]=useState(''),[sending,setSending]=useState(false),[amount,setAmount]=useState('0.25'),[selected,setSelected]=useState(null),[connectionError,setConnectionError]=useState(false);
  const [form,setForm]=useState({instant:'1',cap:'5',delaySeconds:'120',maxPending:'20',resume:true});
  const inflight=useRef(false),token=useRef(null),initialized=useRef(false);
+ const [wallClock,setWallClock]=useState(Date.now());
+ useEffect(()=>{const timer=setInterval(()=>setWallClock(Date.now()),1000);return()=>clearInterval(timer);},[]);
  async function refresh(force=false){if(inflight.current)return;inflight.current=true;try{const r=await fetch('/api/live/state'+(force?'?refresh=1':''),{signal:AbortSignal.timeout(45000)});const s=await r.json();if(!r.ok)throw Error(s.error);token.current=s.controlToken;delete s.controlToken;setData(s);setConnectionError(false);if(!initialized.current){setForm({...s.policy,delaySeconds:String(s.policy.delaySeconds),resume:s.paused});initialized.current=true;}}catch(e){setConnectionError(true);setError(e.message||'Cannot reach V3. No transaction sent.');}finally{inflight.current=false;}}
  useEffect(()=>{refresh();const timer=setInterval(()=>refresh(),4000);return()=>clearInterval(timer);},[]);
  useEffect(()=>{history.replaceState(null,'','#'+page);},[page]);
@@ -23,9 +26,10 @@ export default function LiveApp(){
  if(page==='demo')return <StoryDemo onBack={()=>setPage('overview')}/>;
  if(!data)return <main className="loading"><Shield size={36}/><h1>Connecting to Portaldot V3</h1><p role="status">{error||'Checking the contract and finalized chain state…'}</p><button className="button primary" onClick={()=>refresh(true)}>Retry connection</button></main>;
  const queue=data.messages.filter(m=>m.status==='queued'),rows=page==='queue'?queue:data.messages;
- const busy=sending||data.busy,disabled=busy||connectionError||!data.canSign;
+ const stale=connectionError||wallClock-Date.parse(data.checkedAt)>45000;
+ const busy=sending||data.busy,disabled=busy||stale||!data.canSign;
  const guardianPending=data.jobs.some(j=>pending(j.status)&&j.input.action!=='submit');
- const pauseDisabled=sending||connectionError||guardianPending||data.paused||!data.signingAvailable;
+ const pauseDisabled=sending||stale||guardianPending||data.paused||!data.signingAvailable;
  const activeJob=data.jobs.find(j=>pending(j.status));const lastJob=data.jobs[0];
  const remaining=Math.max(0,Number(data.policy.cap)-Number(data.spent));
  const selectedRow=data.messages.find(m=>m.key===selected);
@@ -39,6 +43,8 @@ export default function LiveApp(){
  {page==='overview'&&<section className="story-entry"><div><strong>Cross-chain treasury payouts, with boundaries</strong><p>See a real request enter quarantine and get cancelled by the guardian.</p></div><button className="button primary" onClick={()=>setPage('demo')}>Watch verified walkthrough <ArrowRight size={16}/></button></section>}<div className="live-network-banner"><Radio size={17}/><div><strong>{connectionError?'Connection interrupted':'V3 identity and contract verified'}</strong><span>{short(data.contract)} · finalized block {data.finalizedBlock} · {new Date(data.checkedAt).toLocaleTimeString()}</span></div><a href="/api/live/evidence" download><Download size={15}/>JSON</a></div>
  {(error||notice)&&<div className={`feedback ${error?'error':'success'}`} role={error?'alert':'status'}>{error?<AlertTriangle size={17}/>:<Check size={17}/>}<span>{error||notice}</span><button aria-label="Dismiss message" onClick={()=>{setError('');setNotice('');}}><X size={16}/></button></div>}
  {data.historyError&&<p className="v3-alert" role="alert">{data.historyError}</p>}
+ {stale&&<p className="v3-alert" role="alert">Fresh chain state is unavailable. Transaction controls are disabled until a verified refresh succeeds.</p>}
+ {(page==='overview'||page==='queue')&&<GuardianMonitor data={data} stale={stale} onReview={key=>{setSelected(key);setPage('queue');}}/>}
  {activeJob&&<section className="panel live-pending" aria-live="polite"><Clock3 size={20}/><div><strong>{activeJob.input.action} · {activeJob.status}</strong><p>{activeJob.error||'Waiting for the network. Duplicate submissions are blocked.'}</p>{activeJob.source&&<p>Sepolia: {activeJob.source.status} · {short(activeJob.source.transactionHash)}</p>}{activeJob.transactionHash&&<code>{activeJob.transactionHash}</code>}</div></section>}
  {lastJob&&!pending(lastJob.status)&&<section className={`live-result ${lastJob.status==='failed'?'failed':''}`} role="status"><Badge status={lastJob.status}/><span>{lastJob.error||`${actions[lastJob.input.action]}: ${lastJob.status==='checked'?'read-only results recorded':'transaction completed'}`}</span></section>}
  {page==='overview'&&<><section className="route-panel"><div className="route-head"><span>{sourceName} → Portaldot V3</span><span className={`live-label ${data.paused?'is-paused':''}`}><span/>{data.paused?'Releases paused':'Protection active'}</span></div><div className="route">{[[Layers,sourceName,data.sourceConfig?'On-chain request event':'Direct testnet request'],[Radio,'Trusted relay','Attests request to V3'],[Shield,'Airlock','Limits, delay, guardian'],[Shield,'Reserve vault','Native tPOT on V3']].map(([Icon,label,detail],i)=><React.Fragment key={label}>{i>0&&<div className="route-link"><div/><ArrowRight size={15}/></div>}<div className="route-stop"><div className={`route-icon ${i===2?'firewall':'source'}`}><Icon size={25}/></div><strong>{label}</strong><span>{detail}</span></div></React.Fragment>)}</div><div className="route-foot"><span><Check size={14}/>Replay protection</span><span><Check size={14}/>Queued funds reserved</span><span><Check size={14}/>Guardian response window</span></div></section>

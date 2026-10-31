@@ -24,3 +24,11 @@ A separate fresh copy passed `npm ci`, all 19 regression checks and `npm run bui
 ## Next work
 
 Guardian alerting, response within quarantine, additional public-testnet adversarial coverage, operator onboarding and stronger source verification. See [Week 2 progress](check-in/WEEK-2.md).
+
+## 2026-11-01 final preparation
+
+Added a terminal observer and local Guardian watch UI, optional browser notifications, explicit incomplete-history status, stale-state write blocking and bounded historical catch-up. Corrected native signing affordability to cover peak storage deposits. Native jobs record finalized block timestamps before reporting completion.
+
+Added an isolated local final scenario, separate from testnet evidence: normal and delayed payouts, guardian alert, pause 110 seconds before eligibility, cancellation, timelocked resume, replay rejection and split-budget enforcement. All 25 regression checks and 9 local scenario assertions passed. New V3 transactions remain pending due to the existing operator funding constraint, documented in FINAL-PLAN.md. No additional tokens are assumed.
+
+Browser automation was stopped by automatic URL verification; visual validation of the new panel remains open. Production claims are based on existing V3 receipts and explicitly labelled local checks.

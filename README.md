@@ -22,6 +22,9 @@ Run the console and open **Watch verified walkthrough** on the Control room, or 
 - [Architecture diagram](docs/check-in/architecture.svg)
 - [Controlled scenario JSON](artifacts/v3-attack-demo.json)
 - [Development record](docs/DEVELOPMENT.md)
+- [Final delivery plan](docs/FINAL-PLAN.md)
+- [Local guardian observer](docs/GUARDIAN-WATCH.md)
+- [Integration guide](docs/INTEGRATION.md)
 
 ![Airlock architecture](docs/check-in/architecture.svg)
 
@@ -110,7 +113,7 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 19 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 25 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
 
 
 ## Controlled public attack demo
@@ -120,3 +123,11 @@ With the local console running, `node scripts/attack-demo.mjs --send-testnet` pe
 The Control room displays the saved evidence from `artifacts/v3-attack-demo.json`. The normal 0.25 tPOT payout is explicitly taken from the earlier cross-testnet run. New-demo metrics distinguish the cancelled 4 tPOT request, actual payout during the scenario, and the vault balance. They do not claim that the entire vault was demonstrably saved. The scenario leaves releases paused. Resume uses the existing 300-second policy delay.
 
 The first run exposed a V3 peak-storage funding requirement: pause preflight rejected before signing with only 1.95 tPOT in the guardian. A one-time recovery returned 3 tPOT of relay surplus to the pinned guardian and continued pause/cancel without creating another source request. That historical recovery utility is excluded from this package; the original failed preflight and recovery transactions remain visible in the public evidence.
+
+## Final-stage verification
+
+`npm run demo:local:final` executes the normal payout, legitimate delayed payout, guardian alert, timely pause, cancellation, delayed resume, nonce replay and split-budget scenarios on a temporary Anvil node. The [local report](artifacts/local-final-scenario.json) includes transaction hashes and timestamps. It is separate from the real V3 receipts above.
+
+The local control room now includes Guardian watch: queued request details, chain-based eligibility, optional browser notifications and stale-state protection. Keep the console open; notifications do not install a background service. `npm run guardian:watch` provides a separate terminal observer.
+
+The latest full regression suite passed 25 checks. The local final scenario passed 9 assertions; pause inclusion preceded eligibility by 110 seconds with explicitly advanced local chain time. A new timely-response run on V3 remains pending.

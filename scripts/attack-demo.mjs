@@ -2,8 +2,10 @@ import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {randomUUID} from 'node:crypto';
 import {parseEther} from 'ethers';
+import {verifyPauseTiming} from '../lib/demo-timing.mjs';
 if(!process.argv.includes('--send-testnet'))throw Error('Use --send-testnet to run the controlled public testnet demo');
-const base='http://127.0.0.1:5173',journal='deployments/v3-attack-demo.local.json',artifact='artifacts/v3-attack-demo.json';
+const fresh=process.argv.includes('--final-run');
+const base='http://127.0.0.1:5173',journal=fresh?'deployments/v3-final-demo.local.json':'deployments/v3-attack-demo.local.json',artifact=fresh?'artifacts/v3-final-demo.json':'artifacts/v3-attack-demo.json';
 if(existsSync(journal))throw Error('Demo journal already exists. Inspect its transactions; automatic replay is disabled.');
 const report={startedAt:new Date().toISOString(),status:'preflight',operations:[],limitations:'Controlled 4 tPOT request to the guardian, modelling an untrusted relay instruction. Trusted RPC relay, six source confirmations; no Ethereum consensus proof. The normal payout is a separately recorded earlier run. Cancelled amount is not a measurement of total loss avoided.'};
 const save=()=>{const text=JSON.stringify(report,null,2);writeFileSync(journal,text);writeFileSync(artifact,text);};
@@ -31,10 +33,16 @@ try{
  const refreshed=await get('/api/live/demo-quote');assert.equal(refreshed.ready,true);assert.equal(refreshed.topup,'0');
  report.status='quarantining';save();const submission=await action('Controlled oversized-for-instant request',{action:'submit',amount:'4'});
  const queued=await state(),message=queued.messages.find(m=>m.nonce===submission.nonce);assert.equal(message?.status,'queued');assert.equal(message.amount,'4.0');assert.equal(queued.balance,before.balance);assert.equal(parseEther(queued.reserved),4n*10n**18n);report.messageKey=message.key;report.quarantined=queued;save();
- report.status='guardian-response';save();await action('Guardian emergency pause',{action:'pause'});
+ report.status='guardian-response';save();const pauseJob=await action('Guardian emergency pause',{action:'pause'});
  const paused=await state();assert.equal(paused.paused,true);report.paused=paused;save();
  await action('Guardian cancels the quarantined request',{action:'cancel',key:message.key});
  const after=await state();assert.equal(after.messages.find(m=>m.key===message.key)?.status,'cancelled');assert.equal(after.balance,before.balance);assert.equal(after.reserved,'0.0');assert.equal(after.paused,true);
  report.after=after;report.metrics={earlierNormalPayout:baseline.input.amount,requested:'4',paidDuringDemo:'0',cancelled:'4',vaultBefore:before.balance,vaultAfter:after.balance};
+ if(fresh){
+  // Verify only after cancellation, so a timing/RPC failure cannot interrupt cleanup.
+  assert.ok(Number.isFinite(pauseJob.blockTimestamp),'Finalized native pause block timestamp required');
+  report.timingInput={eligibleAt:message.eligibleAt,pauseBlockTimestamp:pauseJob.blockTimestamp/1000};save();
+  report.pauseTiming=verifyPauseTiming(report.timingInput);
+ }
  report.status='completed';report.completedAt=new Date().toISOString();save();console.log(JSON.stringify({status:report.status,metrics:report.metrics}));
 }catch(e){report.status='stopped';report.error=e.message;save();console.error(e.message);process.exitCode=1;}
