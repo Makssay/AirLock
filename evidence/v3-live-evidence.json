@@ -1,0 +1,252 @@
+{
+  "network": "Portaldot V3 testnet",
+  "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+  "startedAt": "2026-10-22T13:32:29.701Z",
+  "checks": [
+    "normal release finalized",
+    "window budget recorded the 1 tPOT release",
+    "oversized drain rejected",
+    "nonce replay rejected",
+    "early queued release rejected",
+    "releases blocked while paused",
+    "guardian pause and cancellation finalized",
+    "vault retained 49 tPOT; queue reservations cleared"
+  ],
+  "receipts": [
+    {
+      "label": "normal release",
+      "transactionHash": "0x00a3e06050ab7bfbbc12e37464b7501deeb325d12dfd8da879118ffbd9bed57d",
+      "blockNumber": 146604,
+      "blockHash": "0x3e59b74afb61cb772d8191f2da69a2aa92a900aca23f82722a1b47e567753056",
+      "status": 1,
+      "gasUsed": "444115459661383",
+      "events": [
+        "Released"
+      ]
+    },
+    {
+      "label": "large request quarantined",
+      "transactionHash": "0xf2474ee1604320a983c9f77e2ae9e58d55274179693c257665b29311739bf70b",
+      "blockNumber": 146608,
+      "blockHash": "0x13ffed40cfc17c1965bd4d44916a312080d78c814aeab641c08c5befa500ffec",
+      "status": 1,
+      "gasUsed": "333265536659660",
+      "events": [
+        "Queued"
+      ]
+    },
+    {
+      "label": "guardian pause",
+      "transactionHash": "0xc0ea21b93d00460c85844e13f3af780a302356bcb5ce15b6aa33209c92a16db5",
+      "blockHash": "0xc728cfdd74ac0189833f699e520a3e6b95c00a7aae9daf10dd619f600c2c6aac",
+      "status": 1,
+      "events": [
+        "balances.Withdraw",
+        "revive.ContractEmitted",
+        "balances.TransferAndHold",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "guardian cancels queued release",
+      "transactionHash": "0x56d75487ad240f41a49927e14d6bea65d1cf55b4594bca9c7ea67c5f2c386fdb",
+      "blockHash": "0xa351b3918cb3e87fc076a6530c4cfed441a17b50cc45033888a40455ee50db1c",
+      "status": 1,
+      "events": [
+        "balances.Withdraw",
+        "revive.ContractEmitted",
+        "balances.TransferOnHold",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ],
+  "completed": true,
+  "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+  "guardian": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+  "relay": "0x74b438f9dDd5E9A35bd6eFD3D032F9411094dD0A",
+  "domain": "0xdf1818a0cf3b9100ee06e75356b9f7b623b3780437ae5b989b1e77e2ac50de5e",
+  "firstNonce": "1792675957821",
+  "vaultBalanceBaseUnits": "49000000000000000000",
+  "amountDecimals": 18,
+  "reserved": "0",
+  "paused": true,
+  "completedAt": "2026-10-22T13:34:02.186Z",
+  "portaldotDeployment": true,
+  "deployment": {
+    "mode": "portaldot-v3-finalized",
+    "portaldotDeployment": true,
+    "verifiedAt": "2026-10-22T13:29:26.811Z",
+    "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "transactionHash": "0x23d1230a3897b65591474b2dadadf7fecc12e6ec34f373474f9c26535bb06e54",
+    "blockHash": "0x468bc4d8d0526ef6668b64965d814b91f4430a038ce72de096a9ffa8be24c1a7",
+    "blockNumber": "146537",
+    "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+    "relay": "0x74b438f9dDd5E9A35bd6eFD3D032F9411094dD0A",
+    "guardian": "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+    "events": [
+      {
+        "section": "balances",
+        "method": "Withdraw",
+        "data": [
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          62141630135934
+        ]
+      },
+      {
+        "section": "system",
+        "method": "NewAccount",
+        "data": [
+          "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2"
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "Endowed",
+        "data": [
+          "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+          1000000000000000
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "Transfer",
+        "data": [
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          "5EhiwzvbbScfUNUQvMqw9geavojSnB6hGPjxHx5wEASJvEi2",
+          1000000000000000
+        ]
+      },
+      {
+        "section": "utility",
+        "method": "ItemCompleted",
+        "data": []
+      },
+      {
+        "section": "system",
+        "method": "NewAccount",
+        "data": [
+          "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc"
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "Endowed",
+        "data": [
+          "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+          10000000000000
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "Minted",
+        "data": [
+          "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+          10000000000000
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "Transfer",
+        "data": [
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+          "0x00000000000000000011c37937e08000"
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "TransferAndHold",
+        "data": [
+          {
+            "revive": "CodeUploadDepositReserve"
+          },
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          "5EYCAe5ijiYfhaAUBd6H9WGRTsvwFFc7GnhQkiHvBYxdvpbV",
+          "0x0000000000000000006932235bcca000"
+        ]
+      },
+      {
+        "section": "revive",
+        "method": "Instantiated",
+        "data": [
+          "0x75c9fbc682ead1bfc4c33e461c178deecc1f2c1d",
+          "0x3bbb62bf86d40f26a87e70fe56ee073e69198713"
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "TransferAndHold",
+        "data": [
+          {
+            "revive": "StorageDepositReserve"
+          },
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          "5DR2M7QXn48xu3JNZZ9uPK7uU9Y32mqjkEYXFXcU1jrKs6Yc",
+          "0x000000000000000000250191d55fb800"
+        ]
+      },
+      {
+        "section": "utility",
+        "method": "ItemCompleted",
+        "data": []
+      },
+      {
+        "section": "utility",
+        "method": "BatchCompleted",
+        "data": []
+      },
+      {
+        "section": "balances",
+        "method": "Deposit",
+        "data": [
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          59489729
+        ]
+      },
+      {
+        "section": "balances",
+        "method": "Deposit",
+        "data": [
+          "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+          62141570646205
+        ]
+      },
+      {
+        "section": "transactionPayment",
+        "method": "TransactionFeePaid",
+        "data": [
+          "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+          62141570646205,
+          0
+        ]
+      },
+      {
+        "section": "system",
+        "method": "ExtrinsicSuccess",
+        "data": [
+          {
+            "weight": {
+              "refTime": 2217702388,
+              "proofSize": 47111
+            },
+            "class": "Normal",
+            "paysFee": "Yes"
+          }
+        ]
+      }
+    ]
+  },
+  "relayTopup": {
+    "transactionHash": "0xdc89f691df8df3c2d29b5744bb09199aefd946dffcc679e54d88a9055c7ef4f3",
+    "amountTPOT": 25,
+    "blockHash": "0xdf72b6cd24e5cfef85031075c4ec547f65f8eb7511d6df5b9a612f75f4694ca4",
+    "status": "finalized"
+  },
+  "limits": "Full split-attack, reentrancy and policy/resume tests ran locally. Rejection checks here are read-only calls. The source-chain attestation is trusted."
+}
