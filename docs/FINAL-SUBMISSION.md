@@ -10,12 +10,12 @@ Working V3 treasury contract and Sepolia outbox integration through a six-confir
 
 The local operator console now includes Guardian watch with request details, eligibility times, optional browser notifications and stale-state protection. A separate terminal observer supports read retries and warns when state or history cannot be verified. Signing preflight checks peak storage deposits independently of net storage charges.
 
-The full regression suite passes 25 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
+The full regression suite passes 27 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
 
 ## Links
 
 - Repository: https://github.com/Makssay/AirLock
-- Product: https://airlock-v3-by-makssay-and-kuznets.vercel.app/
+- Product: https://makssay.github.io/AirLock/
 - Video: https://youtu.be/LKbyCsM62rQ
 - Pitch deck: https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf
 - Testnet evidence: https://github.com/Makssay/AirLock/blob/main/artifacts/v3-attack-demo.json

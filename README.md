@@ -8,7 +8,7 @@ Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. R
 
 ## See the product
 
-**[Open the public Airlock demo](https://airlock-v3-by-makssay-and-kuznets.vercel.app)** — wallet-free walkthrough, video and transaction evidence.
+**[Open the public Airlock demo](https://makssay.github.io/AirLock/)** — wallet-free walkthrough, video and transaction evidence.
 
 **[Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ)** — 2:23, English narration.
 
@@ -113,7 +113,7 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 25 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 27 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
 
 
 ## Controlled public attack demo
@@ -131,3 +131,5 @@ The first run exposed a V3 peak-storage funding requirement: pause preflight rej
 The local control room now includes Guardian watch: queued request details, chain-based eligibility, optional browser notifications and stale-state protection. Keep the console open; notifications do not install a background service. `npm run guardian:watch` provides a separate terminal observer.
 
 The latest full regression suite passed 25 checks. The local final scenario passed 9 assertions; pause inclusion preceded eligibility by 110 seconds with explicitly advanced local chain time. A new timely-response run on V3 remains pending.
+
+Public mirror: https://makssay.github.io/AirLock/ — built automatically from main. The Vercel deployment remains at https://airlock-v3-by-makssay-and-kuznets.vercel.app/; some Vercel edge addresses are unreachable from the development network.
