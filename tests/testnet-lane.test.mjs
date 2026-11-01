@@ -76,7 +76,7 @@ function walletFixture(overrides={}){
 }
 test('source wallet signs only the supported owner call and saves its hash without waiting for confirmations',async()=>{
  const f=walletFixture();assert.equal(await signSourceRequest(f.provider,'2',f.options),hash);
- assert.deepEqual(f.events,['saved-draft','wallet','saved-hash']);assert.equal(f.sends.length,1);assert.equal(f.sends[0].to,lane.sourceContract);assert.equal(f.sends[0].value,'0x0');
+ assert.deepEqual(f.events,['saved-draft','wallet','saved-hash']);assert.equal(f.sends.length,1);assert.equal(f.sends[0].to,lane.sourceContract);assert.equal(f.sends[0].value,'0x0');assert.equal(f.sends[0].chainId,'0xaa36a7');
  assert.equal(outboxInterface.parseTransaction({data:f.sends[0].data}).args[0],parseEther('2'));
 });
 test('wrong wallet/network, paused vault, missing reserves and expensive source gas never reach signing',async()=>{
