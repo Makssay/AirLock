@@ -5,6 +5,12 @@
   "functions": {
     "api/network.mjs": {
       "maxDuration": 15
+    },
+    "api/playground.mjs": {
+      "maxDuration": 15
+    },
+    "api/playground-telegram.mjs": {
+      "maxDuration": 15
     }
   },
   "headers": [
