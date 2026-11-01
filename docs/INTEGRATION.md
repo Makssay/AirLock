@@ -18,7 +18,7 @@ The V3 contract enforces destination policy. Source authenticity is trusted to t
 
 Inspect the pinned network identity and bytecode before signing. Keep guardian and relay keys separate. Estimate network fees, net storage charge and transient peak storage independently. Run `npm run guardian:watch` with the local console for terminal alerts. Complete event-history synchronization before relying on full coverage.
 
-For ambiguous transaction results, inspect the saved hash and chain state. Do not generate a replacement request or nonce automatically.
+For ambiguous transaction results, use **Inspect saved request** in the operator console. If fresh verification finds the original event and no accepted destination message, explicitly continue it with **Relay existing request on V3**. Unknown hashes remain blocked from replacement. See [recovery](RECOVERY.md).
 
 ## Pilot acceptance
 

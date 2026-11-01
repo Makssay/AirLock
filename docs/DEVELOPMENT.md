@@ -36,3 +36,7 @@ Browser automation was stopped by automatic URL verification; visual validation 
 ## Nov 1 — Telegram guardian delivery
 
 Added an independent read-only observer with a separate history journal, persisted notification queue and exclusive process lock. Notifications cover queue entry, 60/15-second reminder stages, eligibility, pause/resume, tracked release/cancellation and outage/recovery. Telegram uses plain text and bounded retry-after backoff; transport errors are sanitized. Six new delivery/projection checks pass; full suite: 33 checks passing. Live dry-run and actual chat delivery status are recorded separately in FINAL-PLAN.md. No signing keys are needed on the notification host.
+
+## Nov 1 — Cross-chain recovery
+
+Implemented source receipt revalidation and destination reconciliation, an inspect/continue operator panel, serialized recovery requests and preserved reverted destination history. Recovery derives the original nonce from the source event and never creates a replacement Sepolia request. Added 11 recovery tests, including exact signed transaction decoding with an unfunded fixture key and a mocked broadcaster. Historical source RPC inspection remained waiting because the receipt was absent; no new transaction was sent.

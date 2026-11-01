@@ -5,8 +5,9 @@ import {readFileSync,writeFileSync,existsSync,mkdirSync} from 'node:fs';
 import {parseEnv} from 'node:util';
 import {randomUUID} from 'node:crypto';
 import {matchesV3Code} from '../lib/v3-code.mjs';
-import {createSourceRequest,sourceConfig} from './source-lane.mjs';
+import {createSourceRequest,verifySourceRequest,sourceConfig} from './source-lane.mjs';
 import {guardianFundingRequired} from '../lib/guardian-watch.mjs';
+import {inspectDestination} from '../lib/crosschain-recovery.mjs';
 
 export const V3_GENESIS='0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd';
 export const V3_CONTRACT='0x3bbb62bf86d40f26a87e70fe56ee073e69198713';
@@ -47,7 +48,8 @@ export class LiveV3 {
   this.store=existsSync(this.file)?JSON.parse(readFileSync(this.file,'utf8')):{jobs:[],messages:{},logs:[],cursor:146536};
   if(!existsSync(this.file)&&existsSync('artifacts/v3-console-e2e.json')){const history=JSON.parse(readFileSync('artifacts/v3-console-e2e.json','utf8')).finalState;this.store.jobs=history.jobs;this.store.logs=history.logs;this.store.cursor=history.finalizedBlock;for(const message of history.messages)this.store.messages[message.key]={...message};}
   this.busy=false;this.running=new Set();this.snapshotPromise=null;this.cached=null;this.cacheTime=0;this.connectPromise=null;
-  for(const job of this.store.jobs)if(job.status==='checking'){job.status='failed';job.error='Server restarted before signing; no transaction was broadcast.';}
+  for(const job of this.store.jobs)if(['checking','relaying'].includes(job.recovery?.state))job.recovery={state:'interrupted',reason:'Server restarted. Inspect saved transactions again before resuming.',checkedAt:new Date().toISOString()};
+  for(const job of this.store.jobs)if(job.status==='checking'){job.status=job.transactionHash||job.source?.transactionHash?'uncertain':'failed';job.error=job.status==='uncertain'?'Server restarted; inspect saved transactions before continuing.':'Server restarted before signing; no transaction was broadcast.';}
   if(existsSync('deployments/v3-smoke.local.json')){const smoke=JSON.parse(readFileSync('deployments/v3-smoke.local.json','utf8'));if(smoke.firstNonce){for(const offset of [0n,7n]){const nonce=BigInt(smoke.firstNonce)+offset;const key=this.iface.encodeFunctionData('messageId',[id('airlock:external-testnet:v1'),nonce]);this.store.messages['nonce:'+nonce]={nonce:nonce.toString(),lookupData:key};}}}
  }
  save(){writeFileSync(this.file,json(this.store));}
@@ -108,7 +110,7 @@ export class LiveV3 {
   const unfinished=this.store.jobs.find(j=>['signed','submitted','included','uncertain'].includes(j.status));
   const capability=existsSync('.env')&&existsSync('deployments/relay-wallet.local.json');
   const pending=plan.exists?{instant:formatEther(plan.policy.instant),cap:formatEther(plan.policy.cap),delaySeconds:Number(plan.policy.delaySeconds),maxPending:formatEther(plan.policy.maxPending),eligibleAt:Number(plan.eligibleAt)*1000,resume:plan.resume}:null;
-  return {mode:'portaldot-v3-testnet',contract:V3_CONTRACT,chainId:420420777,genesis:V3_GENESIS,finalizedBlock:height,finalizedHash:finalizedHash.toHex(),checkedAt:new Date().toISOString(),now:block.timestamp*1000,balance:formatEther(balance),reserved:formatEther(reserved),spent:formatEther(spent),reserveFloor:formatEther(floor),windowSeconds:Number(window),policyDelaySeconds:Number(policyDelay),paused,policy:{instant:formatEther(policy.instant),cap:formatEther(policy.cap),delaySeconds:Number(policy.delaySeconds),maxPending:formatEther(policy.maxPending)},pendingPolicy:pending,guardian:this.plan.guardianEvm,relay:this.plan.relay,guardianBalance:formatEther(guardianBalance),relayBalance:formatEther(relayBalance),messages:messages.toReversed(),logs:this.store.logs.toReversed(),jobs:this.store.jobs.toReversed(),busy:this.busy||!!unfinished,canSign:capability&&!unfinished,signingAvailable:capability,historyError,sourceConfig:sourceConfig(),source:sourceConfig()?'Sepolia event → trusted RPC relay → V3; six confirmations, not a consensus proof':'Direct V3 testnet relay requests; no external-chain proof'};
+  return {mode:'portaldot-v3-testnet',contract:V3_CONTRACT,chainId:420420777,genesis:V3_GENESIS,finalizedBlock:height,finalizedHash:finalizedHash.toHex(),checkedAt:new Date().toISOString(),now:block.timestamp*1000,balance:formatEther(balance),reserved:formatEther(reserved),spent:formatEther(spent),reserveFloor:formatEther(floor),windowSeconds:Number(window),policyDelaySeconds:Number(policyDelay),paused,policy:{instant:formatEther(policy.instant),cap:formatEther(policy.cap),delaySeconds:Number(policy.delaySeconds),maxPending:formatEther(policy.maxPending)},pendingPolicy:pending,guardian:this.plan.guardianEvm,relay:this.plan.relay,guardianBalance:formatEther(guardianBalance),relayBalance:formatEther(relayBalance),messages:messages.toReversed(),logs:this.store.logs.toReversed(),jobs:this.store.jobs.toReversed(),busy:this.busy||!!unfinished,canSign:capability&&!unfinished,signingAvailable:capability,relaySigningAvailable:existsSync('deployments/relay-wallet.local.json'),historyError,sourceConfig:sourceConfig(),source:sourceConfig()?'Sepolia event → trusted RPC relay → V3; six confirmations, not a consensus proof':'Direct V3 testnet relay requests; no external-chain proof'};
  }
  start(body,requestId){
   const input=validateLiveAction(body);
@@ -156,10 +158,12 @@ export class LiveV3 {
   if(action==='submit')return this.sendRelay(job,api);
   return this.sendGuardian(job,api);
  }
- async sendRelay(job,api){
+ relayWallet(){try{return new Wallet(JSON.parse(readFileSync('deployments/relay-wallet.local.json','utf8')).privateKey,this.rpc);}catch{throw Error('Contract: local relay key is unavailable');}}
+ async sendRelay(job,api,{sourceNonce}={}){
+  if(job.source?.transactionHash&&sourceNonce===undefined)throw Error('Contract: source request already exists; use recovery instead');
   if(await this.contract.paused())throw Error('Contract: releases are paused. Schedule and activate a resume policy first.');
-  const amount=parseEther(job.input.amount),domain=await this.contract.sourceDomain();let nonce=BigInt(Date.now());
-  let relay;try{relay=new Wallet(JSON.parse(readFileSync('deployments/relay-wallet.local.json','utf8')).privateKey,this.rpc);}catch{throw Error('Contract: local relay key is unavailable');}
+  const amount=parseEther(job.input.amount),domain=await this.contract.sourceDomain();let nonce=sourceNonce??BigInt(Date.now());
+  const relay=this.relayWallet();
   if(relay.address.toLowerCase()!==this.plan.relay.toLowerCase())throw Error('Contract: relay key mismatch');
   let data=this.iface.encodeFunctionData('submit',[domain,nonce,this.plan.guardianEvm,amount]);
   let gasPrice=BigInt(await this.rpc.send('eth_gasPrice',[])),estimated;
@@ -167,7 +171,7 @@ export class LiveV3 {
   let gasLimit=estimated*105n/100n,cost=gasPrice*gasLimit;
   if(cost>25n*U)throw Error('Limit: relay fee estimate exceeds 25 tPOT');
   if(await this.rpc.getBalance(relay.address)<cost+U/10n)throw Error('Limit: relay balance is too low for the estimated fee; top it up separately');
-  if(sourceConfig()){
+  if(sourceConfig()&&sourceNonce===undefined){
    nonce=await createSourceRequest(job,()=>this.save());
    if(await this.contract.paused())throw Error('Contract: guardian paused while waiting for source confirmations; source event saved, no payout submitted');
    data=this.iface.encodeFunctionData('submit',[domain,nonce,this.plan.guardianEvm,amount]);gasPrice=BigInt(await this.rpc.send('eth_gasPrice',[]));
@@ -178,7 +182,8 @@ export class LiveV3 {
   job.nonce=nonce.toString();job.amount=job.input.amount;job.recipient=this.plan.guardianEvm;job.estimatedMaxFee=formatEther(cost);
   const key=await this.contract.messageId(domain,nonce);this.store.messages[key]={key,nonce:nonce.toString(),recipient:job.recipient,amount:amount.toString()};
   const tx={to:V3_CONTRACT,data,type:0,gasPrice,gasLimit,chainId:420420777,nonce:await this.rpc.getTransactionCount(relay.address,'pending')};
-  const signed=await relay.signTransaction(tx);job.transactionHash=(await import('ethers')).keccak256(signed);job.kind='ethereum';job.status='signed';this.save();
+  const signed=await relay.signTransaction(tx);if(job.transactionHash){job.destinationAttempts||=[];job.destinationAttempts.push({transactionHash:job.transactionHash,blockNumber:job.blockNumber,status:'reverted'});}
+  job.transactionHash=(await import('ethers')).keccak256(signed);job.kind='ethereum';job.status='signed';this.save();
   await this.rpc.broadcastTransaction(signed);job.status='submitted';this.save();
   const receipt=await this.rpc.waitForTransaction(job.transactionHash,1,120000);
   if(!receipt)throw Error('Contract: transaction finality not yet observed');
@@ -188,6 +193,45 @@ export class LiveV3 {
   if(receipt.status!==1){job.status='failed';job.error='Transaction reverted; network fee still applies';}else job.status='finalized';
   job.completedAt=new Date().toISOString();this.save();
  }
+ startRecovery(body,requestId){
+  if(typeof requestId!=='string'||!/^[-a-z0-9]{16,80}$/i.test(requestId))throw Error('A unique request ID is required');
+  if(typeof body?.jobId!=='string'||typeof body.resume!=='boolean')throw Error('Choose an existing job and an explicit recovery mode');
+  const job=this.store.jobs.find(item=>item.id===body.jobId);
+  if(!job||job.input.action!=='submit'||!job.source?.transactionHash)throw Error('Recovery requires a saved cross-chain request');
+  if(job.recoveryRequests?.includes(requestId))return job;
+  this.running ||= new Set();
+  if(this.busy||this.running.size||this.store.jobs.some(other=>other!==job&&['checking','signed','submitted','included','uncertain'].includes(other.status)))throw Error('Another operation must be resolved first');
+  if(body.resume&&job.recovery?.state!=='resumable')throw Error('Inspect the saved request before resuming it');
+  job.recoveryRequests||=[];job.recoveryRequests.push(requestId);
+  job.recovery={state:'checking',resume:body.resume,checkedAt:new Date().toISOString()};
+  this.busy=true;this.running.add(job.id);this.save();
+  setImmediate(()=>this.recover(job,body.resume).catch(error=>{const reason=/^(Contract:|Limit:)/.test(error.message||'')?error.message:'Recovery could not verify the saved request. Check connectivity and inspect again.';job.recovery={state:'blocked',reason,checkedAt:new Date().toISOString()};if(job.transactionHash||job.source?.transactionHash)job.status='uncertain';this.save();}).finally(()=>{this.running.delete(job.id);this.busy=this.running.size>0;this.cacheTime=0;}));
+  return job;
+ }
+ async recover(job,resume){
+  const api=await this.connect();await this.assertIdentity(api);
+  const config=sourceConfig();
+  if(!config||config.destination.toLowerCase()!==V3_CONTRACT.toLowerCase()||config.recipient.toLowerCase()!==this.plan.guardianEvm.toLowerCase())throw Error('Contract: recovery destination mismatch');
+  validateLiveAction(job.input);
+  const source=await this.verifyRecoverySource(job);
+  if(source.state!=='verified'){job.recovery={...source,checkedAt:new Date().toISOString()};this.save();return;}
+  const header=await api.rpc.chain.getHeader(await api.rpc.chain.getFinalizedHead());
+  const domain=await this.contract.sourceDomain();
+  const result=await inspectDestination({rpc:this.rpc,contract:this.contract,iface:this.iface,job,nonce:source.nonce,domain,guardian:this.plan.guardianEvm,relay:this.plan.relay,destination:V3_CONTRACT,finalizedHeight:Number(header.number.toString())});
+  const {receipt,...details}=result;
+  job.recovery={...details,checkedAt:new Date().toISOString()};
+  if(result.state==='completed'){
+   job.status=result.status;job.error=null;job.completedAt=new Date().toISOString();
+   if(receipt){job.blockNumber=receipt.blockNumber;job.blockHash=receipt.blockHash;}
+  }
+  this.save();
+  if(!resume||result.state!=='resumable')return;
+  if(await this.contract.paused()){job.recovery.state='blocked';job.recovery.reason='Releases are paused. Resume the policy before relaying this existing request.';this.save();return;}
+  job.recovery.state='relaying';job.error=null;this.save();
+  await this.sendRelay(job,api,{sourceNonce:source.nonce});
+  job.recovery={state:job.status==='finalized'?'completed':'blocked',reason:job.status==='finalized'?'Existing source request relayed on V3.':job.error,checkedAt:new Date().toISOString()};this.save();
+ }
+ async verifyRecoverySource(job){return verifySourceRequest(job,()=>this.save());}
  async guardianReadiness(){
   const api=await this.connect();await this.assertIdentity(api);
   const account=await api.query.system.account(GUARDIAN);

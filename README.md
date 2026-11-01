@@ -116,7 +116,7 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 37 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 48 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
 
 
 ## Controlled public attack demo
@@ -140,3 +140,7 @@ Public mirror: https://makssay.github.io/AirLock/ — published from a local pro
 ### Guardian Telegram notifications
 
 `npm run guardian:telegram` runs a read-only V3 observer independently of the browser and signing console. It persists delivery state, sends quarantine reminders and request outcomes, and reports monitoring interruptions. Configure the bot and private chat in the ignored notification environment; see [setup and background operation](docs/GUARDIAN-WATCH.md#telegram-observer-independent-of-the-browser). Private-chat test delivery has been verified on the development machine. Continuous operation requires an awake machine or a persistent host.
+
+### Interrupted cross-chain requests
+
+The operator console can inspect saved source/destination transactions and explicitly continue the same source event. Unknown destination hashes block replacement; existing V3 messages are reconciled instead of resent. See [recovery procedure and validation scope](docs/RECOVERY.md).

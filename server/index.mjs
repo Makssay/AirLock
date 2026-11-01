@@ -27,6 +27,7 @@ app.get('/api/live/demo-quote',async(_req,res)=>{try{res.json(await live.demoQuo
 app.get('/api/live/demo',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/v3-attack-demo.json','utf8')));}catch{res.json(null);}});
 app.get('/api/live/evidence',async(_req,res)=>{try{res.attachment('airlock-v3-live-state.json').json({disclaimer:'Finalized Portaldot V3 state and local submission journal. No external-chain proof.',...await live.snapshot(true)});}catch(e){res.status(503).json({error:e.message});}});
 app.post('/api/live/action',(req,res)=>{try{res.status(202).json(live.start(req.body,req.headers['x-request-id']));}catch(e){res.status(400).json({error:e.message});}});
+app.post('/api/live/recovery',(req,res)=>{try{res.status(202).json(live.startRecovery(req.body,req.headers['x-request-id']));}catch(e){res.status(400).json({error:e.message});}});
 let preparingV3=false;
 app.get('/api/v3/preparation',(_req,res)=>{try{res.json(JSON.parse(readFileSync('deployments/v3-preparation.local.json','utf8')));}catch{res.status(404).json({error:'Prepare the V3 deployment first.'});}});
 app.post('/api/v3/prepare',async(_req,res)=>{

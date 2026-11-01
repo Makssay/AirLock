@@ -24,7 +24,19 @@ export async function createSourceRequest(job,save){
   job.source={chainId:11155111,contract:config.contract,transactionHash:hash,status:'signed',requiredConfirmations:6};job.status='signed';job.kind='source';save();
   await rpc.broadcastTransaction(signed);job.source.status='waiting for six confirmations';job.status='submitted';save();
   const receipt=await rpc.waitForTransaction(hash,6,240000);if(!receipt||receipt.status!==1)throw Error('Contract: source receipt failed or is not confirmed yet');
-  const block=await rpc.getBlock(receipt.blockNumber);if(block.hash!==receipt.blockHash)throw Error('Contract: source block is not canonical');
+  const verified=await validateSourceReceipt({job,save,config,rpc,contract,receipt,amount});
+  if(verified.state!=='verified')throw Error('Contract: source confirmations are not ready');
+  return verified.nonce;
+ }finally{rpc.destroy();}
+}
+
+export async function validateSourceReceipt({job,save,config,rpc,contract,receipt,amount=parseEther(job.input.amount)}){
+  if(!receipt)return {state:'waiting',reason:'Source transaction has no receipt yet. Do not create another request.'};
+  if(receipt.hash?.toLowerCase()!==job.source.transactionHash.toLowerCase())throw Error('Contract: source receipt hash mismatch');
+  const height=await rpc.getBlockNumber();
+  if(height-receipt.blockNumber+1<6)return {state:'waiting',reason:'Waiting for six canonical source confirmations.'};
+  if(receipt.status!==1)throw Error('Contract: source transaction reverted');
+  const block=await rpc.getBlock(receipt.blockNumber);if(!block||block.hash!==receipt.blockHash)throw Error('Contract: source block is not canonical');
   if(receipt.to.toLowerCase()!==config.contract.toLowerCase()||receipt.from.toLowerCase()!==config.owner.toLowerCase())throw Error('Contract: unexpected source transaction');
   const events=receipt.logs.filter(l=>l.address.toLowerCase()===config.contract.toLowerCase()).map(l=>{try{return contract.interface.parseLog(l);}catch{return null;}}).filter(e=>e?.name==='ReleaseRequested');
   if(events.length!==1)throw Error('Contract: source event is missing or ambiguous');
@@ -32,6 +44,21 @@ export async function createSourceRequest(job,save){
   if(event.args.nonce<=0n||event.args.nonce>0xffffffffn)throw Error('Contract: source nonce outside the configured lane range');
   const nonce=(11155111n<<32n)|event.args.nonce;
   Object.assign(job.source,{status:'six confirmations verified',blockNumber:receipt.blockNumber,blockHash:receipt.blockHash,eventNonce:event.args.nonce.toString(),destinationNonce:nonce.toString(),amount:job.input.amount,recipient:config.recipient});save();
-  return nonce;
+  return {state:'verified',nonce};
+}
+
+export async function verifySourceRequest(job,save){
+ const config=sourceConfig();
+ if(!config||config.chainId!==11155111||job.source?.chainId!==11155111||job.source.contract?.toLowerCase()!==config.contract.toLowerCase()||!/^0x[0-9a-f]{64}$/i.test(job.source.transactionHash))throw Error('Contract: saved source lane does not match configuration');
+ const request=new FetchRequest(config.rpc);request.timeout=20000;
+ const rpc=new JsonRpcProvider(request,undefined,{batchMaxCount:1});
+ try{
+  if(await rpc.send('eth_chainId',[])!=='0xaa36a7')throw Error('Contract: wrong source chain');
+  const artifact=JSON.parse(readFileSync('artifacts/evm/AirlockOutbox.json','utf8'));
+  const contract=new Contract(config.contract,artifact.abi,rpc);
+  if((await contract.destination()).toLowerCase()!==config.destination.toLowerCase()||(await contract.recipient()).toLowerCase()!==config.recipient.toLowerCase()||(await contract.owner()).toLowerCase()!==config.owner.toLowerCase())throw Error('Contract: source configuration mismatch');
+  if(config.runtimeCodeHash&&keccak256(await rpc.getCode(config.contract))!==config.runtimeCodeHash)throw Error('Contract: source code changed');
+  const receipt=await rpc.getTransactionReceipt(job.source.transactionHash);
+  return await validateSourceReceipt({job,save,config,rpc,contract,receipt});
  }finally{rpc.destroy();}
 }

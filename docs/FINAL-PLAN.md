@@ -93,3 +93,13 @@ Telegram token and private chat ID remain only in the original ignored `.env`. B
 Added read-only pause/resume readiness simulation, including native peak deposit, fee and margin, without loading a guardian key. Added current execution blockers and policy context to queued payout details, with explicit distinction from historical queue reasons. All 37 tests pass; operator build passes. Browser visual validation remains pending. Cross-chain recovery and the updated two-scenario demonstration remain the next stages.
 
 Publication: source b11de60 pushed; Vercel production gqgn34v0a completed and original URL returned 200 through the reachable-edge diagnostic. Pages branch 73f2c86 built and ordinary HTTPS returned 200. Optimized initial observer history seeding from the existing local console cache; the observer still verifies identity and scans the remaining contiguous history. Updated operator console started separately on loopback port 5176 without moving signing secrets.
+
+### Cross-chain recovery implementation
+
+Implemented the fourth product stage: inspect and explicitly resume a saved cross-chain request in the operator console. The source event is revalidated and the original nonce reused. Destination hash/receipt, canonical block, transaction arguments and finalized message state are reconciled first. Unknown hashes or tip-only messages never permit replacement. Existing messages resolve the operation without sending again; finalized reverted submissions retain their previous hashes when explicitly retried. Guardian pause remains available during a pending relay.
+
+Added 11 recovery tests covering source checks, reorgs, ambiguity, destination state, idempotency, pause and decoding the signed destination transaction. No source key is needed to inspect or continue an existing event; only the configured relay key is needed to submit on V3. The clean checkout remains read-only without signing credentials.
+
+A read-only inspection of the historical source hash returned no receipt from the configured Sepolia RPC and remained waiting. No new public-testnet recovery transaction was sent. Two-scenario presentation is the remaining product stage; existing Anvil receipts and historical V3 receipts must keep their environment labels.
+
+Validation checkpoint: full suite 48/48 passing, operator and public builds pass. The independent Telegram observer caught up and reported healthy finalized V3 block 280594 at 17:51:16 UTC; its persisted recovery notification delivery timestamp is 17:46:28 UTC. This establishes read-only observation recovery, not a new payout/guardian timing run.
