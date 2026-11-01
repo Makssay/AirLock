@@ -1,5 +1,5 @@
 import {createHmac} from 'node:crypto';
-const origins=new Set(['https://airlock-v3-by-makssay-and-kuznets.vercel.app','https://airlock-portaldot.vercel.app','https://makssay.github.io','http://127.0.0.1:5181','http://localhost:5181']);
+const origins=new Set(['https://airlock.credvote.xyz','https://airlock-v3-by-makssay-and-kuznets.vercel.app','https://airlock-by-makssay-and-kuznets.vercel.app','https://airlock-portaldot.vercel.app','https://makssay.github.io','http://127.0.0.1:5181','http://localhost:5181']);
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store');res.setHeader('Vary','Origin');
  const origin=req.headers.origin;
