@@ -22,6 +22,8 @@ This checklist is separate from the completed Week 2 submission. A check means t
 
 - [x] Public Try Airlock simulation with cloud sessions, virtual funding, Telegram pairing flow and guardian controls; all four public API scenarios passed.
 
+- [x] User-driven Telegram pairing and real delivery of all seven notifications across both public API demo scenarios.
+
 ## Before final submission
 
 - [ ] User sends the attribution clarification and obtains the correct mentor feedback.

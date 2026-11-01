@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-11-01T19:16:41.903Z",
+  "publicApi": true,
+  "simulation": true,
+  "telegramConnected": true,
+  "suspiciousCancelled": true,
+  "legitimateReleased": true,
+  "earlyExecutionRejected": true,
+  "balance": 48,
+  "paid": 2,
+  "reserved": 0,
+  "notifications": [
+    {
+      "event": "8:released",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560595275
+    },
+    {
+      "event": "7:queued",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560573491
+    },
+    {
+      "event": "6:resumed",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560572729
+    },
+    {
+      "event": "4:cancelled",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560560047
+    },
+    {
+      "event": "3:paused",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560559245
+    },
+    {
+      "event": "2:queued",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560558211
+    },
+    {
+      "event": "connected",
+      "status": "delivered",
+      "attempts": 1,
+      "delivered": 1793560539326
+    }
+  ],
+  "scope": "Educational virtual-token simulation through the public API with real opt-in Telegram delivery. No blockchain transaction or browser-click verification is claimed."
+}
