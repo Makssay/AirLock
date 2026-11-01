@@ -61,6 +61,8 @@ The treasury is shared and the outbox is owner-restricted. There is deliberately
 
 The page stores only source hashes, native transaction progress and a short receipt history in this browser. An ambiguous wallet result remains blocked until its hash/result is inspected. When recovering a source hash without the original V3 starting block, the finalized message can still be checked, but historical destination transaction lookup may be unavailable. With a saved starting block the lookup is bounded to 2,000 V3 blocks.
 
+On the static Pages mirror and local app, live observations go directly to the three fixed read-only RPC endpoints. Their browser CORS preflights were checked successfully. Vercel uses its same-origin read-only API with direct RPC fallback. Pages testnet observation therefore does not depend on reaching a Vercel domain. The simulation's separate cloud service is unchanged.
+
 ## Funding recovery check
 
 A read-only November 2 check scanned all 165 uploaded-code records. The guardian owns one code record, with reference count 1, for the existing treasury. There is no unused guardian-owned upload whose deposit can be reclaimed independently of the active contract. No code was removed and no treasury policy was weakened.

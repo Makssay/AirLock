@@ -5,7 +5,7 @@ import {connectSourceWallet,signSourceRequest} from '../lib/testnet-wallet.mjs';
 import './playground.css';
 import './testnet.css';
 const storeKey='airlock-real-testnet-v1';
-const api=import.meta.env.BASE_URL==='/'&&typeof location!=='undefined'&&!['localhost','127.0.0.1'].includes(location.hostname)?'/api/testnet':'https://airlock-by-makssay-and-kuznets.vercel.app/api/testnet';
+const api=import.meta.env.BASE_URL==='/'&&typeof location!=='undefined'&&!['localhost','127.0.0.1'].includes(location.hostname)?'/api/testnet':null;
 const short=text=>text?text.slice(0,8)+'…'+text.slice(-6):'';
 const load=()=>{try{const value=JSON.parse(localStorage.getItem(storeKey)||'{}');return {source:value.source||null,native:value.native||null,history:Array.isArray(value.history)?value.history.slice(-10):[]};}catch{return {source:null,native:null,history:[]};}};
 const rejected=error=>error.code===4001||/signature declined/i.test(error.message);
@@ -19,8 +19,10 @@ export default function LiveTestnet({onBack}){
   if(polling.current)return;polling.current=true;const hash=current.current.source?.hash,fromBlock=current.current.source?.destinationStartBlock,version=generation.current;
   try{
    let result;
-   try{const response=await fetch(api+(hash?'?hash='+encodeURIComponent(hash)+(Number.isSafeInteger(fromBlock)?'&from='+fromBlock:''):''),{signal:AbortSignal.timeout(22000)});if(!response.ok)throw Error();result=await response.json();}
-   catch{const [destination,source]=await Promise.all([readDestination(),verifyOutbox()]);result={destination,source,request:hash?await inspectSourceStatus(hash,{destination,fromBlock}):null};}
+   const direct=async()=>{const [destination,source]=await Promise.all([readDestination(),verifyOutbox()]);return {destination,source,request:hash?await inspectSourceStatus(hash,{destination,fromBlock}):null};};
+   if(!api)result=await direct();
+   else try{const response=await fetch(api+(hash?'?hash='+encodeURIComponent(hash)+(Number.isSafeInteger(fromBlock)?'&from='+fromBlock:''):''),{signal:AbortSignal.timeout(22000)});if(!response.ok)throw Error();result=await response.json();}
+   catch{result=await direct();}
    if(mounted.current&&generation.current===version&&hash===current.current.source?.hash){setSnapshot({...result,receivedAt:Date.now()});setStale(false);}
   }catch{if(mounted.current)setStale(true);}finally{polling.current=false;}
  }
