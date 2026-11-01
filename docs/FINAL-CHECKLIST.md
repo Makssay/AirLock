@@ -20,10 +20,12 @@ This checklist is separate from the completed Week 2 submission. A check means t
 
 - [x] Two-scenario interactive walkthrough and revised English/Russian presentation scripts. Existing YouTube upload is preserved.
 
+- [x] Public Try Airlock simulation with cloud sessions, virtual funding, Telegram pairing flow and guardian controls; all four public API scenarios passed.
+
 ## Before final submission
 
 - [ ] User sends the attribution clarification and obtains the correct mentor feedback.
-- [ ] Browser visual/interaction check: both demo scenarios and all seven steps, mobile layout, video playback and guardian panel. Automatic browser URL verification currently blocks agent-controlled browser inspection.
+- [ ] Browser visual/interaction check: Try Airlock session flow, both recorded demo scenarios and all seven steps, mobile layout, video playback and guardian panel. Automatic browser URL verification currently blocks agent-controlled browser inspection.
 - [ ] User rehearses the presentation and agrees the live/Q&A format with organizers.
 - [ ] User reviews and updates the existing DoraHacks build, keeping the submitted track and original demo URL.
 - [ ] Confirm the latest final deadline and required fields against the organizers' current announcement.

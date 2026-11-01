@@ -30,6 +30,10 @@ The Sepolia outbox emits requests without escrowing ETH. The relay checks config
 
 ## Test evidence
 
-`npm test` runs 19 checks over actual local EVM transactions, transfer rollback, reentrancy, spending and quarantine rules, V3 bytecode wrapper validation and server input/idempotency guards. Public V3 deployment and transaction evidence is recorded separately in `artifacts/v3-live-evidence.json`, `artifacts/v3-console-e2e.json` and `artifacts/v3-attack-demo.json`.
+`npm test` runs 66 checks over actual local EVM transactions, transfer rollback, reentrancy, spending and quarantine rules, V3 bytecode wrapper validation and server input/idempotency guards. Public V3 deployment and transaction evidence is recorded separately in `artifacts/v3-live-evidence.json`, `artifacts/v3-console-e2e.json` and `artifacts/v3-attack-demo.json`.
 
 The controlled 4 tPOT request was quarantined, paused and cancelled with zero payout during the scenario. Guardian pause finalized after the 120-second quarantine because funding recovery was required. This demonstrates the mechanisms, not a response within the delay. The current preflight reserves peak pause storage funds plus a margin. Local adversarial tests do not establish that every adversarial scenario was exercised on public testnet.
+
+## Educational playground
+
+Try Airlock is a separate virtual-balance simulation with real opt-in Telegram delivery. It has no blockchain transaction endpoint and no access to the operator signing console. Its abbreviated timings are not the V3 policy. Session and pairing boundaries, credential handling and delivery scope are documented in [PLAYGROUND.md](PLAYGROUND.md).

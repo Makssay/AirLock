@@ -12,7 +12,7 @@ Working V3 treasury contract and Sepolia outbox integration through a six-confir
 
 The local operator console now includes Guardian watch with request details, eligibility times, optional browser notifications and stale-state protection. A separate terminal observer supports read retries and warns when state or history cannot be verified. Signing preflight checks peak storage deposits independently of net storage charges.
 
-The full regression suite passes 53 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
+The full regression suite passes 66 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
 
 ## Links
 
@@ -65,3 +65,5 @@ Guardian update: Telegram private-chat delivery has been tested; an independent 
 Cross-chain reliability update: the operator console now reconciles saved source/destination transactions after interruption and can explicitly relay the original verified source event. Unknown destination hashes block replacement. Recovery is covered by fixture and signing tests; no new public-testnet recovery run is claimed.
 
 The interactive public walkthrough now contains two selectable scenarios: recorded Portaldot V3 protection receipts and a separately labelled local Anvil legitimate delayed payout. The latter includes captured queue/release snapshots and a read-only TooEarly execution check. The existing YouTube video remains the earlier recorded V3 demo.
+
+Interactive playground: https://airlock-v3-by-makssay-and-kuznets.vercel.app/#try provides an isolated virtual treasury with a real opt-in Telegram connection, server-checked demo payouts, guardian pause/cancel and delayed legitimate execution. It is explicitly a simulation, separate from the recorded V3 evidence. Persistent sessions and the notification outbox run in a private cloud backend.

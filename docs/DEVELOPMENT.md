@@ -44,3 +44,7 @@ Implemented source receipt revalidation and destination reconciliation, an inspe
 ## Nov 1 — Two-scenario interactive demo
 
 Added independent V3 protection and local Anvil legitimate-payment paths with a guided switch between them. The local scenario now captures block-pinned queue/release/protection snapshots and the exact TooEarly rejection. New evidence projection rejects wrong networks, missing receipts, premature releases and incorrect balance deltas; server rendering verifies environment labels and distinguishes read-only calls from transactions. Full suite: 53 passing checks. Updated English/Russian presentation scripts; existing YouTube upload is unchanged.
+
+## Nov 1 — Public educational treasury playground
+
+Added Try Airlock with virtual funding, four payout scenarios, guardian actions, shortened demo policy delays and real Telegram pairing/delivery. Vercel proxies only whitelisted session operations to an owner-private Sites Worker backed by D1. The cloud state uses revision compare-and-swap, bounded session lifetime, request idempotency and delivery leases. No blockchain signing keys are configured in either playground service. Full suite: 66 checks passing. Cloud and public API funding/pair-link creation verified; real chat-cycle verification follows the user Start action.
