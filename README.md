@@ -116,7 +116,7 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 66 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 68 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
 
 
 ## Controlled public attack demo

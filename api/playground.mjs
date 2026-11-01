@@ -14,7 +14,7 @@ export default async function handler(req,res){
  if(typeof body==='string'){try{body=JSON.parse(body);}catch{return res.status(400).json({error:'Invalid JSON'});}}
  if(!body||typeof body!=='object'||JSON.stringify(body).length>4096)return res.status(400).json({error:'Invalid demo request'});
  // Never forward arbitrary caller fields or notification destinations.
- const input={action:body.action};if(body.action==='request')input.scenario=body.scenario;if(['execute','cancel'].includes(body.action))input.messageId=body.messageId;
+ const input={action:body.action};if(body.action==='redeem')input.handoff=body.handoff;if(body.action==='request')input.scenario=body.scenario;if(['execute','cancel'].includes(body.action))input.messageId=body.messageId;
  const ip=String(req.headers['x-vercel-forwarded-for']||req.headers['x-forwarded-for']||req.socket?.remoteAddress||'unknown').split(',')[0].trim();
  const client=createHmac('sha256',service).update(ip).digest('hex');
  try{

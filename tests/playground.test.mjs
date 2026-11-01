@@ -64,6 +64,21 @@ test('cloud re-pairing disconnects the old treasury and sessions expire',()=>{
  f.setTime(now+3600001);assert.throws(()=>f.call(b.token,{action:'status'}),/expired/);assert.equal(Object.keys(f.get().data.sessions).length,0);
 });
 test('cloud anonymous creation has a per-client cap',()=>{const f=fixture();for(let i=0;i<20;i++)f.call(null,{action:'create'});assert.throws(()=>f.call(null,{action:'create'}),/rate limit/);});
+test('Telegram review handoff opens the same treasury on another device exactly once',()=>{
+ const f=fixture(),a=f.call(null,{action:'create'});pair(f,a.token);f.call(a.token,{action:'fund'});
+ const alert=f.get().claim(),handoff=new URLSearchParams(alert.reviewUrl.split('?')[1]).get('open');
+ const requestId=randomUUID(),phone=f.call(null,{action:'redeem',handoff},requestId);
+ assert.equal(phone.session.id,a.session.id);assert.equal(phone.session.state.balance,5000);
+ assert.equal(f.call(null,{action:'redeem',handoff},requestId).token,phone.token);
+ assert.throws(()=>f.call(null,{action:'redeem',handoff}),/expired/);
+ f.call(phone.token,{action:'request',scenario:'legitimate'});
+ assert.equal(f.call(a.token,{action:'status'}).session.state.reserved,200);
+});
+test('Telegram review handoff expires without exposing a persistent session token',()=>{
+ const f=fixture(),a=f.call(null,{action:'create'});pair(f,a.token);const alert=f.get().claim();assert.ok(!alert.reviewUrl.includes(a.token));
+ const handoff=new URLSearchParams(alert.reviewUrl.split('?')[1]).get('open');f.setTime(now+300001);
+ assert.throws(()=>f.call(null,{action:'redeem',handoff}),/expired/);
+});
 test('cloud CAS retries concurrent writes and idempotency prevents concurrent duplicate funding',async()=>{
  const {change}=await import('../services/playground/runtime.mjs');
  let row=null;

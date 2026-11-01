@@ -9,6 +9,9 @@ const scenarios=[['normal','A routine payout','0.50','Within the instant thresho
 export default function Playground({onBack}){
  const [token,setToken]=useState(()=>{try{return localStorage.getItem(storageKey)||'';}catch{return '';}});
  const [session,setSession]=useState(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[pairUrl,setPairUrl]=useState(''),[offline,setOffline]=useState(false),[clock,setClock]=useState(Date.now()),[expired,setExpired]=useState(false);
+ const [handoff,setHandoff]=useState(()=>new URLSearchParams(typeof location==='undefined'?'':location.hash.split('?')[1]||'').get('open')||'');
+ const redeemed=useRef(null);
+ useEffect(()=>{const change=()=>setHandoff(new URLSearchParams(location.hash.split('?')[1]||'').get('open')||'');addEventListener('hashchange',change);return()=>removeEventListener('hashchange',change);},[]);
  const pending=useRef(null),polling=useRef(false),currentToken=useRef(token),mounted=useRef(true);
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
  useEffect(()=>{currentToken.current=token;},[token]);
@@ -16,10 +19,10 @@ export default function Playground({onBack}){
   let response,result;
   try{response=await fetch(api,{method:'POST',headers:{'Content-Type':'application/json','X-Request-Id':requestId,...(auth?{'X-Demo-Session':auth}:{})},body:JSON.stringify(input),signal:AbortSignal.timeout(15000)});result=await response.json();}
   catch{throw Object.assign(Error('The demo service could not be reached. You can retry the same action.'),{uncertain:true});}
-  if(!response.ok){if(response.status===401&&mounted.current)setExpired(true);throw Object.assign(Error(result.error||'Demo service unavailable'),{uncertain:response.status>=500});}
+  if(!response.ok){if(response.status===401&&mounted.current&&auth===currentToken.current)setExpired(true);throw Object.assign(Error(result.error||'Demo service unavailable'),{uncertain:response.status>=500});}
   return result;
  }
- async function refresh(){if(!currentToken.current||polling.current)return;polling.current=true;try{const result=await request({action:'status'});if(mounted.current){setSession(result.session);setOffline(false);}}catch{if(mounted.current)setOffline(true);}finally{polling.current=false;}}
+ async function refresh(){if(!currentToken.current||polling.current)return;polling.current=true;try{const auth=currentToken.current;const result=await request({action:'status'},crypto.randomUUID(),auth);if(mounted.current&&auth===currentToken.current){setSession(result.session);setOffline(false);}}catch{if(mounted.current)setOffline(true);}finally{polling.current=false;}}
  useEffect(()=>{if(token)refresh();const timer=setInterval(()=>{if(token)refresh();},3000);return()=>clearInterval(timer);},[token]);
  useEffect(()=>{const timer=setInterval(()=>setClock(Date.now()),250);return()=>clearInterval(timer);},[]);
  async function perform(input,retry=false){
@@ -31,10 +34,12 @@ export default function Playground({onBack}){
    if(result.token){currentToken.current=result.token;setToken(result.token);try{localStorage.setItem(storageKey,result.token);}catch{}}
    setSession(result.session);setOffline(false);setExpired(false);if(result.telegramUrl)setPairUrl(result.telegramUrl);
    if(operation.input.action==='telegram-disconnect')setPairUrl('');
+   if(operation.input.action==='redeem'){history.replaceState(null,'','#try');setHandoff('');}
    pending.current=null;setNotice(operation.input.action==='telegram-link'?'Open your bot below, press Start, then return here.':operation.input.action==='create'?'Your own demo treasury is ready. Add its first funds.':'Demo state updated.');
   }catch(error){if(mounted.current){setError(error.message);if(!error.uncertain)pending.current=null;}}
   finally{if(mounted.current)setBusy(false);}
  }
+ useEffect(()=>{if(handoff&&!busy&&redeemed.current!==handoff){redeemed.current=handoff;perform({action:'redeem',handoff});}},[handoff,busy]);
  async function startOver(){
   if(busy)return;
   if(token&&!expired){setBusy(true);try{await request({action:'telegram-disconnect'});}catch(error){setError(error.message);setBusy(false);return;}setBusy(false);}

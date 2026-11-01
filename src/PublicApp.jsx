@@ -9,8 +9,8 @@ const github='https://github.com/Makssay/AirLock';
 const contract='0x3bbb62bf86d40f26a87e70fe56ee073e69198713';
 
 export default function PublicApp(){
- const [page,setPage]=useState(location.hash==='#try'?'try':location.hash==='#demo'?'demo':'home'),[video,setVideo]=useState(false),[network,setNetwork]=useState(null),[checking,setChecking]=useState(true),[networkError,setNetworkError]=useState(false);
- useEffect(()=>{const change=()=>setPage(location.hash==='#try'?'try':location.hash==='#demo'?'demo':'home');addEventListener('hashchange',change);return()=>removeEventListener('hashchange',change);},[]);
+ const [page,setPage]=useState(location.hash.startsWith('#try')?'try':location.hash==='#demo'?'demo':'home'),[video,setVideo]=useState(false),[network,setNetwork]=useState(null),[checking,setChecking]=useState(true),[networkError,setNetworkError]=useState(false);
+ useEffect(()=>{const change=()=>setPage(location.hash.startsWith('#try')?'try':location.hash==='#demo'?'demo':'home');addEventListener('hashchange',change);return()=>removeEventListener('hashchange',change);},[]);
  async function refresh(){setChecking(true);setNetworkError(false);try{const s=base==='/'?await (async()=>{const r=await fetch('/api/network',{signal:AbortSignal.timeout(14000)});if(!r.ok)throw Error();return r.json();})():await readBrowserNetwork();if(s.chainId!==420420777||!s.codeVerified)throw Error();setNetwork(s);}catch{setNetworkError(true);}finally{setChecking(false);}}
  useEffect(()=>{refresh();},[]);
  function demo(){location.hash='demo';setPage('demo');window.scrollTo(0,0);}

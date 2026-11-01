@@ -19,7 +19,7 @@ export async function deliverPlayground(env){
   try{notification=await change(env,store=>store.claim());}catch{return;}
   if(!notification)return;
   try{
-   await sendTelegram({token:env.TELEGRAM_BOT_TOKEN,chatId:notification.chat,text:notification.text,reviewUrl:'https://airlock-v3-by-makssay-and-kuznets.vercel.app/#try',prefix:'Airlock Playground · SIMULATION'});
+   await sendTelegram({token:env.TELEGRAM_BOT_TOKEN,chatId:notification.chat,text:notification.text,reviewUrl:notification.reviewUrl,prefix:'Airlock Playground · SIMULATION'});
    await change(env,store=>store.finish(notification.id,true));
   }catch(error){await change(env,store=>store.finish(notification.id,false,error.retryAfter||10));}
  }
