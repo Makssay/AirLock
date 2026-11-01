@@ -3,6 +3,9 @@
   "buildCommand": "npm run build:public",
   "outputDirectory": "dist",
   "functions": {
+    "api/testnet.mjs": {
+      "maxDuration": 30
+    },
     "api/network.mjs": {
       "maxDuration": 15
     },

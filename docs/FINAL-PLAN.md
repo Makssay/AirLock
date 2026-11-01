@@ -4,7 +4,9 @@ Started 2026-11-01. Source: team plan and the supplied Oct 30 AMA notes.
 
 ## Latest status
 
-Implemented: peak-deposit signing preflight, bounded history catch-up, Telegram guardian observer with persistent delivery, readiness simulations, payout explanations, interrupted cross-chain recovery and a two-scenario public walkthrough. Current regression suite: 68 checks passing. Local contract scenario: 9 assertions passing, including a 110-second pause margin and legitimate delayed release. Operator build passes.
+November 2: implemented the separate browser-wallet `#testnet` operator run and a dedicated persistent local relay. The public API is read-only; no signing keys were installed in hosting. Both pinned chains and code were read successfully. The native guardian preflight verified Revive's SCALE wrapper and stopped on the 11.5245 tPOT temporary storage requirement before a signature. The saved readiness artifact is explicitly read-only. Fresh on-chain execution and browser extension interaction QA remain pending. No reclaimable unused guardian code deposit was found. See [live testnet run](LIVE-TESTNET.md).
+
+Implemented: peak-deposit signing preflight, bounded history catch-up, Telegram guardian observer with persistent delivery, readiness simulations, payout explanations, interrupted cross-chain recovery, a two-scenario public walkthrough and the browser-wallet testnet operator run. Current regression suite: 95 checks passing. Local contract scenario: 9 assertions passing, including a 110-second pause margin and legitimate delayed release. Operator build passes.
 
 Verified Telegram private-chat delivery and recovery from unavailable to fresh finalized V3 observation on the development machine. Continuous operation still requires that host to stay running. The public walkthrough distinguishes historical V3 receipts from the new captured local Anvil queue/release snapshots and read-only TooEarly check.
 

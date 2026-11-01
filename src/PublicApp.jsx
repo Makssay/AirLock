@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {ArrowUpRight,ArrowRight,Shield,Clock3,Pause,Check,Play,ExternalLink,Radio,RefreshCw} from 'lucide-react';
 import StoryDemo from './StoryDemo.jsx';
 const Playground=React.lazy(()=>import('./Playground.jsx'));
+const LiveTestnet=React.lazy(()=>import('./LiveTestnet.jsx'));
 import './public.css';
 import {readBrowserNetwork} from '../lib/browser-network.mjs';
 const base=import.meta.env.BASE_URL;
@@ -9,15 +10,17 @@ const github='https://github.com/Makssay/AirLock';
 const contract='0x3bbb62bf86d40f26a87e70fe56ee073e69198713';
 
 export default function PublicApp(){
- const [page,setPage]=useState(location.hash.startsWith('#try')?'try':location.hash==='#demo'?'demo':'home'),[video,setVideo]=useState(false),[network,setNetwork]=useState(null),[checking,setChecking]=useState(true),[networkError,setNetworkError]=useState(false);
- useEffect(()=>{const change=()=>setPage(location.hash.startsWith('#try')?'try':location.hash==='#demo'?'demo':'home');addEventListener('hashchange',change);return()=>removeEventListener('hashchange',change);},[]);
+ const route=()=>location.hash.startsWith('#testnet')?'testnet':location.hash.startsWith('#try')?'try':location.hash==='#demo'?'demo':'home';
+ const [page,setPage]=useState(route),[video,setVideo]=useState(false),[network,setNetwork]=useState(null),[checking,setChecking]=useState(true),[networkError,setNetworkError]=useState(false);
+ useEffect(()=>{const change=()=>setPage(route());addEventListener('hashchange',change);return()=>removeEventListener('hashchange',change);},[]);
  async function refresh(){setChecking(true);setNetworkError(false);try{const s=base==='/'?await (async()=>{const r=await fetch('/api/network',{signal:AbortSignal.timeout(14000)});if(!r.ok)throw Error();return r.json();})():await readBrowserNetwork();if(s.chainId!==420420777||!s.codeVerified)throw Error();setNetwork(s);}catch{setNetworkError(true);}finally{setChecking(false);}}
  useEffect(()=>{refresh();},[]);
  function demo(){location.hash='demo';setPage('demo');window.scrollTo(0,0);}
+ if(page==='testnet')return <React.Suspense fallback={<main className="story-page"><p role="status">Verifying the testnet lane…</p></main>}><LiveTestnet onBack={()=>{location.hash='';setPage('home');window.scrollTo(0,0);}}/></React.Suspense>;
  if(page==='try')return <React.Suspense fallback={<main className="story-page"><p role="status">Loading your playground…</p></main>}><Playground onBack={()=>{location.hash='';setPage('home');window.scrollTo(0,0);}}/></React.Suspense>;
  if(page==='demo')return <StoryDemo evidenceUrl={base+'evidence/v3-attack-demo.json'} localEvidenceUrl={base+'evidence/local-final-scenario.json'} backLabel="Airlock home" onBack={()=>{location.hash='';setPage('home');window.scrollTo(0,0);}}/>;
  return <div className="public-site"><a className="skip-link" href="#public-main">Skip to content</a>
- <header className="public-header"><a className="public-brand" href="#" aria-label="Airlock home"><img src={base+'airlock-logo.png'} width="38" height="38" alt=""/>airlock<span>.</span></a><nav aria-label="Main navigation"><a href="#try">Try Airlock</a><a href="#how-it-works">How it works</a><a href="#evidence">Evidence</a><a href={github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={15}/></a></nav></header>
+ <header className="public-header"><a className="public-brand" href="#" aria-label="Airlock home"><img src={base+'airlock-logo.png'} width="38" height="38" alt=""/>airlock<span>.</span></a><nav aria-label="Main navigation"><a href="#try">Try Airlock</a><a href="#testnet">Live testnet</a><a href="#how-it-works">How it works</a><a href="#evidence">Evidence</a><a href={github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={15}/></a></nav></header>
  <main id="public-main"><section className="public-hero"><div className="public-hero-copy"><p className="public-eyebrow"><span/>Built on Portaldot V3</p><h1>Your relay can fail.<br/><em>Your treasury<br/>gets a say.</em></h1><p className="public-lede">Airlock puts spending limits, a waiting period and an independent guardian between cross-chain instructions and your treasury.</p><div className="public-actions"><a className="button primary" href="#try">Try your own treasury <ArrowRight size={17}/></a><button className="button subtle" onClick={demo}>Explore recorded evidence</button><a className="button subtle" href="#video"><Play size={15}/>Watch the 2-minute story</a></div><p className="public-caption">Public testnet prototype · Explore without connecting a wallet</p></div>
  <div className="public-vault"><div className="public-vault-top"><Shield size={23}/><span>Airlock / Portaldot V3</span><span className="public-record-label">Recorded result</span></div><div className="public-vault-balance"><span>Treasury after the controlled scenario</span><strong>48.75 <small>tPOT</small></strong><p><Check size={15}/>4 tPOT request cancelled · 0 tPOT paid</p></div><div className="public-request"><div><Clock3 size={19}/><strong>Cross-chain request</strong><b>4 tPOT</b></div><ol><li><span>01</span>Request enters quarantine<Check size={15}/></li><li><span>02</span>Guardian pauses releases<Check size={15}/></li><li><span>03</span>Request cancelled<Check size={15}/></li></ol></div><button className="public-proof-link" onClick={demo}>Follow the finalized receipts <ArrowUpRight size={17}/></button></div></section>
  <section className="public-route" aria-label="Cross-chain request path"><span>Ethereum Sepolia</span><ArrowRight size={17}/><span>Trusted RPC relay</span><ArrowRight size={17}/><strong><Shield size={18}/>Airlock on Portaldot V3</strong><ArrowRight size={17}/><span>Treasury payout</span></section>

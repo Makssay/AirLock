@@ -12,7 +12,7 @@ Working V3 treasury contract and Sepolia outbox integration through a six-confir
 
 The local operator console now includes Guardian watch with request details, eligibility times, optional browser notifications and stale-state protection. A separate terminal observer supports read retries and warns when state or history cannot be verified. Signing preflight checks peak storage deposits independently of net storage charges.
 
-The full regression suite passes 68 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
+The regression suite includes the contract, source verification, persistent relay recovery and browser-wallet preparation. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
 
 ## Links
 
@@ -69,3 +69,5 @@ Cross-chain reliability update: the operator console now reconciles saved source
 The interactive public walkthrough now contains two selectable scenarios: recorded Portaldot V3 protection receipts and a separately labelled local Anvil legitimate delayed payout. The latter includes captured queue/release snapshots and a read-only TooEarly execution check. The existing YouTube video remains the earlier recorded V3 demo.
 
 Interactive playground: https://airlock-v3-by-makssay-and-kuznets.vercel.app/#try provides an isolated virtual treasury with a real opt-in Telegram connection, server-checked demo payouts, guardian pause/cancel and delayed legitimate execution. It is explicitly a simulation, separate from the recorded V3 evidence. Persistent sessions and the notification outbox run in a private cloud backend.
+
+The separate https://airlock-v3-by-makssay-and-kuznets.vercel.app/#testnet page connects the configured source owner and native guardian browser wallets to the existing shared test treasury. It tracks real source hashes, six canonical confirmations and finalized V3 payout state. A dedicated local relay preserves signed bytes before broadcast and reconciles uncertain transactions. Both chain/code checks and the real native resume simulation have been exercised read-only; the latter remains funding-blocked before a signature. No new successful payout or full extension interaction run is claimed for this page yet.

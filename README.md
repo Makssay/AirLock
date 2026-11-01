@@ -14,6 +14,8 @@ Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. R
 
 **[Watch the demo on YouTube](https://youtu.be/LKbyCsM62rQ)** — 2:23, English narration.
 
+**[Live testnet operator run](https://airlock-v3-by-makssay-and-kuznets.vercel.app/#testnet)** — connect the configured Sepolia owner and native guardian wallets, track a real source request and inspect finalized V3 state. This uses the shared team treasury. New requests remain blocked while it is paused or operator funding is insufficient. [Setup and current status](docs/LIVE-TESTNET.md).
+
 Source: [Makssay/AirLock](https://github.com/Makssay/AirLock).
 
 Run the console and open **Watch verified walkthrough** on the Control room, or visit `http://127.0.0.1:5173/#demo`. The viewer includes four recorded V3 protection steps and a separate three-step local Anvil delayed-payment scenario. It reads receipts and snapshots without signing transactions. The Control room continues to read live finalized V3 state.
@@ -102,7 +104,7 @@ Signing requires the exact pinned genesis, chain ID, deployed bytecode and role 
 
 ## Public website on Vercel
 
-`npm run build:public` builds the public viewer into `dist/`, including static recorded evidence. The Vercel configuration uses this command automatically. The public build does not include operator controls or the local signing server. `/api/network` is a fixed read-only observer: it verifies chain ID and contract bytecode, then returns balance and observation time at the latest RPC block. It does not claim that observation is finalized. If RPC is unavailable, the recorded demo still works.
+`npm run build:public` builds the public site into `dist/`, including static recorded evidence. The Vercel configuration uses this command automatically. The local signing server and its keys are excluded. The `#testnet` operator page requests signatures through connected browser wallets; hosted APIs remain read-only. `/api/network` observes the latest EVM block. `/api/testnet` additionally verifies native finality, treasury roles and the pinned Sepolia outbox, and inspects a supplied source hash. If RPC is unavailable, the recorded demo still works.
 
 No wallet keys or mnemonic environment variables are required on Vercel. Continue using `npm run dev` for the local operator console. See [deployment details](docs/DEPLOYMENT.md).
 

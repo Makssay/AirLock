@@ -58,3 +58,15 @@ After the user pressed Start on a fresh one-time link, the public API completed 
 ## Nov 1 — Documentation languages
 
 Made English the primary business-model and pitch language, with separate Russian translations under docs/ru and language navigation from the README and translated documents. Consolidated the Russian demo script into the same translation directory. Application code and business assumptions are unchanged.
+
+## Nov 2 — Browser-wallet testnet operator run
+
+Added a separate `#testnet` page for the existing shared Sepolia/V3 lane. The browser verifies both deployed contracts, saves source hashes before confirmation, checks six canonical source confirmations and reads messages at native finalized V3 height. Source signatures use the connected configured EVM owner; guardian signatures use the existing native account through its extension. Public APIs are read-only and no signing key was installed in hosting.
+
+Added a dedicated local relay with one-process locking, a flushed pre-broadcast journal, same-byte rebroadcast after ambiguous responses, canonical/finalized receipt checks and bounded payout/fee budgets. It opens only the separate testnet relay key. Existing console journals and recorded evidence are preserved.
+
+Read-only checks verified both chains, pinned code and treasury roles. Native wallet preflight initially exposed a SCALE wrapper difference; the verifier now accepts raw code or exactly one valid wrapper against the pinned SHA-256. The real resume simulation then stopped before a signature on the existing 11.5245 tPOT peak storage requirement. All 165 code-deposit entries were inspected; the only guardian-owned code has one active reference and cannot be reclaimed as an unused upload. No code or policy was changed on-chain.
+
+The new page and separate English/Russian operator guide distinguish the real shared treasury from the virtual playground. Fresh public-testnet payouts, wallet extension interaction QA and a revised video remain pending funding. See `artifacts/live-testnet-readiness.json`; it is a read-only observation, not a new transaction run.
+
+Validation: full regression suite passes 95 tests. Operator and public builds pass. The relay's initial single-shot run opened the dedicated wallet and remained idle, with no signed or broadcast transaction. Final manual wallet-extension and mobile QA remain open.

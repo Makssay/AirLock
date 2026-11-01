@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-11-01T21:11:55.449Z",
+  "scope": "Read-only public-testnet readiness, not a new payout or wallet interaction",
+  "source": {
+    "chainId": 11155111,
+    "contract": "0x92eB46a2a0F8644Ec13fFbD2d7Cb61762c3A95fE",
+    "owner": "0xf337687dD73c1A13EFE39393a000f55a95B1ac54",
+    "codeVerified": true
+  },
+  "destination": {
+    "chainId": 420420777,
+    "contract": "0x3bbb62bf86d40f26a87e70fe56ee073e69198713",
+    "finalizedBlock": 282581,
+    "nativeFinalizedHash": "0x4b5b50847a60856cc21972ec78a2642e520dfd4d03e2b9e541f92a97f334890b",
+    "now": 1793567496000,
+    "checkedAt": "2026-11-01T21:11:51.254Z",
+    "paused": true,
+    "policy": {
+      "instant": "1.0",
+      "cap": "5.0",
+      "delaySeconds": 120,
+      "maxPending": "20.0"
+    },
+    "pendingPolicy": null,
+    "balance": "48.75",
+    "guardianBalance": "4.91908574072156",
+    "relayBalance": "2.6906124962319628",
+    "reserved": "0.0",
+    "reserveFloor": "5.0",
+    "spent": "0.0",
+    "windowSeconds": 600,
+    "policyDelaySeconds": 300,
+    "codeVerified": true
+  },
+  "guardian": {
+    "address": "5HKTe2e7hXWUN6gfreN9dMGQ3TBjqeVbkMzFAFpCaxfvXnQZ",
+    "available": "5.01908574072156",
+    "resumeSimulation": "blocked",
+    "reason": "revive.StorageDepositNotEnoughFunds",
+    "peakStorageDeposit": "11.5245",
+    "minimumFundingGapBeforeFees": "6.50541425927844"
+  },
+  "readyToCreateSourceRequest": false,
+  "signingKeysLoaded": false,
+  "transactionsBroadcast": false
+}

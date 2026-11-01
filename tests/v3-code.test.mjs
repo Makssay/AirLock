@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {hexToU8a,compactAddLength} from '@polkadot/util';
-import {matchesV3Code} from '../lib/v3-code.mjs';
+import {matchesV3Code,matchesV3RuntimeHash} from '../lib/v3-code.mjs';
 
 test('V3 code verification accepts raw bytes and exactly one valid SCALE byte wrapper',()=>{
  const expected='0x608080604052';const raw=hexToU8a(expected);
@@ -14,4 +14,13 @@ test('V3 code verification accepts raw bytes and exactly one valid SCALE byte wr
  assert.equal(matchesV3Code(truncated,expected),false);
  const wrongLength=compactAddLength(raw);wrongLength[0]+=4;
  assert.equal(matchesV3Code(wrongLength,expected),false);
+});
+
+test('browser guardian verifies the pinned SHA-256 through exactly one valid SCALE wrapper',async()=>{
+ const raw=hexToU8a('0x608080604052');
+ const expected=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',raw)),n=>n.toString(16).padStart(2,'0')).join('');
+ assert.equal(await matchesV3RuntimeHash(raw,expected),true);
+ assert.equal(await matchesV3RuntimeHash(compactAddLength(raw),expected),true);
+ assert.equal(await matchesV3RuntimeHash(compactAddLength(compactAddLength(raw)),expected),false);
+ const invalid=compactAddLength(raw);invalid[0]+=4;assert.equal(await matchesV3RuntimeHash(invalid,expected),false);
 });

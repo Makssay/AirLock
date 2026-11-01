@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "testnet:readiness": "node scripts/testnet-readiness.mjs",
+    "relay:testnet": "node scripts/testnet-relay.mjs",
     "guardian:telegram": "node scripts/telegram-watch.mjs",
     "guardian:watch": "node scripts/guardian-watch.mjs",
     "publish:pages": "node scripts/publish-pages.mjs --publish",

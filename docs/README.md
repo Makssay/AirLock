@@ -12,6 +12,7 @@ English is the primary language for repository documentation and hackathon submi
 | Pilot offer and interviews | [Read](PILOT-OFFER.md) | [Read](ru/PILOT-OFFER.md) |
 | Business pitch and judge Q&A | [Read](BUSINESS-PITCH.md) | [Read](ru/BUSINESS-PITCH.md) |
 | Presentation script | [Read](PRESENTATION-SCRIPT.md) | [Read](ru/PRESENTATION-SCRIPT.md) |
+| Live testnet operator run | [Read](LIVE-TESTNET.md) | [Read](ru/LIVE-TESTNET.md) |
 
 ## Technical and submission references
 

@@ -37,5 +37,7 @@ This checklist is separate from the completed Week 2 submission. A check means t
 
 ## Open technical work
 
+- A real `#testnet` operator page and dedicated relay process are implemented. Browser wallet signatures, source recovery and native-finality observation have unit/read-only checks. A new paid-out testnet cycle and extension interaction QA are still pending; deployment alone does not establish them.
+
 - Fresh V3 timely guardian response and legitimate delayed payout remain funding-constrained. Existing real V3 proof remains valid; new local evidence is not labelled testnet evidence.
 - Telegram observer code and persistent delivery are implemented. Private-chat delivery and fresh V3 observation have been verified on the development machine. Continuous hosting still needs deployment. An external pilot and official mainnet V3 compatibility confirmation remain open.
