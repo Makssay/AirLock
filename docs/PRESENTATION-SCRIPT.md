@@ -1,5 +1,7 @@
 # Two-scenario presentation script
 
+[English](PRESENTATION-SCRIPT.md) | [Русский](ru/PRESENTATION-SCRIPT.md)
+
 Suggested English narration for the updated interactive walkthrough. Rehearse below three minutes. This is a presentation script; the existing YouTube upload remains the earlier V3 recording.
 
 Airlock lets a treasury stop the wrong payout and complete the right one.

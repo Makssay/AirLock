@@ -54,3 +54,7 @@ Added single-use five-minute Telegram review handoffs for opening the same virtu
 ## Nov 1 — Live Telegram acceptance
 
 After the user pressed Start on a fresh one-time link, the public API completed the suspicious request queue/pause/cancel sequence and a legitimate delayed 2-token payout, with TooEarly rejection before expiry. Telegram accepted all seven notifications on their first attempt. Final virtual balance 48, paid 2, reserved 0. Sanitized simulation evidence is in artifacts/playground-live-cycle.json; this is not blockchain or browser-click evidence.
+
+## Nov 1 — Documentation languages
+
+Made English the primary business-model and pitch language, with separate Russian translations under docs/ru and language navigation from the README and translated documents. Consolidated the Russian demo script into the same translation directory. Application code and business assumptions are unchanged.

@@ -8,7 +8,7 @@ Implemented: peak-deposit signing preflight, bounded history catch-up, Telegram 
 
 Verified Telegram private-chat delivery and recovery from unavailable to fresh finalized V3 observation on the development machine. Continuous operation still requires that host to stay running. The public walkthrough distinguishes historical V3 receipts from the new captured local Anvil queue/release snapshots and read-only TooEarly check.
 
-Prepared: final submission draft, integration/recovery guides, two-scenario English/Russian scripts and Q&A runbook. The English script is 310 words (about 143 seconds at 130 words/minute, before pauses). Existing YouTube upload and pitch PDF remain the earlier published materials. No new public-testnet payout, organizer message or DoraHacks submission was sent.
+Prepared: final submission draft, integration/recovery guides, two-scenario English script and Q&A runbook. The English script is 310 words (about 143 seconds at 130 words/minute, before pauses). Existing YouTube upload and pitch PDF remain the earlier published materials. No new public-testnet payout, organizer message or DoraHacks submission was sent.
 
 Open: browser/mobile interaction QA, fresh V3 timely-response and legitimate delayed-payout evidence (funding-constrained), continuous hosting, pilot, mainnet clarification and final submission review.
 
@@ -133,3 +133,7 @@ Live visitor Telegram acceptance completed after a refreshed Start link. Public 
 ### Monetization preparation
 
 Prepared a Russian business model with verified adjacent product/hosting references, an English scoped pilot offer, English/Russian business pitch and machine-readable assumption calculations. Initial hypotheses: $500 onboarding + $99/month Core; $249/month Team after validation. Cost model includes support and maintenance at $40/hour, 3% payment reserve and $100 shared infrastructure allowance, with sensitivity analysis and excluded costs. Calculations checked with Decimal arithmetic. Customer demand, pricing and revenue remain unvalidated. Updated submission business text, README, runbook and narration; no billing, paid plans, outreach or DoraHacks submission was activated. Existing PDF and YouTube video are unchanged.
+
+### Documentation languages
+
+English remains the primary repository and submission language. Following the user preference, Russian business-model, pilot, pitch and presentation translations are maintained separately under docs/ru with bidirectional language links. The redundant top-level Russian script was moved to that directory. Calculations, pricing assumptions and application behavior are unchanged.

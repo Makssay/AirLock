@@ -1,5 +1,7 @@
 # Airlock
 
+[English](README.md) | [Русская документация](docs/ru/README.md)
+
 **What if your relay starts sending bad payout instructions?**
 
 Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. Relay authorization is only the first check: the contract also enforces a spending cap, quarantine, reserve floor, replay protection and independent guardian controls.

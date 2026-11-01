@@ -1,5 +1,7 @@
 # Airlock design-partner pilot
 
+[English](PILOT-OFFER.md) | [Русский](ru/PILOT-OFFER.md)
+
 Copy-ready English material. Proposed offer, not an existing customer announcement. The team reviews and sends it; no outreach has been sent automatically.
 
 ## Short invitation

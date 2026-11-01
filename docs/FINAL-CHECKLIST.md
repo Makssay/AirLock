@@ -18,13 +18,13 @@ This checklist is separate from the completed Week 2 submission. A check means t
 - [x] Updated public viewer includes PDF, integration guide and team attribution. Pages root/assets/PDF/evidence returned 200; PDF bytes match the source.
 - [x] Updated Vercel production deployment completed. New root and application chunk verified through an explicit reachable CDN edge with TLS validation; this is separate from ordinary DNS/browser verification.
 
-- [x] Two-scenario interactive walkthrough and revised English/Russian presentation scripts. Existing YouTube upload is preserved.
+- [x] Two-scenario interactive walkthrough and revised English presentation script and separate Russian translation. Existing YouTube upload is preserved.
 
 - [x] Public Try Airlock simulation with cloud sessions, virtual funding, Telegram pairing flow and guardian controls; all four public API scenarios passed.
 
 - [x] User-driven Telegram pairing and real delivery of all seven notifications across both public API demo scenarios.
 
-- [x] Proposed business model, sourced market benchmarks, cost calculations, pilot offer and English/Russian pitch wording prepared.
+- [x] Proposed business model, sourced market benchmarks, cost calculations, pilot offer and English pitch wording and separate Russian translation prepared.
 
 ## Before final submission
 

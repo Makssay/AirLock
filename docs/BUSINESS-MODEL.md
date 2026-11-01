@@ -1,116 +1,118 @@
-# Airlock: модель монетизации
+# Airlock business model
 
-Подготовлено 1 ноября 2026 года. Цены Airlock ниже — предложения для проверки на пилотах, а не действующие тарифы или подтверждённая выручка. Все суммы в USD. Внешние ориентиры проверены по страницам поставщиков в эту дату.
+[English](BUSINESS-MODEL.md) | [Русский](ru/BUSINESS-MODEL.md)
 
-## Решение для команды
+Prepared November 1, 2026. The Airlock prices below are proposals to validate through pilots, not live plans or confirmed revenue. All amounts are in USD. External benchmarks were checked against providers' pages on this date.
 
-Публичные контракты и самостоятельный запуск остаются бесплатными. Доход предполагается от внедрения и подписки на обслуживание казны: настройка, работа наблюдателя, доставка уведомлений, проверка готовности guardian и история операций. Клиент сохраняет свои ключи и принимает решения о выплатах.
+## Proposed model
 
-Первая проверяемая цена: **$500 за внедрение + $99 в месяц за одну казну**. Пакет для нескольких казначейств — **$249 в месяц** после подтверждения спроса и реализации соответствующего обслуживания. Комиссия с каждой выплаты и токен проекта в эту модель не включены.
+The public contracts and self-hosted software remain free. Proposed revenue comes from onboarding and a subscription for treasury operations: configuration, observer operation, notification delivery, guardian readiness checks and operation history. Customers retain their keys and make payout decisions.
 
-## Первый клиент
+The first price to validate is **$500 for onboarding + $99 per month for one treasury**. A package for multiple treasuries would cost **$249 per month**, after demand is validated and the corresponding service is implemented. This model includes neither a per-payout fee nor a project token.
 
-Рабочая персона, не существующий заказчик: небольшая команда протокола, которая уже использует сервис регулярных выплат. Один инженер обслуживает relay, операционный руководитель отвечает за платежи, отдельный участник выступает guardian.
+## Initial customer
 
-Сценарий: relay создаёт заявки на выплаты участникам. Команда хочет ограничить мгновенные расходы и иметь время проверить крупный запрос, при этом проводить легитимные платежи после ожидания. Покупатель — руководитель разработки или операций с бюджетом на инфраструктуру; пользователь — оператор казны и guardian.
+Working persona, not an existing customer: a small protocol team that already runs a recurring payout service. One engineer maintains the relay, an operations lead owns payments, and a separate participant acts as guardian.
 
-Критерии первого пилота:
+Scenario: the relay creates payout requests for contributors. The team wants limits on immediate spending and time to review larger requests while allowing legitimate payments after the delay. The buyer is an engineering or operations lead with an infrastructure budget; users are the treasury operator and guardian.
 
-- У команды уже есть автоматизированные выплаты и человек, отвечающий за них.
-- Команда готова использовать отдельную тестовую казну и предоставить обратную связь.
-- Есть совместимый исходный поток заявок; первый пилот ограничен текущим эталонным адаптером.
-- Для живого V3 этапа заранее подтверждены RPC, тестовые средства и бюджеты операционных кошельков.
+First-pilot qualification:
 
-Путь привлечения: демонстрация Try Airlock → 20-минутное интервью → ограниченный пилот → согласованное платное внедрение и подписка. Сообщения потенциальным клиентам пока не отправлены.
+- The team already automates payouts and has a named process owner.
+- The team will use a separate test treasury and provide feedback.
+- Its source flow is compatible; the first pilot is limited to the current reference adapter.
+- RPC access, test funds and operator-wallet budgets are confirmed before the live V3 stage.
 
-## За что платят
+Acquisition path: Try Airlock demonstration → 20-minute workflow interview → scoped pilot → agreed paid onboarding and subscription. No prospect outreach has been sent.
 
-| Пакет | Предлагаемая цена | Состав предложения | Статус |
+## Proposed packages
+
+| Package | Proposed price | Scope | Status |
 | --- | --- | --- | --- |
-| Community | $0 за ПО | MIT-исходники, контракты, документация, самостоятельный запуск; инфраструктуру оплачивает владелец | Доступно в репозитории; публичный playground бесплатный |
-| Core | $99/месяц | 1 казна, 1 согласованный поток заявок, 1 Telegram-чат guardian, наблюдатель, проверка средств оператора, журнал за 30 дней, до 30 минут поддержки в месяц | Пакет для проверки после пилота; обслуживаемая V3-услуга ещё не запущена |
-| Team | $249/месяц | До 3 казначейств в согласованных сетях, до 5 контактов для оповещения, резервный канал доставки, журнал за 90 дней, ежемесячный разбор, до 90 минут поддержки | Целевой пакет; маршрутизация и эксплуатация нескольких клиентов требуют разработки |
-| Внедрение | $500 однократно | Поддерживаемый адаптер, отдельное развёртывание, согласование политики, проверка финансирования операторов, учебный прогон и передача инструкции; целевой бюджет работ до 6 часов | Предложение для оценки; нестандартные адаптеры согласуются отдельно |
+| Community | $0 for software | MIT source, contracts, documentation and self-hosting; the operator funds infrastructure | Available in the repository; the public playground is free |
+| Core | $99/month | 1 treasury, 1 agreed source flow, 1 guardian Telegram chat, observer, operator-funding checks, 30-day history and up to 30 minutes of support per month | Package to validate after the pilot; the managed V3 service has not launched |
+| Team | $249/month | Up to 3 treasuries on agreed networks, up to 5 notification contacts, a fallback delivery channel, 90-day history, monthly review and up to 90 minutes of support | Target package; multi-customer routing and operations require development |
+| Onboarding | $500 once | Supported adapter, separate deployment, policy configuration, operator-funding checks, training exercise and operating guide; target effort up to 6 hours | Proposal for estimation; custom adapters are scoped separately |
 
-Подписка рассчитывается за обслуживаемую казну, а не за объём её активов. Для Team число казначейств и контактов ограничено составом пакета. Это предложение не даёт Airlock полномочий guardian: клиент подписывает действия собственным инструментом. Газ и storage deposit оплачиваются отдельно кошельками клиента.
+Subscriptions are priced per managed treasury rather than by the value of its assets. The Team package limits the number of treasuries and contacts. Airlock receives no guardian authority under this offer: customers sign actions through their own tools. Customer wallets fund gas and storage deposits separately.
 
-Область поддержки — рабочее время, согласованное с клиентом. Круглосуточная работа автоматического наблюдателя и круглосуточное человеческое дежурство — разные услуги; последнее в эти цены не заложено. SLA по реакции человека, страховое покрытие и обещания предотвратить любую потерю не предлагаются.
+Support is provided during business hours agreed with the customer. Continuous automated observation and round-the-clock human response are separate services; the latter is not included in these prices. No human-response SLA, insurance coverage or promise to prevent every loss is offered.
 
-## Что подтверждено продуктом
+## What the product demonstrates
 
-Контракт V3, записанные транзакции и исходная Sepolia-интеграция существуют. Локальный оператор умеет проверять готовность guardian и восстанавливать прерванный запрос. Наблюдатель V3 работает на машине разработчика. Облачный учебный playground хранит отдельные сессии; живой прогон подтвердил приём Telegram всех семи уведомлений.
+The V3 contract, recorded transactions and initial Sepolia integration exist. The local operator console checks guardian readiness and recovers interrupted requests. The V3 observer runs on the developer machine. The educational cloud playground stores isolated sessions; a live run confirmed Telegram acceptance of all seven notifications.
 
-Платная производственная служба наблюдения V3, несколько клиентов, резервирование RPC, оплачиваемая поддержка и расширенные сроки хранения ещё требуют внедрения и проверки. Работу облачного playground нельзя выдавать за готовность такой службы. Выручка, подписанные пилоты и готовность платить пока не подтверждены.
+A paid production V3 monitoring service, multiple customers, RPC redundancy, paid support and extended retention still require implementation and validation. The cloud playground does not establish readiness of that service. Revenue, signed pilots and willingness to pay have not been validated.
 
-## Рыночные ориентиры и вывод
+## Market benchmarks and interpretation
 
-| Источник | Проверенный ориентир | Значение для Airlock |
+| Source | Verified benchmark | Implication for Airlock |
 | --- | --- | --- |
-| [Tenderly](https://tenderly.co/pricing) | Мониторинг событий и межсетевых операций, автоматические действия и доставка в Telegram входят в командное предложение. Есть бесплатная индивидуальная версия; объём командного обслуживания согласуется с продажами | Уведомления уже представлены на рынке. Проверяем ценность внедрения политики казны и всего процесса guardian на V3; отдельной платы за сам факт сообщения недостаточно обосновать |
-| [PagerDuty](https://www.pagerduty.com/pricing/) | Professional: $25 за пользователя в месяц при помесячной оплате либо $21 за пользователя в месяц при годовой | Ориентир оплаты операционного процесса. Это общий сервис инцидентов; цена за пользователя не эквивалентна нашей цене за казну |
-| [Vercel](https://vercel.com/pricing) | Pro указан как $20/месяц; дополнительное потребление зависит от использования | Один из ориентиров бюджета интерфейса. Это не наш фактический счёт и не стоимость всей системы |
-| [Cloudflare Workers](https://developers.cloudflare.com/workers/platform/pricing/) | В примерах Standard используется базовая подписка $5/месяц плюс потребление | Ориентир вычислительного слоя. Не определяет цену текущего размещения через Sites и не включает V3 RPC или поддержку |
+| [Tenderly](https://tenderly.co/pricing) | Its team offering includes event and cross-chain monitoring, automated actions and Telegram delivery. An individual free version is available; team capacity is discussed with sales | Alerts are already available in the market. Validate the value of implementing the treasury policy and complete guardian workflow on V3; message delivery alone is insufficient differentiation |
+| [PagerDuty](https://www.pagerduty.com/pricing/) | Professional: $25 per user per month when billed monthly, or $21 per user per month with annual billing | A benchmark for paid operational workflows. It is a general incident service; its per-user price is not equivalent to our per-treasury price |
+| [Vercel](https://vercel.com/pricing) | Pro is listed at $20/month; additional consumption depends on usage | One frontend budget anchor. This is neither our actual invoice nor the total system cost |
+| [Cloudflare Workers](https://developers.cloudflare.com/workers/platform/pricing/) | Standard pricing examples use a $5/month base subscription plus consumption | A compute-layer budget anchor. It does not establish current Sites hosting costs or include V3 RPC and support |
 
-Вывод — наша гипотеза: команда может платить за согласованную политику, интеграцию и обслуживание процесса от заявки до решения guardian. Эти источники подтверждают существование соседних платных услуг, но не доказывают спрос на Airlock, наличие поддержки Portaldot у конкурентов или достаточность наших цен.
+Our inference is a hypothesis: teams may pay for an agreed policy, integration and an operated process from request to guardian decision. These sources establish adjacent paid offerings; they do not prove demand for Airlock, competitor support for Portaldot or the adequacy of our proposed prices.
 
-## Плановая экономика
+## Planning economics
 
-Все следующие значения — допущения для небольшой обслуживаемой группы клиентов. Это не измеренные эксплуатационные расходы. Расчёт доступен в `artifacts/business-model.json`.
+All values below are assumptions for a small managed customer group, not measured operating expenses. Machine-readable calculations are in `artifacts/business-model.json`.
 
-Общий месячный бюджет инфраструктуры **$100**:
+Shared monthly infrastructure allowance: **$100**.
 
-| Статья | Бюджет |
+| Item | Budget |
 | --- | ---: |
-| Интерфейс и API | $20 |
-| Постоянный наблюдатель и база | $15 |
-| Основной/резервный доступ RPC | $40 |
-| Внешняя проверка доступности, логи и резервные копии | $15 |
-| Резерв потребления | $10 |
-| Всего | $100 |
+| Frontend and API | $20 |
+| Persistent observer and database | $15 |
+| Primary/fallback RPC access | $40 |
+| External availability checks, logs and backups | $15 |
+| Usage reserve | $10 |
+| Total | $100 |
 
-RPC — бюджет-заглушка до получения реального предложения для V3; собственный узел, выделенный RPC и большие нагрузки могут существенно его изменить. Не считаем нынешние бесплатные лимиты гарантией будущих затрат.
+The RPC allowance is a placeholder until a V3-specific quote is available. A self-operated node, dedicated RPC or heavy usage could materially change it. Current free allowances are not a guarantee of future costs.
 
-Для рабочего времени используем условную полную ставку **$40/час**, для приёма платежа — резерв **3% выручки**, не тариф выбранного платёжного сервиса.
+Use an assumed loaded labor rate of **$40/hour** and a payment-processing reserve of **3% of revenue**. The latter is a planning allowance, not a selected processor's quoted fee.
 
-| На одного клиента в месяц | Core | Team |
+| Per customer per month | Core | Team |
 | --- | ---: | ---: |
-| Выручка | $99.00 | $249.00 |
-| Поддержка: 0.5 / 1.5 часа | $20.00 | $60.00 |
-| Обслуживание: 0.25 / 0.5 часа | $10.00 | $20.00 |
-| Дополнительное потребление | $5.00 | $10.00 |
-| Резерв приёма оплаты, 3% | $2.97 | $7.47 |
-| Переменные затраты | $37.97 | $97.47 |
-| Остаток до общей инфраструктуры | $61.03 | $151.53 |
+| Revenue | $99.00 | $249.00 |
+| Support: 0.5 / 1.5 hours | $20.00 | $60.00 |
+| Maintenance: 0.25 / 0.5 hours | $10.00 | $20.00 |
+| Incremental usage | $5.00 | $10.00 |
+| Payment-processing reserve, 3% | $2.97 | $7.47 |
+| Variable cost | $37.97 | $97.47 |
+| Contribution before shared infrastructure | $61.03 | $151.53 |
 
-| Иллюстративная группа | Месячная выручка | Переменные затраты | Общая инфраструктура | Остаток |
+| Illustrative cohort | Monthly revenue | Variable cost | Shared infrastructure | Remainder |
 | --- | ---: | ---: | ---: | ---: |
 | 10 Core | $990.00 | $379.70 | $100.00 | $510.30 |
 | 3 Team | $747.00 | $292.41 | $100.00 | $354.59 |
 | 5 Core + 3 Team | $1,242.00 | $482.26 | $100.00 | $659.74 |
 
-Это не прогноз продаж и не чистая прибыль. Остаток не покрывает отдельно рассчитанные расходы на поиск клиентов, основную разработку, независимую проверку безопасности, налоги и другие постоянные расходы команды. Выручка внедрения не прибавляется к MRR.
+These are neither sales forecasts nor net-profit figures. The remainder excludes separately budgeted customer acquisition, core product R&D, independent security review, taxes and other team overhead. Onboarding revenue is not added to MRR.
 
-В рамках этих допущений два Core покрывают $100 общей инфраструктуры и заложенные переменные затраты. Это не порог окупаемости всей компании. При $500 общей инфраструктуры потребуется уже 9 Core.
+Under these assumptions, two Core customers cover the $100 shared infrastructure allowance and budgeted variable costs. This is not company-wide break-even. At $500 of shared infrastructure, 9 Core customers would be needed.
 
-Чувствительность: если на Core уходит 2 часа поддержки вместо 0.5, переменные затраты возрастают до $97.97, остаток на клиента падает до $1.03. У десяти таких клиентов после $100 общей инфраструктуры результат **–$89.70/месяц**. Значит, объём ручной работы надо измерять, ограничивать пакетом и пересматривать цену до расширения.
+Sensitivity: if a Core customer takes 2 hours of monthly support instead of 0.5, variable cost rises to $97.97 and contribution falls to $1.03. Ten such customers leave **–$89.70/month** after $100 of shared infrastructure. Measure manual effort, bound it within the package and revisit pricing before scaling.
 
-Разовое внедрение за $500: 6 часов по $40 = $240, резерв прямых расходов $25, резерв оплаты $15; плановый остаток $220 до остальных затрат. При превышении шести часов уточняем объём и цену.
+For $500 onboarding: 6 hours at $40 = $240, direct-cost reserve $25, payment reserve $15; planned remainder $220 before other costs. Re-scope and re-price work exceeding six hours.
 
-## Пилот и решение о запуске
+## Pilot and launch decision
 
-Предложение: до трёх design partners, 14 дней, одна тестовая казна на команду. Бесплатны ограниченное внедрение и сопровождение; максимальный бюджет команды Airlock — 6 часов на пилот. Первый этап начинается с playground и разбора процесса. Живой V3 этап запускается после проверки сети и финансирования тестовых операторов; дополнительные tPOT от нашей команды не обещаются.
+Proposed pilot: up to three design partners, 14 days, one test treasury per team. Scoped setup and support are free, with Airlock effort capped at 6 hours per pilot. Start with the playground and workflow review. The live V3 stage begins after network and test-operator funding checks; additional tPOT from our team is not promised.
 
-Бюджет трёх пилотов: 18 часов по $40 = $720 времени, $50 общей инфраструктуры за половину месяца и $60 резерва потребления; всего $830 плановых ресурсов, из них $110 денежных расходов и $720 времени. Это план, не понесённые расходы. Текущие расходы продукта отдельно не измерялись.
+Budget for three pilots: 18 hours at $40 = $720 of labor, $50 of shared infrastructure for half a month and $60 of usage reserve. Total planned resources: $830, comprising $110 cash and $720 labor. These are budgets, not incurred expenses. Actual current product costs have not been measured separately.
 
-Перед расширением проверяем:
+Validate the following before expanding:
 
-1. Пять интервью с командами, у которых уже есть автоматические выплаты.
-2. До трёх пилотов с конкретным владельцем процесса и согласованным объёмом.
-3. Нормальную выплату, легитимную задержанную выплату и остановку нежелательной заявки в выбранной среде, с точными метками среды.
-4. Время уведомлений, доступность чтения и баланс операторов; отдельно считаем реакцию человека и финализацию транзакции. Для тестовых сигналов хотим p95 «наблюдение → приём Telegram» до 10 секунд, но это цель пилота, а не действующий SLA и не гарантия реакции в карантине.
-5. Не более 6 часов суммарной ручной работы на пилот; для подписки измеряем ожидаемую ежемесячную поддержку относительно 30 минут Core.
-6. Хотя бы две команды готовы обсуждать предложенную цену и хотя бы одна подтверждает это согласованным платным продолжением после выполнения условий. До фактической оплаты это не выручка.
+1. Five workflow interviews with teams already automating payouts.
+2. Up to three scoped pilots with a named process owner.
+3. A normal payout, a legitimate delayed payout and a stopped unwanted request in the selected environment, with accurate environment labels.
+4. Notification timing, read availability and operator balances. Measure human response and transaction finality separately. Target p95 observation-to-Telegram-acceptance below 10 seconds for test signals; this is a pilot target, not a current SLA or a guarantee of a response within quarantine.
+5. No more than 6 total hours of manual effort per pilot. For a subscription, measure expected monthly support against the Core allowance of 30 minutes.
+6. At least two concrete pricing discussions and one agreed paid continuation after prerequisites are met. Revenue begins with actual payment.
 
-Если оплачиваемый интерес не подтверждается, меняем пакет или сегмент. Если интеграции требуют постоянной ручной разработки, проверяем модель платного внедрения и интеграционного сопровождения перед обещанием стандартной подписки.
+If paid interest is not established, revise the package or customer segment. If integrations require ongoing custom development, validate paid implementation and integration support before promising a standardized subscription.
 
-Готовое предложение и вопросы для интервью — в [PILOT-OFFER.md](PILOT-OFFER.md). Контакты не собирались, сообщения не отправлялись, оплату не подключали.
+The ready-to-send offer and interview questions are in [PILOT-OFFER.md](PILOT-OFFER.md). No prospect contacts were collected, outreach sent or payment collection enabled.

@@ -1,14 +1,12 @@
 # Business pitch for the final
 
+[English](BUSINESS-PITCH.md) | [Русский](ru/BUSINESS-PITCH.md)
+
 Proposed model; pricing and demand await pilot validation.
 
-## English, about 32 seconds at 130 words/minute
+## Spoken version, about 32 seconds at 130 words/minute
 
 Our first customers are teams already automating treasury payouts. Airlock's contracts stay open source. We plan to charge for onboarding and operating the monitoring and guardian workflow: a proposed $500 setup fee and $99 per month for one treasury. Customers keep their keys and make the payout decisions. We are seeking three test-treasury pilot partners to measure operational effort and validate willingness to pay before launching the paid service.
-
-## Русский вариант
-
-Наши первые клиенты — команды, которые уже автоматизируют выплаты из казны. Контракты Airlock остаются открытыми. Мы планируем зарабатывать на внедрении и обслуживании мониторинга и процесса guardian: предлагаем проверить цену $500 за настройку и $99 в месяц за одну казну. Ключи и решения о выплатах остаются у клиента. Следующий шаг — три пилота на тестовых казнах, чтобы измерить затраты на сопровождение и подтвердить готовность платить.
 
 ## One-slide text
 
