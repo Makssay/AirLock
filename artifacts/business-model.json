@@ -1,0 +1,99 @@
+{
+  "preparedOn": "2026-11-01",
+  "currency": "USD",
+  "status": "Unvalidated planning hypotheses; no revenue or customer-count forecast",
+  "hourlyCostAssumption": 40.0,
+  "paymentReserveFraction": 0.03,
+  "sharedInfrastructureBudget": 100.0,
+  "plans": {
+    "core": {
+      "price": 99.0,
+      "supportHours": 0.5,
+      "maintenanceHours": 0.25,
+      "usage": 5.0,
+      "paymentReserve": 2.97,
+      "variableCost": 37.97,
+      "contributionBeforeSharedInfrastructure": 61.03
+    },
+    "team": {
+      "price": 249.0,
+      "supportHours": 1.5,
+      "maintenanceHours": 0.5,
+      "usage": 10.0,
+      "paymentReserve": 7.47,
+      "variableCost": 97.47,
+      "contributionBeforeSharedInfrastructure": 151.53
+    }
+  },
+  "illustrativeCohorts": [
+    {
+      "coreCustomers": 10,
+      "teamCustomers": 0,
+      "revenue": 990.0,
+      "variableCost": 379.7,
+      "sharedInfrastructure": 100.0,
+      "remainderBeforeExcludedCosts": 510.3
+    },
+    {
+      "coreCustomers": 0,
+      "teamCustomers": 3,
+      "revenue": 747.0,
+      "variableCost": 292.41,
+      "sharedInfrastructure": 100.0,
+      "remainderBeforeExcludedCosts": 354.59
+    },
+    {
+      "coreCustomers": 5,
+      "teamCustomers": 3,
+      "revenue": 1242.0,
+      "variableCost": 482.26,
+      "sharedInfrastructure": 100.0,
+      "remainderBeforeExcludedCosts": 659.74
+    }
+  ],
+  "coreCustomersToCoverSharedInfrastructure": 2,
+  "coreCustomersAt500InfrastructureBudget": 9,
+  "stressCoreSupportHours": 2,
+  "stressCoreVariableCost": 97.97,
+  "stressTenCoreRemainder": -89.7,
+  "onboarding": {
+    "price": 500,
+    "hours": 6,
+    "labor": 240,
+    "directBudget": 25,
+    "paymentReserve": 15,
+    "remainder": 220
+  },
+  "threePilotBudget": {
+    "hours": 18,
+    "labor": 720,
+    "sharedHalfMonthInfrastructure": 50,
+    "usageReserve": 60,
+    "cashBudget": 110,
+    "totalResources": 830
+  },
+  "excludedCosts": [
+    "Customer acquisition",
+    "Core product R&D",
+    "Independent security review",
+    "Taxes and other team overhead"
+  ],
+  "references": [
+    {
+      "url": "https://tenderly.co/pricing",
+      "use": "Adjacent product capability and pricing model"
+    },
+    {
+      "url": "https://www.pagerduty.com/pricing/",
+      "use": "Per-user incident-management pricing benchmark"
+    },
+    {
+      "url": "https://vercel.com/pricing",
+      "use": "Hosting budget anchor, not actual Airlock invoice"
+    },
+    {
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "use": "Compute budget anchor, not actual Sites invoice"
+    }
+  ]
+}

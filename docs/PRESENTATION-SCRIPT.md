@@ -20,4 +20,4 @@ Quarantine gives the team a review window. The same rules support both stopping 
 
 The operator tools include Telegram alerts, fee and peak-deposit readiness checks, and recovery of interrupted cross-chain requests. Recovery checks the saved source event and destination state before continuing with the original nonce.
 
-Portaldot is where the treasury and payout rules execute. Our next step is a pilot with a team already automating treasury payouts. The source, recorded receipts and integration guide are public.
+Portaldot is where the treasury and payout rules execute. Our first customers are teams already automating treasury payouts. Contracts stay open source; our proposed service is $500 for onboarding and $99 a month per treasury. We are seeking three pilot partners to validate operational effort and willingness to pay. The source, receipts and integration guide are public.

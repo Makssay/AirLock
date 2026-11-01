@@ -12,7 +12,7 @@
 
 2:00–2:35 — Show operator capabilities: Telegram notifications, pause/resume funding readiness and recovery of an existing source request after interruption. Explain that actions are checked again before signing. Do not create a new testnet request for the presentation.
 
-2:35–3:00 — Offer the integration guide and a pilot with a team already automating treasury payouts.
+2:35–3:00 — Present the open-contract + operated-service hypothesis: proposed $500 onboarding and $99/month per treasury. Seek three scoped pilot partners to validate support effort and willingness to pay; offer the integration guide.
 
 ## Before the session
 

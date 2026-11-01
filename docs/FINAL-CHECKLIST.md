@@ -13,7 +13,7 @@ This checklist is separate from the completed Week 2 submission. A check means t
 - [x] Complete copy-ready fields in FINAL-SUBMISSION.md, including native/EVM hash labels.
 - [x] Check-in attribution clarification prepared in CHECKIN-CORRECTION.md.
 - [x] Demo runbook and short Q&A prepared in DEMO-RUNBOOK.md.
-- [x] Spoken English script prepared in PRESENTATION-SCRIPT.md: 284 words, estimated 131 seconds at 130 words/minute, before pauses and navigation.
+- [x] Spoken English script prepared in PRESENTATION-SCRIPT.md: 310 words, estimated 143 seconds at 130 words/minute, before pauses and navigation.
 - [x] Final submission hashes cross-checked against finalized native/EVM records; all four recorded walkthrough stages checked for expected statuses.
 - [x] Updated public viewer includes PDF, integration guide and team attribution. Pages root/assets/PDF/evidence returned 200; PDF bytes match the source.
 - [x] Updated Vercel production deployment completed. New root and application chunk verified through an explicit reachable CDN edge with TLS validation; this is separate from ordinary DNS/browser verification.
@@ -23,6 +23,8 @@ This checklist is separate from the completed Week 2 submission. A check means t
 - [x] Public Try Airlock simulation with cloud sessions, virtual funding, Telegram pairing flow and guardian controls; all four public API scenarios passed.
 
 - [x] User-driven Telegram pairing and real delivery of all seven notifications across both public API demo scenarios.
+
+- [x] Proposed business model, sourced market benchmarks, cost calculations, pilot offer and English/Russian pitch wording prepared.
 
 ## Before final submission
 

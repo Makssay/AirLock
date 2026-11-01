@@ -52,11 +52,13 @@ https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf — s
 
 ## Remaining work
 
-Fresh timely-response and legitimate delayed-payout evidence on public V3; visual/browser validation of the new notification panel; external notification delivery and unattended monitoring; user pilot; official mainnet compatibility confirmation. The current real testnet run proves pause/cancel mechanics; the timely-response assertion currently has local evidence only.
+Fresh timely-response and legitimate delayed-payout evidence on public V3; visual/browser validation of the new notification panel; continuous hosting of the genuine V3 observer (the educational playground already runs in the cloud); a customer pilot; official mainnet compatibility confirmation. The current real testnet run proves pause/cancel mechanics; the timely-response assertion currently has local evidence only.
 
 ## Business hypothesis
 
-Initial users are teams automating treasury payouts through relays. The hypothesis is an open contract module with optional paid monitoring and operational support. Pilot demand and pricing are not yet validated.
+Initial buyers are teams already automating treasury payouts through relays. Contracts remain open source; the proposed paid offering combines onboarding, operated monitoring and guardian workflow support. We plan to test a $500 onboarding fee and $99/month per treasury, with a future $249/month package for up to three treasuries. These are proposed prices, not a launched paid service. Customer keys and guardian decisions remain with the customer.
+
+Validation plan: five workflow interviews, up to three scoped 14-day test-treasury pilots and an agreed paid continuation after technical prerequisites are met. The illustrative cost model includes support time and infrastructure; pricing, pilot demand and margins remain unvalidated. See [business model](BUSINESS-MODEL.md), [pilot offer](PILOT-OFFER.md) and [pitch wording](BUSINESS-PITCH.md).
 
 This is prepared text for the user to review and submit. It has not been sent to DoraHacks or organizers automatically.
 

@@ -148,3 +148,7 @@ The operator console can inspect saved source/destination transactions and expli
 ### Try your own treasury
 
 Open [Try Airlock](https://airlock-v3-by-makssay-and-kuznets.vercel.app/#try) to create an isolated virtual treasury, add demo tokens, pair your Telegram and practice guardian actions or a legitimate delayed payout. The persistent cloud sandbox never handles wallet keys or real funds. See [the playground guide](docs/PLAYGROUND.md) for its demo policy, data lifetime and deployment.
+
+### Proposed business model and pilot
+
+Open-source contracts with proposed paid onboarding and treasury operations. Initial pricing hypothesis: $500 onboarding + $99/month per treasury, validated through scoped test-environment pilots before a paid launch. [Business model and cost assumptions](docs/BUSINESS-MODEL.md) · [Pilot offer](docs/PILOT-OFFER.md) · [Final pitch wording](docs/BUSINESS-PITCH.md). No customer or revenue traction is claimed.
