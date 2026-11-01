@@ -2,7 +2,7 @@
   "network": "Local Anvil",
   "chainId": 31337,
   "scope": "Executable contract scenario. Not Portaldot testnet evidence. Local time is advanced explicitly.",
-  "checkedAt": "2026-10-31T23:07:18.989Z",
+  "checkedAt": "2026-11-01T17:55:51.677Z",
   "checks": [
     "Normal payout changes vault by exactly 0.25",
     "Execution rejected before eligibility",
@@ -19,121 +19,283 @@
       "label": "Normal 0.25 payout",
       "hash": "0x5502a89f9a3d9bf76b6d2dfd1d5d2584b0a07a60c230f34a6946688d92192482",
       "blockNumber": 2,
-      "blockHash": "0xdd4a2db909464617b3659a5b8eb7d2edf84389d6e8c7b37c67f62066905112c7",
-      "timestamp": 1800000000
+      "blockHash": "0x9417af53dfd958c1007ef4b81000d0143ac2cf6c12ad89d5c6d4a8847e561c92",
+      "timestamp": 1800000001
     },
     {
       "label": "Legitimate delayed 2 payout queued",
       "hash": "0x73cd0b80e7843e24a493ac6c8521c27af2665e40e253ab3b0b6cf0419a28b4aa",
       "blockNumber": 3,
-      "blockHash": "0x66eb2e1355a810f9b61cbff6528ecd1fb330420821b2334cbc9ec1c6f1f4481b",
-      "timestamp": 1800000000
+      "blockHash": "0xff04e5c0b3726b5d84a872e1c52a152449504934eb2eb6c357c0eef7faafea08",
+      "timestamp": 1800000001
     },
     {
       "label": "Legitimate delayed payout executed",
       "hash": "0x9387c87f48b6790d697f893d0d4d799f88b74224fa51cb0bc04fdeb05dab9dc0",
       "blockNumber": 5,
-      "blockHash": "0x9926a0399760d2d935cc14cf7cd4743d94c313afc1bc1b44477ddf099b961cec",
-      "timestamp": 1800000121
+      "blockHash": "0xe301eb422d94ec0122eddfbe737d0fd8e5c1c8d9235d1fa55882a0490806d941",
+      "timestamp": 1800000122
     },
     {
       "label": "Controlled 4 payout queued",
       "hash": "0x5d79b2a1ee307377cf3398bf123bc919e6ca609c09be5f4c11cb41e29c34e821",
       "blockNumber": 6,
-      "blockHash": "0xfef0fb9fd083ac8f941c9be25ba28b71d12ca8e7de65248878184a1a8452dd71",
-      "timestamp": 1800000121
+      "blockHash": "0xaaa041ac80361f12ce2fbd618c56b3dbbf5a118772bf440d32396771778a35cf",
+      "timestamp": 1800000122
     },
     {
       "label": "Guardian pause within quarantine",
       "hash": "0x6cfd139f97a2c99abb89acfb139aa9daf02cb0e1e8863ec6f4a3616cee29c460",
       "blockNumber": 8,
-      "blockHash": "0xcc0acf3d60436c52d449854a1aac24d208b957f5b275d56c4d1b72d61836e04b",
-      "timestamp": 1800000131
+      "blockHash": "0xe971cbfbec4b9674475a44425338a007d0f77359fa18e859b626705fbc02bbe7",
+      "timestamp": 1800000132
     },
     {
       "label": "Guardian cancellation",
       "hash": "0x22cf6d47ab4147ea3b88b3140b0c63264fdbc4c6da099aa2413915c87c4fc065",
       "blockNumber": 10,
-      "blockHash": "0x6ad14b181cb8a1d7e46fa407b1392ddd5120eb6d775330ca249d48081ca80fad",
+      "blockHash": "0x1cdbbc1e64b069b10cdbffd5ee9920959c728b12f45d6f63ae0cc4360848d42a",
       "timestamp": 1800000253
     },
     {
       "label": "Schedule resume",
       "hash": "0x8d5ed825fda704c01f5078fd8ca0b7fc677d1954a8c0a4aca0e6340fc4f76d59",
       "blockNumber": 11,
-      "blockHash": "0x8937e4bc6d4106d9bead6c9b8d1b903f19b8a04f48cdc7457a4ed3f0d20aa7e8",
-      "timestamp": 1800000253
+      "blockHash": "0x6eee6cdfbfee86eefcfe6a196fdbb1d7c12fb695ee8ff837441562cc13b37397",
+      "timestamp": 1800000254
     },
     {
       "label": "Activate resume after policy timelock",
       "hash": "0x12974e8319d208ad422ac9a444f971f28471e8b61e8ae53ae56023ffa4c65466",
       "blockNumber": 13,
-      "blockHash": "0x3cb51b782b2ad35dde65191e4899025d0b6d32f343ee7e41b8db735b059f75ea",
-      "timestamp": 1800000554
+      "blockHash": "0x7002211c265365c774356778586160b4588643a5aa9cea3272e93de1a3129f1b",
+      "timestamp": 1800000555
     },
     {
       "label": "Budgeted split payout 10",
       "hash": "0x6fc88c4d33defb1bbdaeeaefa902aeebfbc1e1177a08c86dc7e822d537fd36b9",
       "blockNumber": 15,
-      "blockHash": "0x88f7496170d9ba2f01c1354f87df6afafd20c093aa2280e6d7c44ea5b97af736",
+      "blockHash": "0x2ac5af974550afb134eadb8ff3eb6210318e441db50d2853473a9a65af173abc",
       "timestamp": 1800000605
     },
     {
       "label": "Budgeted split payout 11",
       "hash": "0xff074c1a9d9096d5681c2e8d06c281571bf0d7e16608a349b5de344df444ee97",
       "blockNumber": 16,
-      "blockHash": "0x4e5c42204bc804c9fe96a1fd9462a139b6e5a8f75cc07faf70808f5ccf1d008f",
+      "blockHash": "0xaa76d42b760771c939bb83ac4cce0da43aef0778327ab7a6786eeb7e6b25c14f",
       "timestamp": 1800000605
     },
     {
       "label": "Budgeted split payout 12",
       "hash": "0x00084a4a938d0ae50780bd8d7b9f4dff29eac1ffe3889c5c4a74c0247533c5fc",
       "blockNumber": 17,
-      "blockHash": "0x309126583c73d46b00cebe72e2225a54fe4d929942602ce88e96e3367ecc9b09",
+      "blockHash": "0xb83607bfc5e3a69f30ec6df501dd9d5ecac78fa32b74cd2a02ac2d792d476fa4",
       "timestamp": 1800000605
     },
     {
       "label": "Budgeted split payout 13",
       "hash": "0xf094b675d2582f7b599dd0b2e415eda9db5ccf2a5c16f1356c89dc88cbd61e06",
       "blockNumber": 18,
-      "blockHash": "0xbff3ccda203bb594dd7936a4f41a054cd1bb0187b816d1993a5dca22d09d5d11",
+      "blockHash": "0xba2c8f37fd628d6b39bd4b22f0551f8d3047b287c9705b80948337a6a645e27a",
       "timestamp": 1800000605
     },
     {
       "label": "Budgeted split payout 14",
       "hash": "0xb4c2bde4a10ebcbba77c8869bad3e45de91506890e06d229c6f5692ca799f1c9",
       "blockNumber": 19,
-      "blockHash": "0x300339fcb437ea3377d808d17b30732e48f26d8da265461cb125a2346006e986",
+      "blockHash": "0xcfa2fa04f8425a17c1ef631ec7fc62afb70610f3dbed6bb05df05d14c437d48a",
       "timestamp": 1800000605
     },
     {
       "label": "Over-budget split request queues",
       "hash": "0xe9872fbf944ea62f83ac94ae45a37fbe4c43507b9a79e0e87de3c8658d30d76f",
       "blockNumber": 20,
-      "blockHash": "0x6c352bc5a1c90cd6d8fff4a93d3c43194d349e25104ade95537cb4a030c42f25",
+      "blockHash": "0x560e88d08408a42a56848439c4d253728a8fc6bcaab95852341583150c4594d3",
       "timestamp": 1800000605
     },
     {
       "label": "Clean up over-budget request",
       "hash": "0x82c5267bef067964f5d75d07090bfe0eef60903aa30da9c362886d33d28181a4",
       "blockNumber": 22,
-      "blockHash": "0xd1ac152828bfd22d316a1a48b362bdd28a1d7bc4c682e704f13ef4fde6c56911",
+      "blockHash": "0xc9ddc58b9e443b123be08d22464bf51c88dcdb1cc913c709c529eef9efb5655d",
       "timestamp": 1800000726
     }
   ],
+  "scenarios": {
+    "legitimate": {
+      "queued": {
+        "chainId": 31337,
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "blockNumber": 3,
+        "blockHash": "0xff04e5c0b3726b5d84a872e1c52a152449504934eb2eb6c357c0eef7faafea08",
+        "now": 1800000001000,
+        "balance": "49.75",
+        "reserved": "2.0",
+        "paused": false,
+        "policy": {
+          "instant": "1.0",
+          "cap": "5.0",
+          "delaySeconds": 120
+        },
+        "message": {
+          "key": "0xc921e28dbaf6d80f379ba8486151890a31bdb09611afb66216df641204eb5382",
+          "nonce": "2",
+          "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          "amount": "2.0",
+          "status": "queued",
+          "eligibleAt": 1800000121000
+        },
+        "operation": {
+          "label": "Legitimate delayed 2 payout queued",
+          "hash": "0x73cd0b80e7843e24a493ac6c8521c27af2665e40e253ab3b0b6cf0419a28b4aa",
+          "blockNumber": 3,
+          "blockHash": "0xff04e5c0b3726b5d84a872e1c52a152449504934eb2eb6c357c0eef7faafea08",
+          "timestamp": 1800000001
+        }
+      },
+      "earlyCheck": {
+        "kind": "read-only contract call",
+        "status": "rejected",
+        "reason": "TooEarly",
+        "blockNumber": 3
+      },
+      "released": {
+        "chainId": 31337,
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "blockNumber": 5,
+        "blockHash": "0xe301eb422d94ec0122eddfbe737d0fd8e5c1c8d9235d1fa55882a0490806d941",
+        "now": 1800000122000,
+        "balance": "47.75",
+        "reserved": "0.0",
+        "paused": false,
+        "policy": {
+          "instant": "1.0",
+          "cap": "5.0",
+          "delaySeconds": 120
+        },
+        "message": {
+          "key": "0xc921e28dbaf6d80f379ba8486151890a31bdb09611afb66216df641204eb5382",
+          "nonce": "2",
+          "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          "amount": "2.0",
+          "status": "released",
+          "eligibleAt": 1800000121000
+        },
+        "operation": {
+          "label": "Legitimate delayed payout executed",
+          "hash": "0x9387c87f48b6790d697f893d0d4d799f88b74224fa51cb0bc04fdeb05dab9dc0",
+          "blockNumber": 5,
+          "blockHash": "0xe301eb422d94ec0122eddfbe737d0fd8e5c1c8d9235d1fa55882a0490806d941",
+          "timestamp": 1800000122
+        }
+      }
+    },
+    "protection": {
+      "queued": {
+        "chainId": 31337,
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "blockNumber": 6,
+        "blockHash": "0xaaa041ac80361f12ce2fbd618c56b3dbbf5a118772bf440d32396771778a35cf",
+        "now": 1800000122000,
+        "balance": "47.75",
+        "reserved": "4.0",
+        "paused": false,
+        "policy": {
+          "instant": "1.0",
+          "cap": "5.0",
+          "delaySeconds": 120
+        },
+        "message": {
+          "key": "0xdbd14eaf913b4d7430952d3ab1ab74d212a7e02d39bc9ed7fb41e0c08f317b13",
+          "nonce": "3",
+          "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          "amount": "4.0",
+          "status": "queued",
+          "eligibleAt": 1800000242000
+        },
+        "operation": {
+          "label": "Controlled 4 payout queued",
+          "hash": "0x5d79b2a1ee307377cf3398bf123bc919e6ca609c09be5f4c11cb41e29c34e821",
+          "blockNumber": 6,
+          "blockHash": "0xaaa041ac80361f12ce2fbd618c56b3dbbf5a118772bf440d32396771778a35cf",
+          "timestamp": 1800000122
+        }
+      },
+      "paused": {
+        "chainId": 31337,
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "blockNumber": 8,
+        "blockHash": "0xe971cbfbec4b9674475a44425338a007d0f77359fa18e859b626705fbc02bbe7",
+        "now": 1800000132000,
+        "balance": "47.75",
+        "reserved": "4.0",
+        "paused": true,
+        "policy": {
+          "instant": "1.0",
+          "cap": "5.0",
+          "delaySeconds": 120
+        },
+        "message": {
+          "key": "0xdbd14eaf913b4d7430952d3ab1ab74d212a7e02d39bc9ed7fb41e0c08f317b13",
+          "nonce": "3",
+          "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          "amount": "4.0",
+          "status": "queued",
+          "eligibleAt": 1800000242000
+        },
+        "operation": {
+          "label": "Guardian pause within quarantine",
+          "hash": "0x6cfd139f97a2c99abb89acfb139aa9daf02cb0e1e8863ec6f4a3616cee29c460",
+          "blockNumber": 8,
+          "blockHash": "0xe971cbfbec4b9674475a44425338a007d0f77359fa18e859b626705fbc02bbe7",
+          "timestamp": 1800000132
+        }
+      },
+      "cancelled": {
+        "chainId": 31337,
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "blockNumber": 10,
+        "blockHash": "0x1cdbbc1e64b069b10cdbffd5ee9920959c728b12f45d6f63ae0cc4360848d42a",
+        "now": 1800000253000,
+        "balance": "47.75",
+        "reserved": "0.0",
+        "paused": true,
+        "policy": {
+          "instant": "1.0",
+          "cap": "5.0",
+          "delaySeconds": 120
+        },
+        "message": {
+          "key": "0xdbd14eaf913b4d7430952d3ab1ab74d212a7e02d39bc9ed7fb41e0c08f317b13",
+          "nonce": "3",
+          "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          "amount": "4.0",
+          "status": "cancelled",
+          "eligibleAt": 1800000242000
+        },
+        "operation": {
+          "label": "Guardian cancellation",
+          "hash": "0x22cf6d47ab4147ea3b88b3140b0c63264fdbc4c6da099aa2413915c87c4fc065",
+          "blockNumber": 10,
+          "blockHash": "0x1cdbbc1e64b069b10cdbffd5ee9920959c728b12f45d6f63ae0cc4360848d42a",
+          "timestamp": 1800000253
+        }
+      }
+    }
+  },
   "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   "alert": {
     "key": "0xdbd14eaf913b4d7430952d3ab1ab74d212a7e02d39bc9ed7fb41e0c08f317b13",
     "amount": "4",
     "recipient": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-    "eligibleAt": "2027-01-15T08:04:01.000Z",
+    "eligibleAt": "2027-01-15T08:04:02.000Z",
     "remainingSeconds": 120,
     "state": "quarantine",
     "action": "Review immediately; pause releases if unauthorized"
   },
   "pauseTiming": {
-    "eligibleAt": "2027-01-15T08:04:01.000Z",
-    "pauseBlockTimestamp": 1800000131,
+    "eligibleAt": "2027-01-15T08:04:02.000Z",
+    "pauseBlockTimestamp": 1800000132,
     "marginSeconds": 110
   },
   "metrics": {

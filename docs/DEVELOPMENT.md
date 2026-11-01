@@ -40,3 +40,7 @@ Added an independent read-only observer with a separate history journal, persist
 ## Nov 1 — Cross-chain recovery
 
 Implemented source receipt revalidation and destination reconciliation, an inspect/continue operator panel, serialized recovery requests and preserved reverted destination history. Recovery derives the original nonce from the source event and never creates a replacement Sepolia request. Added 11 recovery tests, including exact signed transaction decoding with an unfunded fixture key and a mocked broadcaster. Historical source RPC inspection remained waiting because the receipt was absent; no new transaction was sent.
+
+## Nov 1 — Two-scenario interactive demo
+
+Added independent V3 protection and local Anvil legitimate-payment paths with a guided switch between them. The local scenario now captures block-pinned queue/release/protection snapshots and the exact TooEarly rejection. New evidence projection rejects wrong networks, missing receipts, premature releases and incorrect balance deltas; server rendering verifies environment labels and distinguishes read-only calls from transactions. Full suite: 53 passing checks. Updated English/Russian presentation scripts; existing YouTube upload is unchanged.

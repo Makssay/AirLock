@@ -2,17 +2,17 @@
 
 ## Three-minute presentation
 
-0:00–0:25 — A relay is authorized to submit instructions, but a treasury still needs its own spending rules. Airlock gives treasury teams a payout budget, a review window and independent guardian controls.
+0:00–0:25 — A treasury needs spending rules and independent oversight even when its relay is authorized.
 
-0:25–0:55 — Show Sepolia → relay → V3. Point out where the treasury lives and where limits are enforced. The relay checks its configured RPC after six confirmations; V3 enforces the destination policy.
+0:25–0:45 — Show Sepolia → relay → V3. The source supplies instructions; Portaldot executes the treasury policy.
 
-0:55–1:40 — Show the recorded V3 walkthrough: earlier 0.25 payout, separate 4 request queued, guardian pause and cancellation, zero payout during that controlled run. Inspect the linked receipts.
+0:45–1:20 — Open **Stop a suspicious request · Recorded Portaldot V3**. Show the earlier 0.25 payout, the separate controlled 4 request, guardian pause and cancellation. The controlled treasury remains 48.75. Expand one receipt.
 
-1:40–2:15 — Show Guardian watch: request amount, recipient and eligibility, optional notifications, stale-state warning. Explain that the operator reviews the request and confirms the response.
+1:20–2:00 — Click **See a legitimate payout**. Say “this is a separate local Anvil contract run, with time advanced for the demonstration.” Show the 2 request queued, the read-only TooEarly rejection, and the successful delayed release. The recorded local treasury moves from 49.75 to 47.75.
 
-2:15–2:40 — If presenting the local verification report, say explicitly “this next scenario is local Anvil.” It proves the contract sequence with a 110-second pause margin using explicitly advanced local time, legitimate delayed release, replay and budget checks. It is not additional V3 execution evidence.
+2:00–2:35 — Show operator capabilities: Telegram notifications, pause/resume funding readiness and recovery of an existing source request after interruption. Explain that actions are checked again before signing. Do not create a new testnet request for the presentation.
 
-2:40–3:00 — Close with the next pilot: a team already using an automated treasury payout relay. Offer the integration guide and ask for feedback on the operating workflow.
+2:35–3:00 — Offer the integration guide and a pilot with a team already automating treasury payouts.
 
 ## Before the session
 
@@ -29,7 +29,7 @@
 
 **What if the large payout is legitimate?** It waits until eligible and can execute subject to the spending budget, pause state and reserves.
 
-**Who responds during quarantine?** The independent guardian. Current local alerts help them review; a permanently hosted monitoring service remains future work.
+**Who responds during quarantine?** The independent guardian. A separate read-only observer can send Telegram alerts while its host is running. The operator reviews and confirms actions through the console.
 
 **Can the relay bypass quarantine by splitting requests?** Each immediate payout still consumes the cumulative fixed-window budget; queued execution also consumes it. A fixed-window boundary can permit a burst across two windows.
 

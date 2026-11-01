@@ -24,6 +24,7 @@ app.get('/api/live/jobs',(_req,res)=>res.json({jobs:live.store.jobs.toReversed()
 let readinessPromise;
 app.get('/api/live/guardian-readiness',async(_req,res)=>{try{readinessPromise ||= live.guardianReadiness().finally(()=>{readinessPromise=null;});res.json(await readinessPromise);}catch{res.status(503).json({error:'Guardian readiness could not be verified. Check V3 connectivity and retry.'});}});
 app.get('/api/live/demo-quote',async(_req,res)=>{try{res.json(await live.demoQuote());}catch(e){res.status(400).json({error:e.message});}});
+app.get('/api/live/local-demo',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/local-final-scenario.json','utf8')));}catch{res.status(404).json({error:'Local contract scenario is not recorded yet.'});}});
 app.get('/api/live/demo',(_req,res)=>{try{res.json(JSON.parse(readFileSync('artifacts/v3-attack-demo.json','utf8')));}catch{res.json(null);}});
 app.get('/api/live/evidence',async(_req,res)=>{try{res.attachment('airlock-v3-live-state.json').json({disclaimer:'Finalized Portaldot V3 state and local submission journal. No external-chain proof.',...await live.snapshot(true)});}catch(e){res.status(503).json({error:e.message});}});
 app.post('/api/live/action',(req,res)=>{try{res.status(202).json(live.start(req.body,req.headers['x-request-id']));}catch(e){res.status(400).json({error:e.message});}});

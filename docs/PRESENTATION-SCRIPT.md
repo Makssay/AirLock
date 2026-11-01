@@ -1,23 +1,23 @@
-# Presentation script
+# Two-scenario presentation script
 
-Suggested English narration. Rehearse at a natural pace and keep the total below three minutes. Use the existing video as fallback; this text is not a new recording.
+Suggested English narration for the updated interactive walkthrough. Rehearse below three minutes. This is a presentation script; the existing YouTube upload remains the earlier V3 recording.
 
-Airlock gives cross-chain treasury payouts a waiting period and an independent guardian.
+Airlock lets a treasury stop the wrong payout and complete the right one.
 
-Imagine a team that automates payments through a relay. The relay is authorized, but it can still send a wrong instruction. The treasury needs its own rules about how much can leave, when it can leave, and who can stop it.
+Imagine a team automating payments through a cross-chain relay. An authorized relay can still send a wrong instruction. The treasury needs its own spending rules and a separate person who can intervene.
 
-That is what Airlock enforces on Portaldot V3.
+Airlock enforces those rules on Portaldot V3.
 
-Here is the flow: an outbox on Ethereum Sepolia emits a payout request. Our relay checks the configured source and waits for six confirmations. It then submits the instruction to the treasury contract on V3.
+Our reference flow starts with a payout request on Ethereum Sepolia. The relay checks the source and waits for six confirmations. It submits the instruction to the treasury contract on V3, where the spending budget, quarantine and guardian controls apply.
 
-Small payouts can pass within the spending budget. Larger requests enter quarantine. The funds stay in the treasury while an independent guardian has an opportunity to review the request.
+Let us follow two requests.
 
-In the recorded V3 demonstration, an earlier request paid 0.25 tPOT. A separate controlled request for 4 tPOT entered quarantine. The guardian paused releases and cancelled that request. During the controlled scenario, the treasury paid zero and remained at 48.75 tPOT. The recorded transactions are linked in the demo.
+First, protection. This walkthrough uses recorded Portaldot V3 transactions. An earlier small request paid 0.25 tPOT. A separate controlled request for 4 tPOT entered quarantine. The guardian paused releases and cancelled it. During that controlled scenario, zero was paid and the treasury remained at 48.75 tPOT. Each step links to its receipt.
 
-The local control room now includes Guardian watch. It shows queued amounts, recipients and eligibility times, and can notify the operator while the console is open. When fresh state is unavailable, transaction controls are disabled.
+Now, a legitimate larger payment. This second scenario is a local Anvil contract run, with local time advanced for the demonstration. The 2 tPOT request enters quarantine. An early execution call returns TooEarly. After the waiting period, execution succeeds: the recipient receives 2 tPOT and the reservation is cleared.
 
-We also have a separate local contract scenario covering a legitimate delayed payment, a pause before eligibility, cancellation, delayed resume, replay and split-budget enforcement. Those checks are clearly labelled as local Anvil evidence.
+Quarantine gives the team a review window. The same rules support both stopping an unauthorized request and completing a legitimate payment.
 
-Portaldot is where the treasury and payout rules execute. The source relay supplies an instruction; V3 decides whether the treasury can release it.
+The operator tools include Telegram alerts, fee and peak-deposit readiness checks, and recovery of interrupted cross-chain requests. Recovery checks the saved source event and destination state before continuing with the original nonce.
 
-Our first target users are teams already automating treasury payouts. We have published the source, receipts and an integration guide, and we are looking for a pilot team to validate the operating workflow.
+Portaldot is where the treasury and payout rules execute. Our next step is a pilot with a team already automating treasury payouts. The source, recorded receipts and integration guide are public.

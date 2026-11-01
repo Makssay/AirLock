@@ -4,13 +4,13 @@ Started 2026-11-01. Source: team plan and the supplied Oct 30 AMA notes.
 
 ## Latest status
 
-Implemented and verified: peak-deposit signing preflight, bounded history catch-up, terminal guardian observer, stale-state write blocking, native finalized timestamps, 27 regression checks, and an isolated 9-assertion Anvil scenario with a 110-second pause margin. Public and operator builds pass. Live observer checked finalized V3 block 269431 with no queued requests.
+Implemented: peak-deposit signing preflight, bounded history catch-up, Telegram guardian observer with persistent delivery, readiness simulations, payout explanations, interrupted cross-chain recovery and a two-scenario public walkthrough. Current regression suite: 53 checks passing. Local contract scenario: 9 assertions passing, including a 110-second pause margin and legitimate delayed release. Operator build passes.
 
-Implemented pending browser validation: Guardian watch panel and opt-in browser notifications. Automatic Computer Use review could not establish the browser URL, so browser interactions were stopped. Queued and stale panel server-render checks passed; those are not browser visual checks.
+Verified Telegram private-chat delivery and recovery from unavailable to fresh finalized V3 observation on the development machine. Continuous operation still requires that host to stay running. The public walkthrough distinguishes historical V3 receipts from the new captured local Anvil queue/release snapshots and read-only TooEarly check.
 
-Prepared: integration guide, final submission draft, presentation/Q&A runbook and organizer questions. Existing video/PDF retain the recorded testnet scenario; no new V3 timing evidence is claimed. External messages/submission were not sent.
+Prepared: final submission draft, integration/recovery guides, two-scenario English/Russian scripts and Q&A runbook. The English script is 284 words (about 131 seconds at 130 words/minute, before pauses). Existing YouTube upload and pitch PDF remain the earlier published materials. No new public-testnet payout, organizer message or DoraHacks submission was sent.
 
-Open: browser QA, fresh V3 timely-response and delayed-payout run (funding-constrained), hosted notifications, pilot, organizer mainnet/track clarification and final submission review.
+Open: browser/mobile interaction QA, fresh V3 timely-response and legitimate delayed-payout evidence (funding-constrained), continuous hosting, pilot, mainnet clarification and final submission review.
 
 ## Delivery order and acceptance
 
@@ -105,3 +105,9 @@ A read-only inspection of the historical source hash returned no receipt from th
 Validation checkpoint: full suite 48/48 passing, operator and public builds pass. The independent Telegram observer caught up and reported healthy finalized V3 block 280594 at 17:51:16 UTC; its persisted recovery notification delivery timestamp is 17:46:28 UTC. This establishes read-only observation recovery, not a new payout/guardian timing run.
 
 Recovery delivery: source commit da48075 pushed; Vercel production ihtohukzy completed, with the updated public bundle verified through the original domain using the reachable-edge TLS diagnostic. Pages commit de90f69 built; its updated public bundle was verified over ordinary HTTPS. Local operator port 5176 was restarted with the new recovery route; missing control token returned 403. Browser interaction validation remains separate from these checks.
+
+### Two-scenario demonstration
+
+The final planned product stage now includes an updated interactive walkthrough: four historical V3 protection steps and three local Anvil legitimate-payment steps. The local generator captures contract state and balance at each operation block; the early read-only execution must return TooEarly specifically. Evidence projection checks network identity, statuses, eligibility timing and exact balance/reservation deltas. The viewer never signs and does not present the early check as a transaction.
+
+Re-ran the local scenario: 9 assertions passed, 110-second pause margin. Full suite: 53 checks passed, including five new evidence/rendering checks. Operator build passed. Both narration scripts and the runbook were updated; the existing YouTube upload remains unchanged. No browser-controlled visual/interaction check was performed because the browser tool is unavailable; server rendering verifies evidence labels only.

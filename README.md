@@ -14,7 +14,7 @@ Airlock is a payout firewall for teams holding a treasury on **Portaldot V3**. R
 
 Source: [Makssay/AirLock](https://github.com/Makssay/AirLock).
 
-Run the console and open **Watch verified walkthrough** on the Control room, or visit `http://127.0.0.1:5173/#demo`. The four-step viewer reads recorded receipts and never signs a transaction. The Control room continues to read live finalized V3 state.
+Run the console and open **Watch verified walkthrough** on the Control room, or visit `http://127.0.0.1:5173/#demo`. The viewer includes four recorded V3 protection steps and a separate three-step local Anvil delayed-payment scenario. It reads receipts and snapshots without signing transactions. The Control room continues to read live finalized V3 state.
 
 - [Pitch deck (PDF)](https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf)
 - [Week 2 progress and evidence](docs/check-in/WEEK-2.md)
@@ -116,7 +116,7 @@ npm run test:live:e2e -- --send-testnet
 
 Deployment commands refuse a recorded deployment or uncertain submission journal. The end-to-end script persists its request IDs and can resume the same operation after interruption; it is not a repeated load test and consumes test tokens. Rebuilding Airlock can change its metadata hash; do not substitute another artifact for the reviewed deployed bytecode.
 
-`npm test` runs 48 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
+`npm test` runs 53 regression checks, including native local EVM transactions, reentrancy and transfer rollback, strict V3 bytecode wrapper validation, request limits, idempotency and independent guardian pause. The recorded public-testnet run validates eight integration checks. Full split-attack, reentrancy and policy-edge scenarios remain local coverage, not public-testnet claims.
 
 
 ## Controlled public attack demo
