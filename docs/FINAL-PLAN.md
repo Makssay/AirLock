@@ -75,3 +75,19 @@ Automatic approval review rejected a final command batch including repository Ho
 Prepared complete testnet fields with native/EVM hash labels, attribution clarification, a spoken presentation script and a separate final checklist. Corrected the historical Week 2 checklist to reflect the team-reported submission and supplied PASSED report. A further browser inspection attempt was stopped by automatic URL verification; browser visual, mobile interaction and video playback checks remain open. No organizer message or DoraHacks update was sent.
 
 Published source commit `0eaf669`; Vercel production `airlock-portaldot-p2s6hfvov-makssays-projects.vercel.app` and Pages static commit `b643582` contain the updated viewer. Ordinary Pages HTTPS checks passed for the new app chunk, root, PDF and receipts. Vercel new root and app chunk passed reachable-edge diagnostics with normal TLS. PDF hash matches its source. YouTube oEmbed returned 200 and the expected demo title; playback was not reverified. All four recorded demo states were checked for expected finalized message status. Local verification records are in ignored `test-results/submission-consistency.json` and `test-results/final-delivery-verification.json`.
+
+## Ordered product improvements (Nov 1)
+
+1. Telegram and independent background observation: implemented with persistent delivery, reminders and outage/recovery events; unit/integration checks in progress. Real chat delivery awaits notification credentials; hosting is a separate deployment.
+2. Guardian readiness: expose connection freshness and action-specific fee/peak-deposit affordability before an incident. Existing signing preflight remains authoritative.
+3. Explain queued payouts: record the policy context at submission, distinguish historical queue reason from present execution blockers, and explain legitimate delayed execution.
+4. Cross-chain recovery: reconcile saved source/destination transaction hashes after interruption and explicitly resume the same validated source event without generating a replacement source request.
+5. Demonstration: present both a stopped request and a legitimate delayed payout, preserving explicit local vs V3 evidence labels.
+
+Complete in this order; do not treat code-only Telegram support as verified delivery or continuous hosting.
+
+### Guardian improvements checkpoint
+
+Telegram token and private chat ID remain only in the original ignored `.env`. Bot API test delivery succeeded (message 3). A standalone observer was started hidden on this Windows machine, with `AIRLOCK_NOTIFY_ENV` pointing to that file and its own delivery/history journals. An actual monitoring-unavailable message was delivered. Fresh complete V3 coverage was not yet verified; this is not a timely guardian-response test. The machine must remain awake.
+
+Added read-only pause/resume readiness simulation, including native peak deposit, fee and margin, without loading a guardian key. Added current execution blockers and policy context to queued payout details, with explicit distinction from historical queue reasons. All 37 tests pass; operator build passes. Browser visual validation remains pending. Cross-chain recovery and the updated two-scenario demonstration remain the next stages.

@@ -1,0 +1,23 @@
+[Unit]
+Description=Airlock read-only guardian notifications
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=airlock
+WorkingDirectory=/opt/airlock
+# Provision a notification-only env here; do not install signing keys.
+Environment=AIRLOCK_NOTIFY_ENV=/etc/airlock/telegram.env
+ExecStart=/usr/bin/node /opt/airlock/scripts/telegram-watch.mjs
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=90
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/airlock/deployments
+
+[Install]
+WantedBy=multi-user.target

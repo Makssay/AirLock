@@ -12,7 +12,7 @@ Working V3 treasury contract and Sepolia outbox integration through a six-confir
 
 The local operator console now includes Guardian watch with request details, eligibility times, optional browser notifications and stale-state protection. A separate terminal observer supports read retries and warns when state or history cannot be verified. Signing preflight checks peak storage deposits independently of net storage charges.
 
-The full regression suite passes 27 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
+The full regression suite passes 37 checks. A reproducible local Anvil scenario additionally exercises normal and delayed payouts, guardian alerting, pause before eligibility, cancellation, delayed resume, nonce replay and split-budget enforcement. Its 9 assertions pass. Local evidence is clearly separated from V3 receipts.
 
 ## Links
 
@@ -59,3 +59,5 @@ Fresh timely-response and legitimate delayed-payout evidence on public V3; visua
 Initial users are teams automating treasury payouts through relays. The hypothesis is an open contract module with optional paid monitoring and operational support. Pilot demand and pricing are not yet validated.
 
 This is prepared text for the user to review and submit. It has not been sent to DoraHacks or organizers automatically.
+
+Guardian update: Telegram private-chat delivery has been tested; an independent read-only observer runs on the development machine with persistent reminders, outcome notifications and outage alerts. The operator UI adds action-specific pause/resume readiness checks and current payout blockers. Continuous hosting and full request-to-notification-to-guardian V3 evidence remain separate from the chat transport test.

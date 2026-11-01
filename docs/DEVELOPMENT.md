@@ -32,3 +32,7 @@ Added a terminal observer and local Guardian watch UI, optional browser notifica
 Added an isolated local final scenario, separate from testnet evidence: normal and delayed payouts, guardian alert, pause 110 seconds before eligibility, cancellation, timelocked resume, replay rejection and split-budget enforcement. All 25 regression checks and 9 local scenario assertions passed. New V3 transactions remain pending due to the existing operator funding constraint, documented in FINAL-PLAN.md. No additional tokens are assumed.
 
 Browser automation was stopped by automatic URL verification; visual validation of the new panel remains open. Production claims are based on existing V3 receipts and explicitly labelled local checks.
+
+## Nov 1 — Telegram guardian delivery
+
+Added an independent read-only observer with a separate history journal, persisted notification queue and exclusive process lock. Notifications cover queue entry, 60/15-second reminder stages, eligibility, pause/resume, tracked release/cancellation and outage/recovery. Telegram uses plain text and bounded retry-after backoff; transport errors are sanitized. Six new delivery/projection checks pass; full suite: 33 checks passing. Live dry-run and actual chat delivery status are recorded separately in FINAL-PLAN.md. No signing keys are needed on the notification host.

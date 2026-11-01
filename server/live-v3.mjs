@@ -36,23 +36,36 @@ export function validateLiveAction(body){
 }
 
 export class LiveV3 {
- constructor(){
+ constructor({journalFile=file}={}){
+  this.file=journalFile;
   mkdirSync('deployments',{recursive:true});
   this.artifact=JSON.parse(readFileSync('artifacts/evm/Airlock.json','utf8'));this.iface=new Interface(this.artifact.abi);
   this.plan=existsSync('deployments/v3-preparation.local.json')?JSON.parse(readFileSync('deployments/v3-preparation.local.json','utf8')):{guardianEvm:JSON.parse(readFileSync('artifacts/v3-live-evidence.json','utf8')).guardian,relay:JSON.parse(readFileSync('artifacts/v3-live-evidence.json','utf8')).relay,dryRun:{result:{ok:{result:{data:readFileSync('artifacts/v3-deployed-runtime.hex','utf8').trim()}}}}};
   const request=new FetchRequest(RPC);request.setHeader('User-Agent','Airlock-local-testnet-console');request.timeout=20000;
   this.rpc=new JsonRpcProvider(request,undefined,{batchMaxCount:1});this.rpc.pollingInterval=1500;
   this.contract=new Contract(V3_CONTRACT,this.artifact.abi,this.rpc);
-  this.store=existsSync(file)?JSON.parse(readFileSync(file,'utf8')):{jobs:[],messages:{},logs:[],cursor:146536};
-  if(!existsSync(file)&&existsSync('artifacts/v3-console-e2e.json')){const history=JSON.parse(readFileSync('artifacts/v3-console-e2e.json','utf8')).finalState;this.store.jobs=history.jobs;this.store.logs=history.logs;this.store.cursor=history.finalizedBlock;for(const message of history.messages)this.store.messages[message.key]={...message};}
+  this.store=existsSync(this.file)?JSON.parse(readFileSync(this.file,'utf8')):{jobs:[],messages:{},logs:[],cursor:146536};
+  if(!existsSync(this.file)&&existsSync('artifacts/v3-console-e2e.json')){const history=JSON.parse(readFileSync('artifacts/v3-console-e2e.json','utf8')).finalState;this.store.jobs=history.jobs;this.store.logs=history.logs;this.store.cursor=history.finalizedBlock;for(const message of history.messages)this.store.messages[message.key]={...message};}
   this.busy=false;this.running=new Set();this.snapshotPromise=null;this.cached=null;this.cacheTime=0;this.connectPromise=null;
   for(const job of this.store.jobs)if(job.status==='checking'){job.status='failed';job.error='Server restarted before signing; no transaction was broadcast.';}
   if(existsSync('deployments/v3-smoke.local.json')){const smoke=JSON.parse(readFileSync('deployments/v3-smoke.local.json','utf8'));if(smoke.firstNonce){for(const offset of [0n,7n]){const nonce=BigInt(smoke.firstNonce)+offset;const key=this.iface.encodeFunctionData('messageId',[id('airlock:external-testnet:v1'),nonce]);this.store.messages['nonce:'+nonce]={nonce:nonce.toString(),lookupData:key};}}}
  }
- save(){writeFileSync(file,json(this.store));}
+ save(){writeFileSync(this.file,json(this.store));}
  async connect(){
   if(this.api?.isConnected)return this.api;
-  if(!this.connectPromise)this.connectPromise=(async()=>{const provider=new WsProvider(WS,false);let timer;try{const api=await Promise.race([(async()=>{await provider.connect();return ApiPromise.create({provider,throwOnConnect:true});})(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('V3 connection timed out')),30000);})]);if(api.genesisHash.toHex()!==V3_GENESIS||api.consts.revive.chainId.toString()!=='420420777'){await api.disconnect();throw Error('Wrong network: signing disabled');}this.api=api;return api;}catch(e){await provider.disconnect();throw e;}finally{clearTimeout(timer);this.connectPromise=null;}})();
+  if(!this.connectPromise)this.connectPromise=(async()=>{
+   const provider=new WsProvider(WS,false);let timer,connectingApi,expired=false;
+   try{
+    const api=await Promise.race([(async()=>{
+     await provider.connect();if(expired)throw Error('V3 connection timed out');
+     connectingApi=new ApiPromise({provider,throwOnConnect:true});
+     return await connectingApi.isReadyOrError;
+    })(),new Promise((_,reject)=>{timer=setTimeout(()=>{expired=true;reject(Error('V3 connection timed out'));},30000);})]);
+    if(api.genesisHash.toHex()!==V3_GENESIS||api.consts.revive.chainId.toString()!=='420420777')throw Error('Wrong network: signing disabled');
+    this.api=api;return api;
+   }catch(e){expired=true;await connectingApi?.disconnect();await provider.disconnect();throw e;}
+   finally{clearTimeout(timer);this.connectPromise=null;}
+  })();
   return this.connectPromise;
  }
  async assertIdentity(api){
@@ -174,6 +187,34 @@ export class LiveV3 {
   if((await this.rpc.getBlock(receipt.blockNumber)).hash!==receipt.blockHash)throw Error('Contract: receipt is not canonical');
   if(receipt.status!==1){job.status='failed';job.error='Transaction reverted; network fee still applies';}else job.status='finalized';
   job.completedAt=new Date().toISOString();this.save();
+ }
+ async guardianReadiness(){
+  const api=await this.connect();await this.assertIdentity(api);
+  const account=await api.query.system.account(GUARDIAN);
+  const available=BigInt(account.data.free.toString())-BigInt(account.data.frozen.toString());
+  const policy=await this.contract.policy();
+  const checks=[];
+  for(const [action,args] of [['pause',[]],['schedulePolicy',[[policy.instant,policy.cap,policy.delaySeconds,policy.maxPending],true]]]){
+   const data=this.iface.encodeFunctionData(action,args);
+   const dry=await api.call.reviveApi.call(GUARDIAN,V3_CONTRACT,0,null,null,data);
+   const charge=dry.storageDeposit.isCharge?BigInt(dry.storageDeposit.asCharge.toString()):0n;
+   const peak=dry.maxStorageDeposit.isCharge?BigInt(dry.maxStorageDeposit.asCharge.toString()):0n;
+   let reason=null;
+   if(dry.result.isErr){reason='Runtime rejected simulation';if(dry.result.asErr.isModule){const error=api.registry.findMetaError(dry.result.asErr.asModule);reason=error.section+'.'+error.name;}}
+   else if((Number(dry.toJSON().result.ok.flags.bits)&1)!==0)reason='Contract rejected simulation';
+   let fee=null,required=null;
+   if(!reason){
+    const weight={refTime:(BigInt(dry.weightRequired.refTime.toString())*125n/100n).toString(),proofSize:(BigInt(dry.weightRequired.proofSize.toString())*125n/100n).toString()};
+    const tx=api.tx.revive.call(V3_CONTRACT,0,weight,((peak>charge?peak:charge)+N).toString(),data);
+    fee=BigInt((await tx.paymentInfo(GUARDIAN)).partialFee.toString());
+    required=guardianFundingRequired({netDeposit:charge,peakDeposit:peak,fee,margin:N/10n});
+    if(fee>N||charge>12n*N||peak>12n*N)reason='Exceeds operator transaction limits';
+    else if(available<required)reason='Insufficient funds for peak deposit and fee margin';
+   }
+   const native=value=>value===null?null:formatEther(value*10000n);
+   checks.push({action,ready:!reason,reason,peakDeposit:native(peak),netDeposit:native(charge),fee:native(fee),required:native(required)});
+  }
+  return {checkedAt:new Date().toISOString(),available:formatEther(available*10000n),checks};
  }
  async guardianKey(){
   await cryptoWaitReady();let pair;try{const env=parseEnv(readFileSync('.env','utf8'));pair=new Keyring({type:'sr25519',ss58Format:42}).addFromUri(env.SEED.trim());delete env.SEED;}catch{throw Error('Contract: local guardian signing is unavailable');}

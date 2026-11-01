@@ -30,4 +30,4 @@ This checklist is separate from the completed Week 2 submission. A check means t
 ## Open technical work
 
 - Fresh V3 timely guardian response and legitimate delayed payout remain funding-constrained. Existing real V3 proof remains valid; new local evidence is not labelled testnet evidence.
-- Hosted monitoring, external notifications, an external pilot and official mainnet V3 compatibility confirmation remain roadmap items.
+- Telegram observer code and persistent delivery are implemented. Actual chat delivery and a continuous host still need configuration and verification. An external pilot and official mainnet V3 compatibility confirmation remain open.

@@ -4,6 +4,8 @@ import {guardianAlerts} from '../lib/guardian-watch.mjs';
 
 export default function GuardianMonitor({data,stale,onReview}){
  const [permission,setPermission]=useState(()=>typeof Notification==='undefined'?'unsupported':Notification.permission);
+ const [readiness,setReadiness]=useState(null),[checking,setChecking]=useState(false),[readinessError,setReadinessError]=useState('');
+ async function checkReadiness(){setChecking(true);setReadinessError('');try{const response=await fetch('/api/live/guardian-readiness',{signal:AbortSignal.timeout(45000)});const result=await response.json();if(!response.ok)throw Error(result.error);setReadiness(result);}catch{setReadinessError('Readiness could not be verified. Retry after checking the connection.');}finally{setChecking(false);}}
  const seen=useRef(new Map());
  const alerts=guardianAlerts(data);
  useEffect(()=>{
@@ -20,6 +22,10 @@ export default function GuardianMonitor({data,stale,onReview}){
   <div className="guardian-monitor-heading"><div><Shield size={20}/><h2 id="guardian-monitor-title">Guardian watch</h2></div><button className="button subtle" disabled={permission!=='default'} onClick={enable}><Bell size={16}/>{permission==='granted'?'Notifications enabled':permission==='denied'?'Notifications blocked':permission==='unsupported'?'In-panel alerts active':'Enable notifications'}</button></div>
   <p role="status">{stale?'Monitoring interrupted — displayed requests may be out of date.':data.historyError?'History is catching up — request coverage is incomplete.':alerts.length?`${alerts.length} queued ${alerts.length===1?'request needs':'requests need'} review.`:'No queued requests at the last verified block.'}</p>
   {alerts.map(alert=><article className="guardian-monitor-request" key={alert.key}><div><strong>{alert.amount} tPOT</strong><span>{alert.state==='paused'?'Releases paused':alert.remainingSeconds>0?`${alert.remainingSeconds}s until eligible at the verified block`:'Eligible for execution — review immediately'}</span><code title={alert.recipient}>{alert.recipient}</code><small>Eligibility: {new Date(alert.eligibleAt).toLocaleString()}</small></div><button className="button danger-outline" onClick={()=>onReview(alert.key)}>Review request <ArrowRight size={15}/></button></article>)}
+  <div className="guardian-readiness"><button className="button subtle" disabled={checking||stale} onClick={checkReadiness}>{checking?'Checking guardian…':'Check guardian readiness'}</button>
+  {readinessError&&<p role="status">{readinessError}</p>}
+  {readiness&&<div><p>Available: {readiness.available} tPOT · checked {new Date(readiness.checkedAt).toLocaleTimeString()}. {Date.now()-Date.parse(readiness.checkedAt)>45000?'Estimate expired; check again.':'Signing performs a fresh check.'}</p>{readiness.checks.map(check=><p key={check.action}><strong>{check.action==='pause'?'Emergency pause':'Schedule resume'}: {check.ready?'Funds and simulation passed':'Needs attention'}</strong>{check.reason&&` · ${check.reason}`} · peak deposit {check.peakDeposit} tPOT{check.required!==null&&` · required with fee margin ${check.required} tPOT`}</p>)}</div>}
+  </div>
   <div className="guardian-monitor-foot"><AlertTriangle size={14}/><span>Guardian decisions require confirmation. Keep the console open for browser notifications.</span></div>
  </section>;
 }
