@@ -52,4 +52,4 @@ Start-Process -FilePath $observerNode -ArgumentList 'scripts/telegram-watch.mjs'
 
 This survives terminal closure, but not machine shutdown/reboot. For continuous hosting, use a persistent machine and a process supervisor; this repository includes `ops/airlock-telegram.service` as a Linux systemd template. Provision only notification credentials on that host. Never provision treasury signing keys for monitoring.
 
-Implementation tests use injected Telegram responses. Actual Telegram delivery and continuous hosting must be verified separately after credentials and a runtime host are configured.
+Implementation tests use injected Telegram responses. Private-chat test delivery and an actual outage alert were verified on the development machine on Nov 1. Full request/reminder/outcome delivery and continuous hosting remain separate acceptance checks. New observer journals can reuse the local console history cache, then verify identity and catch up remaining blocks in their own journal.

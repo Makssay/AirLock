@@ -36,7 +36,14 @@ let state = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : {pending
 const save = () => {writeFileSync(file + '.tmp', JSON.stringify(state, null, 2)); renameSync(file + '.tmp', file);};
 // Separate event-history journal: never race the signing console's store.
 const {LiveV3} = await import('../server/live-v3.mjs');
-const live = new LiveV3({journalFile: `deployments/telegram-chain-${identity}.local.json`});
+const chainFile = `deployments/telegram-chain-${identity}.local.json`;
+if (!existsSync(chainFile) && existsSync('deployments/v3-console.local.json')) {
+  const history = JSON.parse(readFileSync('deployments/v3-console.local.json', 'utf8'));
+  if (Number.isSafeInteger(history.cursor) && history.cursor >= 146536 && history.messages && Array.isArray(history.logs)) {
+    writeFileSync(chainFile, JSON.stringify({cursor: history.cursor, messages: history.messages, logs: history.logs, jobs: []}));
+  }
+}
+const live = new LiveV3({journalFile: chainFile});
 let failures = 0, deliveryFailures = 0;
 try {
   do {
