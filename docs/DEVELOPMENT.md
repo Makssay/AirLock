@@ -48,3 +48,5 @@ Added independent V3 protection and local Anvil legitimate-payment paths with a 
 ## Nov 1 — Public educational treasury playground
 
 Added Try Airlock with virtual funding, four payout scenarios, guardian actions, shortened demo policy delays and real Telegram pairing/delivery. Vercel proxies only whitelisted session operations to an owner-private Sites Worker backed by D1. The cloud state uses revision compare-and-swap, bounded session lifetime, request idempotency and delivery leases. No blockchain signing keys are configured in either playground service. Full suite: 66 checks passing. Cloud and public API funding/pair-link creation verified; real chat-cycle verification follows the user Start action.
+
+Added single-use five-minute Telegram review handoffs for opening the same virtual treasury on a second device while retaining desktop access. Full suite: 68 passing checks; public expired-handoff handling and both updated site bundles verified. User-driven Telegram acceptance remains pending a fresh Start action.
