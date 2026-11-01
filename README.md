@@ -41,6 +41,8 @@ A treasury that executes every authorized relay instruction delegates its payout
 
 ## Run
 
+The six-slide English pitch covers the problem, recorded V3 results, live operator/simulation modes and proposed service pricing. Rebuild it with `python scripts/build-pitch.py` after installing `reportlab`. It uses Segoe UI on Windows and Helvetica elsewhere. The existing YouTube video remains the earlier V3 recording.
+
 Node.js 22+ and npm are required. On Windows the optional native Anvil package runs local regression tests without WSL.
 
 ```powershell

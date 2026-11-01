@@ -70,3 +70,5 @@ Read-only checks verified both chains, pinned code and treasury roles. Native wa
 The new page and separate English/Russian operator guide distinguish the real shared treasury from the virtual playground. Fresh public-testnet payouts, wallet extension interaction QA and a revised video remain pending funding. See `artifacts/live-testnet-readiness.json`; it is a read-only observation, not a new transaction run.
 
 Validation: full regression suite passes 95 tests. Operator and public builds pass. The relay's initial single-shot run opened the dedicated wallet and remained idle, with no signed or broadcast transaction. Final manual wallet-extension and mobile QA remain open.
+
+Updated the six-slide English pitch PDF in the existing visual style with vector/searchable text, recorded-result labels, links to the real operator and simulation modes, and proposed $99/month plus $500 onboarding prices marked for pilot validation. The reproducible ReportLab builder is `scripts/build-pitch.py`. All six rendered pages were visually inspected; text, slide count and six link annotations were checked. The video remains the existing upload until fresh execution can be captured.

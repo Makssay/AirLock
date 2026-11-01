@@ -9,6 +9,7 @@ Airlock — контроль выплат из казны на Portaldot V3. К�
 - [Try Airlock](https://airlock-v3-by-makssay-and-kuznets.vercel.app/#try): отдельная учебная казна, виртуальные токены и настоящие Telegram-уведомления.
 - [Записанные сценарии](https://airlock-v3-by-makssay-and-kuznets.vercel.app/#demo): доказательства защиты на V3 и отдельно обозначенная локальная легитимная выплата после карантина.
 - [Видео](https://youtu.be/LKbyCsM62rQ): опубликованный англоязычный прогон V3.
+- [Питч, PDF](../../public/airlock-pitch-deck.pdf): шесть английских слайдов с проблемой, подтверждениями V3, режимами продукта и предполагаемыми ценами. Исходник собирается через `python scripts/build-pitch.py` с библиотекой `reportlab`.
 
 ## Русские материалы
 

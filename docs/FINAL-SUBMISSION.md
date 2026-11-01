@@ -48,7 +48,7 @@ https://youtu.be/LKbyCsM62rQ — 2:23, English narration; recorded V3 interactio
 
 ## Pitch deck field
 
-https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf — six-slide PDF covering the problem, V3 execution, product evidence and roadmap.
+https://github.com/Makssay/AirLock/blob/main/public/airlock-pitch-deck.pdf — six-slide PDF covering the problem, V3 execution, recorded testnet evidence, operator/simulation modes and proposed service pricing with pilot validation.
 
 ## Remaining work
 

@@ -10,7 +10,7 @@ Implemented: peak-deposit signing preflight, bounded history catch-up, Telegram 
 
 Verified Telegram private-chat delivery and recovery from unavailable to fresh finalized V3 observation on the development machine. Continuous operation still requires that host to stay running. The public walkthrough distinguishes historical V3 receipts from the new captured local Anvil queue/release snapshots and read-only TooEarly check.
 
-Prepared: final submission draft, integration/recovery guides, two-scenario English script and Q&A runbook. The English script is 310 words (about 143 seconds at 130 words/minute, before pauses). Existing YouTube upload and pitch PDF remain the earlier published materials. No new public-testnet payout, organizer message or DoraHacks submission was sent.
+Prepared: final submission draft, integration/recovery guides, two-scenario English script and Q&A runbook. The English script is 310 words (about 143 seconds at 130 words/minute, before pauses). The existing YouTube upload remains the earlier V3 recording. The six-slide PDF now includes operator/simulation modes, proposed service pricing and pilot validation, with a reproducible source script. No new public-testnet payout, organizer message or DoraHacks submission was sent.
 
 Open: browser/mobile interaction QA, fresh V3 timely-response and legitimate delayed-payout evidence (funding-constrained), continuous hosting, pilot, mainnet clarification and final submission review.
 
