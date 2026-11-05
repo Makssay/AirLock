@@ -1,5 +1,6 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,Shield,Wallet,Send,Clock3,Pause,Check,RefreshCw,AlertTriangle,ExternalLink} from 'lucide-react';
+import GuidedDemo from './GuidedDemo.jsx';
 import './playground.css';
 const money=value=>(value/100).toFixed(2);
 const storageKey='airlock-playground-session-v1';
@@ -7,6 +8,7 @@ const api=import.meta.env.BASE_URL==='/'&&typeof location!=='undefined'&&locatio
 const scenarios=[['normal','A routine payout','0.50','Within the instant threshold.'],['suspicious','An unfamiliar recipient','4.00','Get the alert, pause and cancel.'],['legitimate','A larger team payment','2.00','Wait, review, then execute.'],['oversized','An oversized instruction','40.00','See the cap reject the request.']];
 
 export default function Playground({onBack}){
+ const [guided,setGuided]=useState(false);
  const [token,setToken]=useState(()=>{try{return localStorage.getItem(storageKey)||'';}catch{return '';}});
  const [session,setSession]=useState(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[pairUrl,setPairUrl]=useState(''),[offline,setOffline]=useState(false),[clock,setClock]=useState(Date.now()),[expired,setExpired]=useState(false);
  const [handoff,setHandoff]=useState(()=>new URLSearchParams(typeof location==='undefined'?'':location.hash.split('?')[1]||'').get('open')||'');
@@ -69,6 +71,8 @@ export default function Playground({onBack}){
  const notifications=session?.telegram.notifications||[],delivered=notifications.filter(item=>item.status==='delivered').length,pendingCount=notifications.filter(item=>['pending','sending'].includes(item.status)).length;
  const disabled=busy||offline||expired||!!pending.current;
  return <main className="pg-page"><header className="pg-header"><a href="#" onClick={event=>{event.preventDefault();onBack();}}><ArrowLeft size={16}/>Airlock home</a><strong><Shield size={22}/>airlock.</strong><span className="pg-mode">Simulation · virtual funds</span></header>
+  <nav className="pg-mode-switch" aria-label="Demo mode"><button type="button" className="button subtle" aria-pressed={!guided} onClick={()=>setGuided(false)}>Interactive treasury</button><button type="button" className="button subtle" aria-pressed={guided} onClick={()=>setGuided(true)}>Guided walkthrough</button></nav>
+  {guided?<GuidedDemo/>:<>
   <section className="pg-intro"><p className="pg-eyebrow">Try Airlock</p><h1>Your treasury.<br/>Your call.</h1><p>Create a demo treasury, connect Telegram, then decide which payouts get through.</p><div className="pg-facts"><span><Wallet size={15}/>No wallet needed</span><span><Send size={15}/>Real Telegram alerts</span><span><Clock3 size={15}/>20-second demo quarantine</span></div><p className="pg-helper"><a href="#testnet">Open the live Sepolia → Portaldot operator run</a></p></section>
   {(error||notice)&&<div className={`pg-feedback ${error?'is-error':''}`} role={error?'alert':'status'}>{error?<AlertTriangle size={18}/>:<Check size={18}/>}<span>{error||notice}</span>{pending.current&&!busy&&<button className="button subtle" onClick={()=>perform(pending.current.input,true)}>Retry same action</button>}</div>}
   {offline&&<p className="pg-offline" role="status">Connection interrupted. Last observed balances are shown; actions will resume after a fresh server check.</p>}
@@ -80,6 +84,7 @@ export default function Playground({onBack}){
    <section className="pg-card pg-guardian"><div className="pg-section-title"><h2><Shield size={19}/>You are the guardian</h2>{!state.paused&&<button className="button danger-outline" disabled={disabled} onClick={()=>perform({action:'pause'})}><Pause size={15}/>Pause releases</button>}</div>{state.paused&&<div className="pg-pause-state"><strong>Releases are paused. Queued funds stay in the treasury.</strong>{state.resumeAt===null?<button className="button subtle" disabled={disabled} onClick={()=>perform({action:'schedule-resume'})}>Schedule resume · 10s</button>:<button className="button primary" disabled={disabled||remaining(state.resumeAt)>0} onClick={()=>perform({action:'activate-resume'})}>{remaining(state.resumeAt)>0?`Resume in ${remaining(state.resumeAt)}s`:'Activate resume'}</button>}</div>}{queue.length===0?<p className="pg-helper">No requests are waiting. Choose a larger payout above to open a review window.</p>:queue.map(message=><article className="pg-request" key={message.id}><div><span className="pg-request-id">{message.id} · {message.recipient}</span><h3>{money(message.amount)} <small>demo tokens</small></h3><p>{state.paused?'Paused by guardian':remaining(message.eligibleAt)>0?`${remaining(message.eligibleAt)}s left in quarantine`:'Eligible · review before executing'}</p></div><div className="pg-request-actions"><button className="button primary" disabled={disabled||state.paused} onClick={()=>perform({action:'execute',messageId:message.id})}>{remaining(message.eligibleAt)>0?'Try early execution':'Execute payout'}</button><button className="button danger-outline" disabled={disabled} onClick={()=>perform({action:'cancel',messageId:message.id})}>Cancel request</button></div></article>)}</section>
    <section className="pg-card pg-events"><div className="pg-section-title"><h2>Your demo activity</h2><span>Server-checked actions</span></div>{state.events.length===0?<p className="pg-helper">Your story starts with the first funding action.</p>:<ol>{state.events.toReversed().slice(0,16).map(event=><li key={event.id}><span className={`pg-event-dot ${event.type}`}/><div><strong>{event.text}</strong><time>{new Date(event.at).toLocaleTimeString()}</time></div></li>)}</ol>}</section>
    <footer className="pg-footer"><p>This simulation uses virtual tokens and shortened demo timings. Recorded V3 receipts are available in the separate evidence walkthrough.</p><button className="button subtle" disabled={busy} onClick={startOver}>Start a new demo</button></footer>
+  </>}
   </>}
  </main>;
 }
