@@ -1,47 +1,39 @@
-import React,{useEffect,useState} from 'react';
-import {ArrowRight,Check,Clock3,Pause,Play,RotateCcw,Shield,Wallet} from 'lucide-react';
+import React,{useState} from 'react';
+import {ArrowRight,Check,Clock3,Pause,RotateCcw,Wallet} from 'lucide-react';
 
 const steps=[
- {title:'Fund the treasury',status:'50 demo tokens available',icon:Wallet,what:'The team sets aside 50 tokens for payouts.',why:'Airlock checks each request against the funds and spending rules in this treasury.'},
- {title:'Release a routine payout',status:'0.50 tokens paid',icon:Check,what:'The contract releases a small request within the spending limits.',why:'Routine payments can go through immediately.'},
- {title:'Quarantine an unfamiliar request',status:'4 tokens reserved',icon:Clock3,what:'A 4-token request exceeds the instant limit. The funds stay in the treasury during a 20-second review window.',why:'The delay gives the guardian time to check the recipient before funds can leave.'},
- {title:'Notify the guardian',status:'Example Telegram alert',icon:Shield,what:'The alert shows the amount and time left to review. The guardian pauses releases while checking the request.',why:'The guardian can intervene even if the relay that sent the request is compromised.'},
- {title:'Cancel the request',status:'4 tokens cancelled · 0 paid on this request',icon:Check,what:'The guardian cancels the request. The reserved funds become available to the treasury again.',why:'The contract records the cancellation and rejects reuse of the same request.'},
+ {title:'Start with an empty treasury',what:'The treasury holds the tokens Airlock can pay out. Every request is checked against its spending rules.',status:'Available balance',value:'0 demo tokens',icon:Wallet,task:'Add virtual funds so the treasury can pay requests.',action:'Add 50 demo tokens'},
+ {title:'Try a routine payout',what:'Small requests can go through immediately when they fit the spending rules.',status:'Available balance',value:'50 demo tokens',icon:Wallet,task:'Send a 0.50-token request to see an ordinary payout.',action:'Request 0.50 tokens'},
+ {title:'Send a larger request',what:'The routine payout went through. A request above the instant limit must wait for review.',status:'Routine payout released',value:'0.50 tokens paid',icon:Check,task:'Request 4 tokens to see how quarantine protects the treasury.',action:'Request 4 tokens'},
+ {title:'Review the guardian alert',what:'Airlock reserved the 4 tokens inside the treasury. The review window gives the guardian time to inspect the recipient.',status:'Example Telegram alert',value:'4 tokens queued for review',icon:Clock3,task:'Pause releases while you check the unfamiliar request.',action:'Pause releases'},
+ {title:'Decide what happens to the request',what:'Releases are paused. The queued tokens still belong to the treasury.',status:'Releases paused',value:'4 tokens reserved',icon:Pause,task:'Cancel this request to free the reserved funds.',action:'Cancel request'},
+ {title:'The request was cancelled',what:'The reservation is gone and the same request cannot be used again. The earlier routine payout is already complete.',status:'Cancelled',value:'0 tokens paid on this request',icon:Check,task:'Run the walkthrough again to repeat the scenario.',action:'Restart walkthrough'},
 ];
 
 export default function GuidedDemo(){
  const [index,setIndex]=useState(0);
- const [playing,setPlaying]=useState(false);
- const last=index===steps.length-1;
- useEffect(()=>{
-  if(!playing||last)return;
-  const timer=setTimeout(()=>setIndex(index+1),8000);
-  return ()=>clearTimeout(timer);
- },[playing,index,last]);
- function go(next){setPlaying(false);setIndex(next);}
- const {title,status,icon:Icon,what,why}=steps[index];
+ const {title,what,status,value,icon:Icon,task,action}=steps[index];
+ const finished=index===steps.length-1;
 
  return <section className="pg-guided" aria-labelledby="pg-guided-title">
   <div className="pg-intro">
-   <p className="pg-eyebrow">Guided simulation</p>
+   <p className="pg-eyebrow">Guided simulation · virtual funds</p>
    <h1 id="pg-guided-title">A payout, step by step</h1>
-   <p>Follow two requests through Airlock. This walkthrough uses virtual funds and an example Telegram alert.</p>
   </div>
-  <div className="pg-guided-layout">
-   <ol className="pg-guided-track" aria-label="Walkthrough steps">{steps.map((step,i)=><li key={step.title}><button type="button" aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{i+1}</span>{step.title}</button></li>)}</ol>
-   <article className="pg-card pg-guided-scene" aria-live={playing&&!last?'off':'polite'}>
-    <div className="pg-guided-action" key={index}>
+  <div aria-live="polite">
+   <div className="pg-guided-action" key={index}>
+    <p className="pg-guided-count">Step {index+1} of {steps.length}</p>
+    <h2>{title}</h2>
+    <p className="pg-guided-copy">{what}</p>
+    <div className="pg-card pg-guided-scene">
      <span className="pg-guided-status"><Icon size={18} aria-hidden="true"/>{status}</span>
-     <h2>{title}</h2>
-     <p>{what}</p>
-     <p><strong>Why it matters</strong> {why}</p>
+     <strong className="pg-guided-value">{value}</strong>
     </div>
-   </article>
+    <p className="pg-guided-task">{task}</p>
+   </div>
   </div>
-  <div className="pg-guided-controls">
-   <button type="button" className="button subtle" disabled={index===0} onClick={()=>go(index-1)}>Previous</button>
-   <button type="button" className="button subtle" onClick={()=>{if(last){setIndex(0);setPlaying(true);}else setPlaying(!playing);}}>{last?<RotateCcw size={16}/>:playing?<Pause size={16}/>:<Play size={16}/>} {last?'Replay':playing?'Pause':'Play walkthrough'}</button>
-   <button type="button" className="button primary" disabled={last} onClick={()=>go(index+1)}>Next step <ArrowRight size={16}/></button>
-  </div>
+  <button type="button" className="button primary" onClick={()=>setIndex(finished?0:index+1)}>
+   {action} {finished?<RotateCcw size={16}/>:<ArrowRight size={16}/>}
+  </button>
  </section>;
 }
