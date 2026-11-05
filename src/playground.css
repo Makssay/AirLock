@@ -12,4 +12,7 @@
 .pg-guided-task{margin:18px 0 12px}
 .pg-guided-action{animation:pg-step-in 200ms ease-out both}
 @keyframes pg-step-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){.pg-guided-action{animation:none}}
+@media(prefers-reduced-motion:reduce){.pg-guided-action{animation:none}}.pg-guided-alert{margin:18px 0 0;display:grid;gap:8px;max-width:420px;color:#203650;font-size:14px}
+.pg-guided-alert div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pg-guided-alert dt{color:#52647e}
+.pg-guided-alert dd{margin:0;font-weight:600}
