@@ -72,7 +72,7 @@ export default function Playground({onBack}){
  const disabled=busy||offline||expired||!!pending.current;
  return <main className="pg-page"><header className="pg-header"><a href="#" onClick={event=>{event.preventDefault();onBack();}}><ArrowLeft size={16}/>Airlock home</a><strong><Shield size={22}/>airlock.</strong><span className="pg-mode">Simulation · virtual funds</span></header>
   <nav className="pg-mode-switch" aria-label="Demo mode"><button type="button" className="button subtle" aria-pressed={!guided} onClick={()=>setGuided(false)}>Interactive treasury</button><button type="button" className="button subtle" aria-pressed={guided} onClick={()=>setGuided(true)}>Guided walkthrough</button></nav>
-  {guided?<GuidedDemo/>:<>
+  {guided?<GuidedDemo request={request}/>:<>
   <section className="pg-intro"><p className="pg-eyebrow">Try Airlock</p><h1>Your treasury.<br/>Your call.</h1><p>Create a demo treasury, connect Telegram, then decide which payouts get through.</p><div className="pg-facts"><span><Wallet size={15}/>No wallet needed</span><span><Send size={15}/>Real Telegram alerts</span><span><Clock3 size={15}/>20-second demo quarantine</span></div><p className="pg-helper"><a href="#testnet">Open the live Sepolia → Portaldot operator run</a></p></section>
   {(error||notice)&&<div className={`pg-feedback ${error?'is-error':''}`} role={error?'alert':'status'}>{error?<AlertTriangle size={18}/>:<Check size={18}/>}<span>{error||notice}</span>{pending.current&&!busy&&<button className="button subtle" onClick={()=>perform(pending.current.input,true)}>Retry same action</button>}</div>}
   {offline&&<p className="pg-offline" role="status">Connection interrupted. Last observed balances are shown; actions will resume after a fresh server check.</p>}

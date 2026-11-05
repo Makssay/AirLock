@@ -16,3 +16,6 @@
 .pg-guided-alert div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pg-guided-alert dt{color:#52647e}
 .pg-guided-alert dd{margin:0;font-weight:600}
+.pg-guided-stage{min-height:350px}
+.pg-guided-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+@media(max-width:550px){.pg-guided-stage{min-height:405px}}
